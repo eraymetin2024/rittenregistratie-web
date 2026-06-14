@@ -1,0 +1,372 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const functies = [
+  {
+    t: 'Automatisch kilometerstanden registreren',
+    d: 'Software die automatisch kilometerstanden registreren kan, scheelt je uren werk. De app detecteert elke rit via GPS, auto-Bluetooth en optioneel iBeacon en vult begin- en eindstand zelf in.',
+  },
+  {
+    t: 'Sluitende rittenadministratie',
+    d: 'Goede rittenadministratie software legt alle acht verplichte velden vast, zodat je administratie sluitend is en voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    t: 'Eén of meerdere voertuigen',
+    d: 'Of je nu ritregistratie software voor zelfstandigen met één auto zoekt of meerdere voertuigen beheert: je houdt per auto een aparte, sluitende administratie bij.',
+  },
+  {
+    t: 'Rapportages & export',
+    d: 'Een compleet kilometer registratie systeem levert rapportages op maat. Exporteer in één tik naar PDF of Excel — klaar voor je boekhouder of een controle.',
+  },
+  {
+    t: 'Veilige cloud-back-up',
+    d: 'Je gegevens staan veilig in de cloud binnen de EU, conform de AVG. Wissel van telefoon zonder ook maar één rit te verliezen.',
+  },
+  {
+    t: 'Slimme classificatie',
+    d: 'Veeg ritten als zakelijk, woon-werk of privé. Het rit registratie systeem leert je vaste adressen en stelt de juiste categorie automatisch voor.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Wat is rittenregistratie software precies?',
+    a: 'Rittenregistratie software is een programma of app waarmee je je zakelijke en privé kilometers vastlegt en beheert. Moderne rittenregistratie software draait als app op je telefoon en detecteert ritten automatisch, in plaats van dat je alles handmatig in een kilometerregistratie software-pakket of Excel-bestand tikt.',
+  },
+  {
+    v: 'Wat is het verschil tussen rittenregistratie software en een app?',
+    a: 'Vroeger was kilometer registratie software vaak desktopsoftware of een spreadsheet. Een app is feitelijk dezelfde software, maar dan op je telefoon — en dat is voor ZZP en freelancers de beste keuze, omdat de telefoon altijd meereist en ritten zo automatisch worden vastgelegd.',
+  },
+  {
+    v: 'Welke ritregistratie software is het beste voor freelancers?',
+    a: 'De beste ritregistratie software voor freelancers werkt automatisch, is sluitend voor de Belastingdienst en is betaalbaar. Onze app start gratis; voor automatische detectie en cloud-back-up kies je Premium voor ' + PRIJZEN.maand + ' per maand of ' + PRIJZEN.jaar + ' per jaar.',
+  },
+  {
+    v: 'Werkt de software ook voor zelfstandigen met één auto?',
+    a: 'Ja. Ritregistratie software voor zelfstandigen met één auto is precies waar de app op is afgestemd: je houdt één voertuig sluitend bij, claimt je kilometervergoeding en voorkomt bijtelling — zonder ingewikkeld km registratie systeem.',
+  },
+  {
+    v: 'Wat zijn de tekortkomingen van handmatig bijhouden?',
+    a: 'De grootste handmatige ritregistratie software tekortkomingen zijn vergeten ritten, overgetypte kilometerstanden en gaten in de reeks — waardoor je administratie niet meer sluitend is. Een zakelijk rijden app lost dit op door ritten automatisch te detecteren en alle velden zelf in te vullen.',
+  },
+  {
+    v: 'Helpt de app ook met mijn belastingadministratie?',
+    a: 'Zeker. Als app voor rittenadministratie houdt de software je ritten sluitend bij en levert hij een compleet rapport voor je boekhouder. Daarmee is dit ritregistratie software freelancers belastingadministratie die je werk uit handen neemt rond de jaarafsluiting en een eventuele controle.',
+  },
+  {
+    v: 'Voldoet de software aan de eisen van de Belastingdienst?',
+    a: 'De rittenregistratie zzp software legt alle acht verplichte velden vast (datum, begin- en eindstand, vertrek- en aankomstadres, route, doel en het privé- of zakelijk karakter). Daarmee is je administratie sluitend en voldoet ze aan de eisen van de Belastingdienst.',
+  },
+  {
+    v: 'Kan ik de gegevens exporteren?',
+    a: 'Ja. Je exporteert je rittenadministratie als PDF of Excel. Zo lever je bij een controle in één tik een compleet, sluitend rapport aan en kun je de gegevens ook gebruiken voor je facturatie en boekhouding.',
+  },
+  {
+    v: 'Wat kost een goed ritregistratiesysteem?',
+    a: 'Veel ritregistratiesystemen werken met een dure hardwarekast en abonnement. Met onze software heb je geen kastje nodig: je begint gratis en betaalt voor automatisering ' + PRIJZEN.maand + ' per maand of ' + PRIJZEN.jaar + ' per jaar.',
+  },
+  {
+    v: 'Is mijn data veilig?',
+    a: 'Ja. Je rit registratie systeem-gegevens staan versleuteld in de cloud binnen de EU, conform de AVG. Je houdt zelf de controle en kunt je account en data op elk moment verwijderen.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rittenregistratie software',
+    description:
+      'Rittenregistratie software vergeleken met een app: ontdek waarom een moderne app de beste kilometerregistratie software is voor ZZP en freelancers.',
+    url: SITE.domein + '/rittenregistratie-software',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Rittenregistratie software voor ZZP en freelancers',
+    inLanguage: 'nl-NL',
+    author: { '@type': 'Organization', name: SITE.bedrijf },
+    publisher: { '@type': 'Organization', name: SITE.bedrijf },
+    mainEntityOfPage: SITE.domein + '/rittenregistratie-software',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Rittenregistratie software',
+        item: SITE.domein + '/rittenregistratie-software',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Rittenregistratie software voor ZZP & freelancers"
+  description="Rittenregistratie software vergeleken: waarom een moderne app de beste kilometerregistratie software is voor ZZP en freelancers. Sluitend, automatisch, PDF/Excel-export."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Software die meereist in je broekzak</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          <span class="gradient-text">Rittenregistratie software</span> die automatisch je kilometers vastlegt
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Rittenregistratie software hoeft niet log of duur te zijn. Onze app is de
+          moderne kilometerregistratie software die je zakelijke kilometers automatisch
+          vastlegt, sluitend bijhoudt voor de Belastingdienst en in één tik exporteert
+          naar PDF of Excel — zonder kastje en zonder spreadsheets.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/functies" class="btn-ghost">Bekijk alle functies →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Automatische detectie</span>
+          <span>✓ Sluitend voor de Belastingdienst</span>
+          <span>✓ PDF & Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFTWARE OF APP -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">De keuze van nu</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie software of app?</h2>
+      <p class="mt-4 text-zacht">
+        Veel ondernemers zoeken naar "rittenregistratie software" en bedoelen daarmee een
+        programma op de computer of een ingewikkeld kilometer registratie systeem. Maar de
+        praktijk is veranderd: de beste software draait tegenwoordig als app op je telefoon.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 md:grid-cols-2">
+      <div class="card" data-reveal>
+        <h3 class="text-lg font-bold">Klassieke kilometer registratie software</h3>
+        <p class="mt-3 text-[15px] leading-relaxed text-zacht">
+          Traditionele ritregistratie software stond op je pc of werkte met een dure
+          hardwarekast in de auto. Je moest kilometerstanden vaak nog handmatig overtikken,
+          de software updaten en losse bestanden bewaren. Foutgevoelig, tijdrovend en niet
+          altijd sluitend bij een controle.
+        </p>
+      </div>
+      <div class="card bg-gradient-to-br from-merk to-violet text-white" data-reveal style="--reveal-delay:90ms">
+        <h3 class="text-lg font-bold">Moderne app als software</h3>
+        <p class="mt-3 text-[15px] leading-relaxed opacity-90">
+          Een app is precies dezelfde software, maar dan in je broekzak. Omdat je telefoon
+          altijd meereist, kan de app je ritten automatisch detecteren. Geen overtypen, geen
+          updates, geen kastje — en je rittenadministratie software is altijd up-to-date en
+          sluitend.
+        </p>
+      </div>
+    </div>
+    <p class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      Kortom: of je nu zoekt op kilometer registratie software, km registratie systeem of
+      ritregistratiesystemen — voor ZZP'ers en freelancers is een moderne app vrijwel altijd de
+      praktischere, voordeligere en sluitendere keuze. Bekijk gerust onze
+      <a href="/beste-rittenregistratie-app" class="font-semibold text-merk underline">beste rittenregistratie app</a>
+      of vergelijk met de losse
+      <a href="/kilometerregistratie-app" class="font-semibold text-merk underline">kilometerregistratie app</a>.
+    </p>
+  </section>
+
+  <!-- FUNCTIES -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Wat goede software kan</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Functies van goede ritregistratie software</h2>
+        <p class="mt-4 text-zacht">
+          Een volwaardig rit registratie systeem doet meer dan kilometers optellen. Dit zijn de
+          functies die je mag verwachten van moderne kilometer registratie software.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {functies.map((f, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+            <h3 class="mt-5 text-lg font-bold">{f.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{f.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/automatische-rittenregistratie" class="btn-ghost">Meer over automatische rittenregistratie →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOOR FREELANCERS EN ZZP -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Op maat voor zelfstandigen</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Voor freelancers en ZZP'ers</h2>
+        <p class="mt-4 text-zacht">
+          De beste ritregistratie software voor freelancers is software die niet in de weg
+          loopt. Of je nu ritregistratie software voor zelfstandigen met één auto zoekt of als
+          rittenregistratie zzp software meerdere voertuigen wilt beheren: je houdt per auto een
+          aparte, sluitende administratie bij. Juist als ritregistratie software zelfstandigen één
+          auto bijhouden, telt elke gereden kilometer — en die leg je hier moeiteloos vast.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Software die automatisch kilometerstanden kan registreren — geen overtypen',
+            'Geschikt voor één auto of een hele wagenpark aan voertuigen',
+            'Onbelaste kilometervergoeding eenvoudig onderbouwen',
+            'Bijtelling vermijden met de bewaking van de 500 km-grens',
+            'Klaar voor een controle: sluitend PDF- of Excel-rapport in één tik',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+              <span class="text-[15px] text-slate-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/voor-zzp" class="btn-ghost mt-8">Rittenregistratie voor ZZP →</a>
+      </div>
+      <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+        <div class="card w-full max-w-sm">
+          <p class="eyebrow">Prijzen</p>
+          <h3 class="mt-3 text-2xl font-extrabold">Gratis beginnen, Premium voor automatisering</h3>
+          <div class="mt-5 space-y-3 text-[15px]">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span class="font-semibold">Gratis</span>
+              <span class="text-zacht">Handmatig bijhouden</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span class="font-semibold">Premium / maand</span>
+              <span class="font-bold gradient-text">{PRIJZEN.maand}</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="font-semibold">Premium / jaar</span>
+              <span class="font-bold gradient-text">{PRIJZEN.jaar}</span>
+            </div>
+          </div>
+          <a href="/prijzen" class="btn-primary mt-6 w-full text-center">Bekijk de prijzen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAPPORTAGES & EXPORT -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Inzicht & administratie</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rapportages & export</h2>
+        <p class="mt-4 text-zacht">
+          Een goed kilometer registratie systeem laat je niet alleen kilometers verzamelen, maar
+          maakt er ook bruikbare rapportages van — klaar voor je boekhouder, je facturatie of de
+          Belastingdienst. Je krijgt ritregistratie software met duidelijke rapportages en
+          eenvoudige facturatie: zo heb je de beste ritregistratie software inzicht ritten kosten
+          in handen en zie je in één oogopslag waar je aan toe bent.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <div class="card" data-reveal>
+          <h3 class="text-lg font-bold">PDF-rapport</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Een net, sluitend overzicht per periode dat je direct kunt aanleveren bij een
+            controle of doorsturen naar je accountant.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:90ms">
+          <h3 class="text-lg font-bold">Excel-export</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Liever zelf rekenen of koppelen aan je boekhouding? Exporteer je rittenadministratie
+            naar Excel en gebruik de data voor je facturatie.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:180ms">
+          <h3 class="text-lg font-bold">Inzicht per categorie</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Zie in één oogopslag je zakelijke, woon-werk en privé kilometers, plus de opgebouwde
+            kilometervergoeding per periode.
+          </p>
+        </div>
+      </div>
+      <p class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+        Zo wordt je rittenregistratie software niet alleen een verplichting, maar een hulpmiddel
+        dat je geld oplevert via een correcte
+        <a href="/kilometervergoeding" class="font-semibold text-merk underline">kilometervergoeding</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- WAAROM GEEN KASTJE -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl text-center" data-reveal>
+      <span class="eyebrow">Geen hardware nodig</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Software zonder duur ritregistratie-kastje</h2>
+      <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+        Veel klassieke ritregistratiesystemen werken met een fysiek kastje in de auto en een
+        bijbehorend abonnement. Dat maakt km registratie duur en gebonden aan één voertuig. Met
+        software op je telefoon heb je geen hardware nodig: je begint gratis, voegt onbeperkt
+        voertuigen toe en betaalt alleen voor automatisering wanneer je dat wilt. Wil je toch de
+        ervaring van een kastje, lees dan wat een
+        <a href="/rittenregistratie-kastje" class="font-semibold text-merk underline">rittenregistratie kastje</a>
+        kost en waarom software vaak voordeliger is. Twijfel je nog of je überhaupt moet
+        registreren? Bekijk dan hoe je het beste je
+        <a href="/kilometers-bijhouden" class="font-semibold text-merk underline">kilometers kunt bijhouden</a>.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3" data-reveal>
+        <a href="/" class="btn-primary">Naar de homepage</a>
+        <a href="/download" class="btn-ghost">Download de app →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie software — veelgestelde vragen</h2>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-4">
+        {faq.map((f, i) => (
+          <details class="card group" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+              {f.v}
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

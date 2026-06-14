@@ -1,45 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Phone from '../components/Phone.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { SITE, PRIJZEN } from '../consts';
+import { SITE, PRIJZEN, TOPICS } from '../consts';
 
 const features = [
-  {
-    icon: 'gps',
-    titel: 'Automatische rit-detectie',
-    tekst:
-      'Zet de app aan en vergeet hem. Je ritten worden automatisch herkend en vastgelegd — batterijvriendelijk.',
-  },
-  {
-    icon: 'shield',
-    titel: 'Belastingdienst-proof',
-    tekst:
-      'Alle verplichte velden, sluitende kilometers, woon-werkverkeer en de 500 km privé-grens. Altijd in orde.',
-  },
-  {
-    icon: 'swipe',
-    titel: 'Slim classificeren',
-    tekst:
-      'Veeg een rit naar zakelijk of privé. De app leert je adressen en stelt automatisch de juiste categorie voor.',
-  },
-  {
-    icon: 'doc',
-    titel: 'PDF & Excel export',
-    tekst:
-      'Exporteer een professioneel rapport per maand of jaar. Klaar om te delen met je boekhouder of de fiscus.',
-  },
-  {
-    icon: 'clock',
-    titel: 'Werktijden instellen',
-    tekst:
-      'Laat de detectie alleen tijdens werkuren lopen. Buiten dat venster slaapt de app — handig én zuinig.',
-  },
-  {
-    icon: 'cloud',
-    titel: 'Veilige cloud-back-up',
-    tekst:
-      'Je gegevens staan versleuteld in Nederland (EU). Sync tussen apparaten en raak nooit een rit kwijt.',
-  },
+  { icon: 'gps', titel: 'Automatische rit-detectie', tekst: 'Zet de app aan en vergeet hem. Ritten worden op de achtergrond herkend en vastgelegd — batterijvriendelijk.' },
+  { icon: 'shield', titel: 'Belastingdienst-proof', tekst: 'Alle verplichte velden, sluitende kilometers, woon-werkverkeer en de 500 km privé-grens. Altijd in orde.' },
+  { icon: 'swipe', titel: 'Slim classificeren', tekst: 'Veeg een rit naar zakelijk of privé. De app leert je adressen en stelt automatisch de juiste categorie voor.' },
+  { icon: 'doc', titel: 'PDF & Excel export', tekst: 'Exporteer een professioneel rapport per maand of jaar. Klaar voor je boekhouder of de Belastingdienst.' },
+  { icon: 'clock', titel: 'Werktijden instellen', tekst: 'Laat de detectie alleen tijdens werkuren lopen. Buiten dat venster slaapt de app — handig én zuinig.' },
+  { icon: 'cloud', titel: 'Veilige cloud-back-up', tekst: 'Je gegevens staan versleuteld in Nederland (EU). Sync tussen apparaten en raak nooit een rit kwijt.' },
+];
+
+const showcase = [
+  { img: '/screenshots/02_overzicht_dashboard.png', titel: 'Helder dashboard', tekst: 'Zakelijke, woon-werk en privékilometers in één oogopslag — met de meter voor de 500 km privé-grens.' },
+  { img: '/screenshots/01_overzicht.png', titel: 'Al je ritten op een rij', tekst: 'Elke rit met datum, echte adressen en kilometerstanden. Netjes geordend en doorzoekbaar.' },
+  { img: '/screenshots/05_achtergrond_setup.png', titel: 'Werkt op de achtergrond', tekst: 'Een heldere wizard zet de toestemmingen goed, zodat ritten ook worden herkend als de app dicht is.' },
+  { img: '/screenshots/06_werktijden.png', titel: 'Alleen tijdens werktijden', tekst: 'Stel je werkdagen en -uren in. Buiten dat venster slaapt de detectie — privé blijft privé, en het spaart accu.' },
+  { img: '/screenshots/03_rapporten.png', titel: 'Exporteer in één tik', tekst: 'PDF of Excel, per maand of per jaar — direct klaar voor je boekhouder of de aangifte.' },
+  { img: '/screenshots/04_instellingen.png', titel: 'Alles overzichtelijk', tekst: 'Voertuigen, cloud-back-up, thema en de Belastingdienst-instellingen — rustig en duidelijk geregeld.' },
 ];
 
 const stappen = [
@@ -49,33 +29,11 @@ const stappen = [
 ];
 
 const jsonld = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE.bedrijf,
-    url: SITE.domein,
-    email: SITE.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Sloestraat 15',
-      postalCode: '4456 AN',
-      addressLocality: 'Lewedorp',
-      addressCountry: 'NL',
-    },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: SITE.naam,
-    operatingSystem: 'Android, iOS',
-    applicationCategory: 'BusinessApplication',
-    description: SITE.beschrijving,
-    offers: {
-      '@type': 'Offer',
-      price: '29.99',
-      priceCurrency: 'EUR',
-    },
-  },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.bedrijf, url: SITE.domein, email: SITE.email,
+    address: { '@type': 'PostalAddress', streetAddress: 'Sloestraat 15', postalCode: '4456 AN', addressLocality: 'Lewedorp', addressCountry: 'NL' } },
+  { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: SITE.naam, operatingSystem: 'Android, iOS',
+    applicationCategory: 'BusinessApplication', description: SITE.beschrijving,
+    offers: { '@type': 'Offer', price: '29.99', priceCurrency: 'EUR' } },
 ];
 
 const icons: Record<string, string> = {
@@ -93,124 +51,122 @@ const icon = (k: string) => icons[k] ?? '';
   description="Automatische rittenregistratie die voldoet aan de eisen van de Belastingdienst. Batterijvriendelijk, met PDF/Excel-export en slim classificeren. Gratis beginnen."
   jsonld={jsonld}
 >
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="aurora absolute inset-0 -z-10"></div>
-    <div class="grid-mask absolute inset-0 -z-10"></div>
-    <div class="container-x grid items-center gap-12 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
-      <div>
-        <span class="eyebrow" data-reveal>● Belastingdienst-proof · Nederlands</span>
-        <h1 data-reveal style="--reveal-delay:60ms" class="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl">
-          Je rittenregistratie,<br /><span class="gradient-text">volledig automatisch.</span>
-        </h1>
-        <p data-reveal style="--reveal-delay:140ms" class="mt-6 max-w-xl text-lg leading-relaxed text-zacht">
-          Leg je zakelijke kilometers vast zonder gedoe. De app herkent je ritten
-          automatisch, houdt je administratie sluitend en exporteert in één tik —
-          precies zoals de Belastingdienst het wil.
-        </p>
-        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap gap-3">
-          <a href="/download" class="btn-primary">Gratis beginnen</a>
-          <a href="/hoe-het-werkt" class="btn-ghost">Hoe het werkt →</a>
-        </div>
-        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
-          <span class="flex items-center gap-2">✓ Gratis te beginnen</span>
-          <span class="flex items-center gap-2">✓ Geen creditcard</span>
-          <span class="flex items-center gap-2">✓ AVG-proof, EU-servers</span>
-        </div>
+  <!-- HERO (full-screen, emotioneel, Nederlands) -->
+  <section class="relative flex min-h-[calc(100svh-6.25rem)] items-center overflow-hidden bg-[#0A0F1E] text-white">
+    <!-- Thematische achtergrond: zachte GPS-route-lijnen -->
+    <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800" fill="none" aria-hidden="true">
+      <path d="M-50 620 C 250 480, 380 700, 640 520 S 1050 360, 1280 470" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M-50 300 C 200 200, 420 360, 700 240 S 1080 120, 1280 220" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <!-- Subtiele, koele vignette + warme NL-gloed onderaan -->
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(60% 55% at 50% 0%, rgba(47,107,255,0.10), transparent 70%), radial-gradient(50% 45% at 80% 100%, rgba(255,138,61,0.10), transparent 70%);"></div>
+
+    <!-- Flankerende telefoons met echte schermen (alleen op grote schermen) -->
+    <div class="pointer-events-none absolute left-4 top-1/2 hidden w-[235px] -translate-y-1/2 rotate-[-8deg] xl:block 2xl:left-16" data-reveal style="--reveal-delay:200ms">
+      <div class="relative">
+        <div class="absolute -inset-8 rounded-[3rem] bg-merk/30 blur-3xl"></div>
+        <Phone src="/screenshots/02_overzicht_dashboard.png" alt="Dashboard met zakelijke en privékilometers" class="relative ring-1 ring-white/15" />
+      </div>
+    </div>
+    <div class="pointer-events-none absolute right-4 top-1/2 hidden w-[235px] -translate-y-1/2 rotate-[8deg] xl:block 2xl:right-16" data-reveal style="--reveal-delay:280ms">
+      <div class="relative">
+        <div class="absolute -inset-8 rounded-[3rem] bg-violet/30 blur-3xl"></div>
+        <Phone src="/screenshots/03_rapporten.png" alt="Rapporten: PDF en Excel export" class="relative" />
+      </div>
+    </div>
+
+    <div class="container-x relative z-10 w-full py-16 text-center">
+      <h1 data-reveal style="--reveal-delay:80ms" class="mx-auto max-w-4xl text-[2.8rem] font-extrabold leading-[1.03] tracking-tight sm:text-7xl">
+        Jouw ritten.<br />Jouw land.<br /><span class="text-merk-light">Jouw data.</span>
+      </h1>
+
+      <p data-reveal style="--reveal-delay:160ms" class="mx-auto mt-7 max-w-xl text-lg text-slate-300 sm:text-xl">
+        Automatische rittenregistratie van Nederlandse makelij. Eerlijke prijs,
+        en je gegevens blijven veilig in Nederland — niet bij een buitenlandse gigant.
+      </p>
+
+      <div data-reveal style="--reveal-delay:240ms" class="mt-10 flex flex-wrap justify-center gap-3">
+        <a href="/download" class="btn-primary text-base">Gratis beginnen</a>
+        <a href="/hoe-het-werkt" class="btn border border-white/20 text-white hover:bg-white/10">Hoe het werkt →</a>
       </div>
 
-      <!-- Telefoon-mockup -->
-      <div class="relative mx-auto w-full max-w-[320px]" data-reveal style="--reveal-delay:180ms">
-        <div class="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-merk/30 to-violet/30 blur-2xl"></div>
-        <div class="animate-floaty rounded-[2.5rem] border-[10px] border-ink bg-ink p-2 shadow-glow">
-          <div class="overflow-hidden rounded-[1.8rem] bg-white">
-            <div class="bg-gradient-to-br from-merk to-violet px-5 pb-8 pt-6 text-white">
-              <p class="text-sm/none opacity-80">Overzicht</p>
-              <p class="text-2xl font-extrabold">2026</p>
-            </div>
-            <div class="-mt-5 space-y-3 p-4">
-              <div class="rounded-2xl border border-slate-100 bg-white p-4 shadow-soft">
-                <div class="mx-auto grid h-24 w-24 place-items-center rounded-full border-[7px] border-slate-100">
-                  <span class="text-xl font-extrabold">0<span class="text-xs text-zacht"> /500</span></span>
-                </div>
-                <p class="mt-2 text-center text-xs font-bold text-groen">✓ Onder de privé-grens</p>
-              </div>
-              <div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3">
-                <div class="grid h-9 w-9 place-items-center rounded-lg bg-groen/10 text-groen">✓</div>
-                <div>
-                  <p class="text-[13px] font-bold">Registratie is sluitend</p>
-                  <p class="text-[11px] text-zacht">Alle kilometers sluiten aan</p>
-                </div>
-              </div>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="rounded-xl bg-merk/5 p-2 text-center"><p class="text-[10px] text-zacht">Zakelijk</p><p class="text-sm font-extrabold text-merk">34</p></div>
-                <div class="rounded-xl bg-teal/5 p-2 text-center"><p class="text-[10px] text-zacht">Woon-werk</p><p class="text-sm font-extrabold text-teal">0</p></div>
-                <div class="rounded-xl bg-oranje/5 p-2 text-center"><p class="text-[10px] text-zacht">Privé</p><p class="text-sm font-extrabold text-oranje">0</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div data-reveal style="--reveal-delay:320ms" class="mx-auto mt-12 flex max-w-2xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold text-slate-300">
+        <span class="flex items-center gap-2"><span class="text-oranje">●</span> Data blijft in Nederland</span>
+        <span class="flex items-center gap-2"><span class="text-merk-light">●</span> Eerlijke prijs &amp; kwaliteit</span>
+        <span class="flex items-center gap-2"><span class="text-groen">●</span> Voldoet aan de Belastingdienst-eisen</span>
       </div>
+    </div>
+
+    <!-- scroll-hint -->
+    <div class="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-floaty"><path d="M12 5v14M6 13l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </section>
 
-  <!-- TRUST STRIP -->
-  <section class="border-y border-slate-100 bg-mist/60">
-    <div class="container-x flex flex-wrap items-center justify-center gap-x-10 gap-y-3 py-6 text-sm font-semibold text-zacht">
-      <span>🔋 Batterijvriendelijk</span>
-      <span>🛰️ Automatische GPS-detectie</span>
-      <span>📄 PDF & Excel-export</span>
-      <span>🇳🇱 Belastingdienst-proof</span>
-      <span>🔒 EU-servers (AVG)</span>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="functies" class="container-x py-24">
+  <!-- SHOWCASE: echte screenshots -->
+  <section class="container-x py-24">
     <div class="mx-auto max-w-2xl text-center" data-reveal>
-      <span class="eyebrow">Functies</span>
-      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Alles wat je nodig hebt — en niets te veel</h2>
-      <p class="mt-4 text-zacht">Gemaakt voor ZZP'ers en ondernemers die hun tijd liever aan hun werk besteden dan aan administratie.</p>
+      <span class="eyebrow">Zo ziet het eruit</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Helder, snel en gemaakt voor de praktijk</h2>
+      <p class="mt-4 text-zacht">Echte schermen uit de app — geen marketingplaatjes.</p>
     </div>
-    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {features.map((f, i) => (
-        <div class="card group transition hover:-translate-y-1 hover:shadow-glow" data-reveal style={`--reveal-delay:${i * 70}ms`}>
-          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-white">
-            <Fragment set:html={icon(f.icon)} />
-          </div>
-          <h3 class="mt-5 text-lg font-bold">{f.titel}</h3>
-          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{f.tekst}</p>
+    <div class="mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      {showcase.map((s, i) => (
+        <div class="flex flex-col items-center text-center" data-reveal style={`--reveal-delay:${(i % 3) * 90}ms`}>
+          <Phone src={s.img} alt={s.titel} class="w-full max-w-[230px]" />
+          <h3 class="mt-7 text-lg font-bold">{s.titel}</h3>
+          <p class="mt-2 max-w-xs text-[15px] leading-relaxed text-zacht">{s.tekst}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- HOE HET WERKT -->
-  <section class="bg-mist/60 py-24">
+  <!-- FEATURES -->
+  <section id="functies" class="bg-mist/60 py-24">
     <div class="container-x">
       <div class="mx-auto max-w-2xl text-center" data-reveal>
-        <span class="eyebrow">In 3 stappen</span>
-        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Zo simpel werkt het</h2>
+        <span class="eyebrow">Functies</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Alles wat je nodig hebt — en niets te veel</h2>
+        <p class="mt-4 text-zacht">Gemaakt voor ZZP'ers die hun tijd liever aan hun werk besteden dan aan administratie.</p>
       </div>
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
-        {stappen.map((s, i) => (
-          <div class="card relative" data-reveal style={`--reveal-delay:${i * 90}ms`}>
-            <span class="absolute -top-5 left-7 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white shadow-glow">{s.n}</span>
-            <h3 class="mt-6 text-lg font-bold">{s.t}</h3>
-            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{s.d}</p>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((f, i) => (
+          <div class="card group transition hover:-translate-y-1 hover:shadow-glow" data-reveal style={`--reveal-delay:${(i % 3) * 70}ms`}>
+            <div class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-white">
+              <Fragment set:html={icon(f.icon)} />
+            </div>
+            <h3 class="mt-5 text-lg font-bold">{f.titel}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{f.tekst}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- COMPLIANCE -->
+  <!-- HOE HET WERKT -->
   <section class="container-x py-24">
-    <div class="grid items-center gap-12 lg:grid-cols-2">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">In 3 stappen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Zo simpel werkt het</h2>
+    </div>
+    <div class="mt-16 grid gap-6 md:grid-cols-3">
+      {stappen.map((s, i) => (
+        <div class="card relative" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+          <span class="absolute -top-5 left-7 grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white shadow-glow">{s.n}</span>
+          <h3 class="mt-6 text-lg font-bold">{s.t}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{s.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- COMPLIANCE met echte screenshot -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x grid items-center gap-14 lg:grid-cols-2">
       <div data-reveal>
         <span class="eyebrow">100% sluitend</span>
         <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Voldoet aan de eisen van de Belastingdienst</h2>
-        <p class="mt-4 text-zacht">Een rittenadministratie moet sluitend en compleet zijn. Onze app bewaakt dat automatisch — zodat je met een gerust hart je <strong>verklaring geen privégebruik</strong> kunt onderbouwen.</p>
+        <p class="mt-4 text-zacht">Een rittenadministratie moet sluitend en compleet zijn. De app bewaakt dat automatisch — zodat je met een gerust hart je <strong>verklaring geen privégebruik</strong> kunt onderbouwen.</p>
         <ul class="mt-6 space-y-3">
           {[
             'Alle 8 verplichte ritgegevens (datum, standen, adressen, doel)',
@@ -223,21 +179,8 @@ const icon = (k: string) => icons[k] ?? '';
           ))}
         </ul>
       </div>
-      <div class="relative" data-reveal style="--reveal-delay:120ms">
-        <div class="card bg-gradient-to-br from-merk to-violet text-white">
-          <p class="text-sm opacity-80">Rapport · 2026</p>
-          <p class="mt-1 text-3xl font-extrabold">€ 7,82 <span class="text-base font-semibold opacity-80">vergoeding</span></p>
-          <div class="mt-5 space-y-2 text-sm">
-            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Zakelijk</span><span class="font-bold">34 km</span></div>
-            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Woon-werk</span><span class="font-bold">0 km</span></div>
-            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Privé</span><span class="font-bold">0 km</span></div>
-            <div class="flex justify-between pt-1"><span class="opacity-80">Sluitend</span><span class="font-bold">✓ Ja</span></div>
-          </div>
-          <div class="mt-6 flex gap-2">
-            <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">PDF</span>
-            <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Excel</span>
-          </div>
-        </div>
+      <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+        <Phone src="/screenshots/06_werktijden.png" alt="Werktijden instellen voor de automatische detectie" class="w-full max-w-[260px]" />
       </div>
     </div>
   </section>
@@ -246,14 +189,14 @@ const icon = (k: string) => icons[k] ?? '';
   <section class="bg-ink py-24 text-white">
     <div class="container-x grid items-center gap-12 lg:grid-cols-[1fr_0.8fr]">
       <div data-reveal>
-        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-bold text-merk-light">Nieuw</span>
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-bold text-merk-light">Optioneel</span>
         <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Nog betrouwbaarder met de iBeacon</h2>
-        <p class="mt-4 max-w-lg text-white/70">Een klein baken in je auto zorgt dat ritten gegarandeerd starten — ook op de iPhone, óók als de app gesloten is. Geen gedoe, jaren batterij.</p>
+        <p class="mt-4 max-w-lg text-slate-300">Een klein baken in je auto zorgt dat ritten gegarandeerd starten — ook op de iPhone, óók als de app gesloten is. Geen gedoe, jaren batterij.</p>
         <a href="/beacon" class="btn-primary mt-8">Meer over de beacon →</a>
       </div>
       <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
-        <div class="animate-floaty grid h-40 w-40 place-items-center rounded-[2rem] bg-gradient-to-br from-merk to-violet shadow-glow">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M7 7a7 7 0 0 0 0 10M17 7a7 7 0 0 1 0 10M4 4a11 11 0 0 0 0 16M20 4a11 11 0 0 1 0 16" stroke-linecap="round"/></svg>
+        <div class="animate-floaty grid h-44 w-44 place-items-center rounded-[2.2rem] bg-gradient-to-br from-merk to-violet shadow-glow">
+          <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M7 7a7 7 0 0 0 0 10M17 7a7 7 0 0 1 0 10M4 4a11 11 0 0 0 0 16M20 4a11 11 0 0 1 0 16" stroke-linecap="round"/></svg>
         </div>
       </div>
     </div>
@@ -273,7 +216,7 @@ const icon = (k: string) => icons[k] ?? '';
         <ul class="mt-5 space-y-2 text-[15px] text-slate-700">
           <li>✓ Handmatige ritten</li>
           <li>✓ Belastingdienst-proof</li>
-          <li>✓ PDF & Excel-export</li>
+          <li>✓ PDF &amp; Excel-export</li>
         </ul>
       </div>
       <div class="card relative border-merk/30 ring-2 ring-merk/20" data-reveal style="--reveal-delay:90ms">
@@ -283,12 +226,25 @@ const icon = (k: string) => icons[k] ?? '';
         <p class="text-sm text-zacht">of {PRIJZEN.maand}/maand</p>
         <ul class="mt-5 space-y-2 text-[15px] text-slate-700">
           <li>✓ Automatische rit-detectie</li>
-          <li>✓ Cloud-back-up & sync</li>
+          <li>✓ Cloud-back-up &amp; sync</li>
           <li>✓ Onbeperkt voertuigen</li>
         </ul>
       </div>
     </div>
     <div class="mt-8 text-center"><a href="/prijzen" class="btn-ghost">Volledige vergelijking →</a></div>
+  </section>
+
+  <!-- Populaire onderwerpen (interne links voor SEO) -->
+  <section class="container-x pt-4">
+    <div class="rounded-3xl border border-slate-100 bg-mist/60 p-8" data-reveal>
+      <h2 class="text-xl font-extrabold">Populaire onderwerpen</h2>
+      <p class="mt-2 text-sm text-zacht">Alles over rittenregistratie, kilometeradministratie en de Belastingdienst.</p>
+      <div class="mt-5 flex flex-wrap gap-2.5">
+        {TOPICS.map((t) => (
+          <a href={t.href} class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-merk/40 hover:text-merk">{t.label}</a>
+        ))}
+      </div>
+    </div>
   </section>
 
   <CtaBand />

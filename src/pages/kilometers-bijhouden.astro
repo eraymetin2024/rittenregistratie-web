@@ -1,0 +1,353 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const redenen = [
+  {
+    t: 'Kilometervergoeding claimen',
+    d: 'Voor elke zakelijke kilometer mag je een onbelaste vergoeding van €0,23 rekenen. Zonder een sluitende administratie loop je dat geld mis.',
+  },
+  {
+    t: 'Bijtelling voorkomen',
+    d: 'Rijd je minder dan 500 privé-kilometers met de auto van de zaak? Dan voorkom je bijtelling — mits je het met je kilometers kunt bewijzen.',
+  },
+  {
+    t: 'Klaar voor de Belastingdienst',
+    d: 'Een controle kan tot 7 jaar terug gaan. Wie zijn kilometers netjes bijhoudt, levert in één tik een rapport dat voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    t: 'Inzicht in je kosten',
+    d: 'Door je kilometers te registreren zie je precies hoeveel je rijdt, per klant en per project. Handig voor je tarief én je boekhouding.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Hoe kan ik het beste mijn kilometers bijhouden?',
+    a: 'De makkelijkste manier om kilometers bij te houden is met een app die ritten automatisch detecteert. Je hoeft dan niets handmatig in te voeren: de app legt vertrek, aankomst, route en afstand vast en jij geeft alleen aan of een rit zakelijk, woon-werk of privé is. Dat is sneller en betrouwbaarder dan een rittenboekje of spreadsheet.',
+  },
+  {
+    v: 'Welke app om kilometers bij te houden is geschikt?',
+    a: 'Een goede kilometers bijhouden app detecteert ritten automatisch, classificeert ze eenvoudig en exporteert een sluitend rapport. Deze app kilometers bijhouden doet dat via GPS en — op Android — auto-Bluetooth, zodat je zakelijke kilometers vanzelf in je administratie komen. Een betrouwbare km bijhouden app vraagt geen handmatig werk meer en je begint gratis.',
+  },
+  {
+    v: 'Is er een aparte app om zakelijke kilometers bij te houden?',
+    a: 'Je hebt geen losse zakelijke kilometers bijhouden app naast je gewone administratie nodig: dezelfde app houdt zakelijk, woon-werk en privé apart. Wie een app om zakelijke kilometers bij te houden zoekt, krijgt hier automatische detectie én een Belastingdienst-proof export in één. Ook voor wie alleen privé een kilometer bijhouden app wil gebruiken, werkt dit prima.',
+  },
+  {
+    v: 'Moet ik als zelfstandige mijn kilometers bijhouden?',
+    a: 'Wil je als zelfstandige de kilometervergoeding claimen of bijtelling voorkomen, dan moet je een sluitende rittenregistratie kunnen tonen. Kilometers bijhouden zelfstandige is dus geen luxe maar noodzaak. Een app neemt het werk volledig uit handen en houdt zakelijke kilometers automatisch apart.',
+  },
+  {
+    v: 'Wat is het verschil tussen handmatig en automatisch km bijhouden?',
+    a: 'Handmatig km bijhouden betekent dat je na elke rit zelf de begin- en eindstand, het adres en het doel noteert. Dat is foutgevoelig en je vergeet snel een rit. Automatisch kilometers registreren laat de app dit doen: elke rit wordt gedetecteerd en je hoeft alleen nog te classificeren.',
+  },
+  {
+    v: 'Hoe houd ik mijn kilometerstand bij?',
+    a: 'Naast je ritten kun je in de app ook je kilometerstand bijhouden per voertuig. Een kilometerstand bijhouden app sluit je registratie aan op de werkelijke teller van je auto, wat helpt bij een controle. De app waarschuwt bij vreemde sprongen, zodat je km registratie bijhouden altijd sluitend blijft.',
+  },
+  {
+    v: 'Welke gegevens moet ik per rit vastleggen?',
+    a: 'Voor een rittenregistratie die voldoet aan de eisen van de Belastingdienst leg je per rit vast: datum, begin- en eindstand, vertrek- en aankomstadres, de gereden route en het doel van de rit. De app vult dit automatisch in zodra je ritten bijhoudt.',
+  },
+  {
+    v: 'Kan ik zakelijke en privé kilometers gescheiden bijhouden?',
+    a: 'Ja. De app houdt zakelijke kilometers, woon-werkverkeer en privéritten als aparte categorieën bij. Zo zie je in één oogopslag je zakelijke km en blijft je administratie netjes gescheiden — precies zoals de fiscus het wil zien.',
+  },
+  {
+    v: 'Werkt kilometers bijhouden ook gratis?',
+    a: 'Je kunt gratis beginnen met ritten bijhouden in de app. Voor volledig automatische detectie en cloud-back-up gebruik je Premium (' + PRIJZEN.maand + ' per maand of ' + PRIJZEN.jaar + ' per jaar). Er is geen verplichte hardware of duur abonnement nodig.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Kilometers bijhouden: handmatig of automatisch?',
+    url: SITE.domein + '/kilometers-bijhouden',
+    description:
+      'Hoe houd je (zakelijke) kilometers bij? Handmatig versus automatisch, waarom het loont en tips voor een sluitende administratie.',
+    inLanguage: 'nl-NL',
+    author: { '@type': 'Organization', name: SITE.bedrijf },
+    publisher: { '@type': 'Organization', name: SITE.naam },
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Kilometers bijhouden',
+        item: SITE.domein + '/kilometers-bijhouden',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Kilometers bijhouden: handmatig of automatisch?"
+  description="Kilometers bijhouden voor je administratie? Lees hoe je zakelijke km bijhoudt — handmatig vs automatisch — met een app, Belastingdienst-proof. Gratis beginnen."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Sluitende administratie</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          <span class="gradient-text">Kilometers bijhouden</span> — eenvoudig en sluitend
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Kilometers bijhouden hoeft geen klus te zijn. In dit artikel lees je
+          waarom je je zakelijke kilometers vastlegt, wat het verschil is tussen
+          handmatig en automatisch km bijhouden, en hoe je met een app een
+          sluitende administratie opbouwt die voldoet aan de eisen van de
+          Belastingdienst — zonder rittenboekje of spreadsheet.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/functies" class="btn-ghost">Bekijk de functies →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Automatisch</span>
+          <span>✓ Zakelijk & privé apart</span>
+          <span>✓ Belastingdienst-proof</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAAROM -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">De aanleiding</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Waarom kilometers bijhouden?</h2>
+      <p class="mt-4 text-zacht">
+        Kilometers bijhouden is meer dan een administratieve plicht. Het bepaalt
+        rechtstreeks hoeveel vergoeding je krijgt en of je een naheffing voorkomt.
+      </p>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl space-y-5 text-[15px] leading-relaxed text-slate-700">
+      <p>
+        De belangrijkste reden om je kilometers bij te houden is geld. Voor elke
+        zakelijke kilometer mag je een onbelaste
+        <a href="/kilometervergoeding" class="font-semibold text-merk underline-offset-2 hover:underline">kilometervergoeding</a>
+        van €0,23 rekenen. Wie zijn <strong>zakelijke kilometers bijhouden</strong>
+        nalaat, kan die vergoeding niet onderbouwen en laat dus geld liggen. Andersom
+        geldt: rijd je in een auto van de zaak, dan kun je met een sluitende
+        registratie bijtelling voorkomen — mits je minder dan 500 privé-kilometers
+        rijdt en dat kunt bewijzen.
+      </p>
+      <p>
+        Daarnaast wil de Belastingdienst je administratie kunnen controleren, tot wel
+        zeven jaar terug. Door netjes je <strong>ritten bijhouden</strong> te
+        organiseren, lever je bij een controle in één tik een compleet rapport aan.
+        Tot slot geeft het bijhouden van je <strong>kilometerstand</strong> en je
+        ritten je inzicht: je ziet precies hoeveel je rijdt, voor welke klant en tegen
+        welke kosten. Of je nu elke zakelijke kilometer bijhouden wilt voor je
+        vergoeding of alleen je woon-werkverkeer wilt onderbouwen: hoe consequenter je
+        registreert, hoe sterker je administratie staat.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {redenen.map((r, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">€</div>
+          <h3 class="mt-5 text-lg font-bold">{r.t}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{r.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ZAKELIJK ZONDER MOEITE -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Voor ondernemers</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Zakelijke kilometers bijhouden zonder moeite</h2>
+          <p class="mt-4 text-zacht">
+            Als ondernemer wil je je tijd aan je werk besteden, niet aan het
+            natikken van kilometerstanden. Een app zakelijke kilometers bijhouden
+            doet het zware werk voor je.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Automatische rit-detectie via GPS en auto-Bluetooth (Android)',
+              'Veeg-classificatie: zakelijk, woon-werk of privé in één beweging',
+              'Zakelijke km bijhouden gescheiden van privéritten',
+              'De app leert je vaste adressen en stelt de categorie voor',
+              'Eén tik naar een sluitend PDF- of Excel-rapport',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+            Speciaal voor zelfstandigen? Bekijk dan ook onze pagina
+            <a href="/voor-zzp" class="font-semibold text-merk underline-offset-2 hover:underline">voor ZZP</a>
+            en de
+            <a href="/gratis-rittenregistratie-app" class="font-semibold text-merk underline-offset-2 hover:underline">gratis rittenregistratie-app</a>.
+          </p>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Deze maand</p>
+            <p class="mt-1 text-3xl font-extrabold">1.480 km <span class="text-base font-semibold opacity-80">zakelijk</span></p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Zakelijk</span><span class="font-bold">1.480 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Woon-werk</span><span class="font-bold">260 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Privé</span><span class="font-bold">190 km</span></div>
+              <div class="flex justify-between pt-1"><span class="opacity-80">Vergoeding</span><span class="font-bold">€ 340,40</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDMATIG OF AUTOMATISCH -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">De twee methodes</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Handmatig of automatisch?</h2>
+      <p class="mt-4 text-zacht">
+        Je kunt je kilometers op twee manieren bijhouden. Beide kunnen sluitend
+        zijn, maar verschillen sterk in moeite en betrouwbaarheid.
+      </p>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-2">
+      <div class="card" data-reveal>
+        <h3 class="text-lg font-bold">Handmatig km bijhouden</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          Je noteert na elke rit zelf de gegevens — in een boekje, spreadsheet of
+          notitie-app. Goedkoop, maar foutgevoelig: je vergeet snel een rit of een
+          kilometerstand, en bij een controle blijken er gaten te zitten.
+        </p>
+        <ul class="mt-4 space-y-2 text-[15px] text-slate-700">
+          <li>− Tijdrovend na elke rit</li>
+          <li>− Makkelijk een rit vergeten</li>
+          <li>− Foutgevoelige kilometerstanden</li>
+        </ul>
+      </div>
+      <div class="card border-merk/30" data-reveal style="--reveal-delay:90ms">
+        <h3 class="text-lg font-bold gradient-text">Automatisch met een app</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          De app detecteert elke rit en legt vertrek, aankomst, route en afstand
+          vast. Jij classificeert alleen nog. Zo blijft je administratie sluitend
+          en mis je nooit een kilometer.
+        </p>
+        <ul class="mt-4 space-y-2 text-[15px] text-slate-700">
+          <li>✓ Ritten worden vanzelf herkend</li>
+          <li>✓ Niets meer vergeten</li>
+          <li>✓ Direct exporteren als PDF/Excel</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      <p>
+        Voor de meeste rijders is automatisch <strong>kilometers registreren</strong>
+        de beste keuze. Lees meer over de
+        <a href="/automatische-rittenregistratie" class="font-semibold text-merk underline-offset-2 hover:underline">automatische rittenregistratie</a>
+        of bekijk hoe de
+        <a href="/kilometerregistratie-app" class="font-semibold text-merk underline-offset-2 hover:underline">kilometerregistratie-app</a>
+        precies werkt.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Praktisch</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Tips voor een sluitende administratie</h2>
+        <p class="mt-4 text-zacht">
+          Of je nu handmatig of automatisch werkt: met deze tips houd je je
+          kilometers zo bij dat je registratie voldoet aan de eisen van de
+          Belastingdienst.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-4">
+        {[
+          {
+            t: 'Leg alle verplichte velden vast',
+            d: 'Datum, begin- en eindstand, vertrek- en aankomstadres, de gereden route en het doel. Een app vult deze automatisch in zodra je ritten bijhoudt.',
+          },
+          {
+            t: 'Houd zakelijk, woon-werk en privé apart',
+            d: 'Een sluitende administratie scheidt de drie categorieën. Zo zie je je zakelijke km direct en voorkom je discussie bij een controle.',
+          },
+          {
+            t: 'Registreer direct, niet achteraf',
+            d: 'Hoe later je een rit invoert, hoe groter de kans op fouten. Automatische detectie lost dit op: de rit staat al klaar voordat je het weet.',
+          },
+          {
+            t: 'Controleer je kilometerstand periodiek',
+            d: 'Laat je kilometerstand bijhouden aansluiten op de echte teller van je auto. De app waarschuwt bij vreemde sprongen.',
+          },
+          {
+            t: 'Bewaar je gegevens veilig',
+            d: 'De Belastingdienst kan tot 7 jaar terug controleren. Met cloud-back-up (EU/AVG) staat je administratie altijd veilig opgeslagen.',
+          },
+        ].map((tip, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <h3 class="text-lg font-bold">{tip.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{tip.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/rittenregistratie-belastingdienst" class="btn-ghost">Eisen van de Belastingdienst →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Kilometers bijhouden — veelgestelde vragen</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

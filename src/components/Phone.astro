@@ -1,0 +1,17 @@
+---
+// Toont een echte app-screenshot in een strakke telefoon-behuizing.
+const { src, alt = '', class: klass = '', w = 280, h = 622 } = Astro.props;
+---
+<div class={`relative ${klass}`}>
+  <div class="overflow-hidden rounded-[2.3rem] border-[11px] border-[#0B1020] bg-[#0B1020] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.55)] ring-1 ring-white/10">
+    <img
+      src={src}
+      alt={alt}
+      width={w}
+      height={h}
+      loading="lazy"
+      decoding="async"
+      class="block w-full"
+    />
+  </div>
+</div>

@@ -1,0 +1,392 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const functies = [
+  {
+    t: 'Automatische rit-detectie',
+    d: 'De kilometerregistratie app herkent zelf wanneer je gaat rijden via GPS en auto-Bluetooth op Android. Je hoeft niets te starten of te stoppen.',
+  },
+  {
+    t: 'Veeg-classificatie',
+    d: 'Veeg elke rit in één beweging naar zakelijk, woon-werk of privé. De app leert je vaste adressen en stelt de juiste categorie voor.',
+  },
+  {
+    t: '8 verplichte velden',
+    d: 'Datum, kilometerstanden, vertrek- en aankomstadres, route en doel worden netjes vastgelegd, zodat je administratie sluitend is.',
+  },
+  {
+    t: 'PDF- en Excel-export',
+    d: 'Exporteer je kilometeradministratie als PDF of Excel — klaar voor je boekhouder of een controle van de Belastingdienst.',
+  },
+  {
+    t: 'Route op de kaart',
+    d: 'Bekijk per rit de gereden route op de kaart. Zo controleer je in één oogopslag of een rit klopt.',
+  },
+  {
+    t: 'Onbeperkt voertuigen',
+    d: 'Beheer met Premium onbeperkt auto\'s, bestelbussen en motoren, elk met een eigen sluitende administratie.',
+  },
+  {
+    t: 'Cloud-back-up (EU/AVG)',
+    d: 'Je data staat veilig in de cloud binnen de EU en voldoet aan de AVG. Wissel van telefoon zonder een rit te verliezen.',
+  },
+  {
+    t: 'Inzichten & vergoeding',
+    d: 'Zie direct hoeveel zakelijke kilometers je reed en welke kilometervergoeding daarbij hoort, tot op de kilometer nauwkeurig.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Wat is een kilometerregistratie app?',
+    a: 'Een kilometerregistratie app is een mobiele app die je zakelijke en privé gereden kilometers vastlegt in een sluitende administratie. De app registreert per rit de datum, kilometerstanden, adressen, route en het doel, zodat je voldoet aan de eisen van de Belastingdienst en je kilometervergoeding kunt onderbouwen of bijtelling kunt voorkomen.',
+  },
+  {
+    v: 'Hoe werkt automatische kilometerregistratie?',
+    a: 'De app detecteert via GPS en auto-Bluetooth op Android automatisch wanneer je begint te rijden en wanneer je stopt. Optioneel verhoog je de nauwkeurigheid met een iBeacon in de auto. Na de rit veeg je hem in één beweging naar zakelijk, woon-werk of privé. Zo werkt automatische kilometerregistratie zonder dat je iets hoeft te starten.',
+  },
+  {
+    v: 'Is de kilometerregistratie app gratis?',
+    a: `Je begint gratis: handmatig ritten vastleggen volgens de eisen van de Belastingdienst, PDF/Excel-export en één voertuig. Premium (${PRIJZEN.maand}/maand of ${PRIJZEN.jaar}/jaar) voegt automatische rit-detectie, cloud-back-up in de EU en onbeperkt voertuigen toe.`,
+  },
+  {
+    v: 'Voldoet de app aan de eisen van de Belastingdienst?',
+    a: 'Ja, de app helpt je een rittenregistratie te voeren die voldoet aan de eisen van de Belastingdienst: alle 8 verplichte velden, een sluitende administratie en woon-werkverkeer als aparte categorie. Wij claimen geen keurmerk; de app zorgt ervoor dat jouw administratie aan de regels voldoet.',
+  },
+  {
+    v: 'Werkt de kilometerregistratie app op iPhone en Android?',
+    a: 'Ja, de app werkt op zowel iPhone als Android. Automatische rit-detectie via auto-Bluetooth zonder extra hardware werkt op Android; op iPhone gebruik je GPS-detectie en eventueel een iBeacon voor extra nauwkeurigheid.',
+  },
+  {
+    v: 'Is dit ook een goede km teller app?',
+    a: 'De app houdt per rit de begin- en eindstand bij en telt je zakelijke, woon-werk- en privékilometers automatisch op. Daardoor functioneert hij ook als km teller app, maar dan met een complete, Belastingdienst-proof administratie eromheen in plaats van alleen een losse teller.',
+  },
+  {
+    v: 'Kan ik naast kilometers ook mijn uren bijhouden?',
+    a: 'Veel ZZP\'ers zoeken een uren en km registratie app om hun werk in één overzicht te houden. Onze app richt zich op een sluitende kilometeradministratie, maar exporteert per rit datum, tijd en doel naar PDF of Excel, zodat je uren en km registratie naadloos aansluit op je eigen urenstaat of boekhoudpakket.',
+  },
+  {
+    v: 'Werkt de kilometeradministratie via GPS?',
+    a: 'Ja. De kilometeradministratie gps-detectie herkent automatisch wanneer je begint en stopt met rijden en legt de gereden route op de kaart vast. Zo krijg je een digitale kilometerregistratie die nauwkeurig is en die je later eenvoudig kunt controleren.',
+  },
+  {
+    v: 'Is dit online of op mijn telefoon?',
+    a: 'Allebei. Je legt je ritten vast op je telefoon en met Premium synchroniseert de app naar de cloud binnen de EU, zodat je een veilige online kilometerregistratie hebt die je nooit kwijtraakt. Of je het nu een kilometer administratie app, een km administratie app of een kilometer app noemt: het draait om dezelfde digitale kilometer registratie.',
+  },
+  {
+    v: 'Hoe veilig is mijn data in de kilometerregistratie app?',
+    a: 'Je data blijft binnen de EU en wordt verwerkt volgens de AVG. Met Premium staat je back-up versleuteld in de cloud in Nederland. Je kunt je gegevens altijd exporteren of je account verwijderen — jouw kilometers blijven van jou.',
+  },
+  {
+    v: 'Hoelang moet ik mijn kilometeradministratie bewaren?',
+    a: 'De Belastingdienst kan tot 7 jaar terug controleren, dus bewaar je kilometeradministratie zeven jaar. Met cloud-back-up in Premium staat alles automatisch veilig opgeslagen, zodat je nooit een jaar kwijtraakt.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Kilometerregistratie app',
+    url: `${SITE.domein}/kilometerregistratie-app`,
+    description:
+      'Kilometerregistratie app die je zakelijke kilometers automatisch vastlegt volgens de eisen van de Belastingdienst, met PDF/Excel-export. Gratis beginnen.',
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Kilometerregistratie app',
+        item: `${SITE.domein}/kilometerregistratie-app`,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Kilometerregistratie app — automatisch & Belastingdienst-proof"
+  description="Kilometerregistratie app: leg je zakelijke kilometers automatisch vast volgens de eisen van de Belastingdienst, met PDF/Excel-export. Gratis beginnen."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Automatisch & sluitend</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          De <span class="gradient-text">kilometerregistratie app</span> die alles automatisch vastlegt
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-zacht">
+          Met deze kilometerregistratie app leg je je zakelijke kilometers automatisch
+          vast volgens de eisen van de Belastingdienst, zonder gedoe met spreadsheets.
+          De app herkent je ritten via GPS en auto-Bluetooth, classificeert ze met één
+          veeg en exporteert alles naar PDF of Excel. Je begint gratis.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis downloaden</a>
+          <a href="/functies" class="btn-ghost">Bekijk functies →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Automatische rit-detectie</span>
+          <span>✓ PDF & Excel</span>
+          <span>✓ Belastingdienst-proof</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT IS HET -->
+  <section class="container-x py-20">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Uitgelegd</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat is een kilometerregistratie app?</h2>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Een kilometerregistratie app is een mobiele app waarmee je je gereden kilometers
+        netjes bijhoudt in een sluitende administratie. Waar je vroeger een schriftje of
+        een spreadsheet bijhield, doet een moderne km registratie app dit digitaal en
+        grotendeels automatisch. Per rit legt de app de datum vast, de begin- en
+        eindstand van de teller, het vertrek- en aankomstadres, de gereden route en het
+        doel. Daarmee voldoet je administratie aan de eisen van de Belastingdienst en kun
+        je je onbelaste kilometervergoeding onderbouwen of bijtelling voorkomen.
+      </p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        De termen lopen door elkaar: de een zoekt een kilometer registratie app, de ander
+        een kilometeradministratie app of een kmadministratie app, en weer een ander een
+        app voor kilometerregistratie of gewoon een app km registratie. Het komt allemaal
+        op hetzelfde neer — een betrouwbaar kilometerregistratiesysteem dat je zakelijke
+        en privé kilometers scheidt en bewaart. Onze app is precies zo'n
+        kilometerregistratie tool: compleet, eerlijk en zonder verborgen kosten om te
+        beginnen. Of je het nu "kilometerregistratie bijhouden" noemt of "bijhouden kilometerregistratie"
+        voor de Belastingdienst: de app neemt je het handwerk uit handen.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOE WERKT HET -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Automatisch</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Hoe werkt automatische kilometerregistratie?</h2>
+        <p class="mt-4 text-zacht">
+          Geen knop om in te drukken, geen rit meer vergeten. De app doet het zware werk,
+          jij houdt de controle.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <div class="card" data-reveal>
+          <p class="text-3xl font-extrabold gradient-text">1</p>
+          <h3 class="mt-3 text-lg font-bold">Detecteren</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            De app merkt via GPS en auto-Bluetooth op Android dat je gaat rijden en start
+            de registratie automatisch. Een iBeacon in de auto kan dit nog nauwkeuriger maken.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:90ms">
+          <p class="text-3xl font-extrabold gradient-text">2</p>
+          <h3 class="mt-3 text-lg font-bold">Classificeren</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Na de rit veeg je hem naar zakelijk, woon-werk of privé. De app leert je vaste
+            adressen en stelt de juiste categorie automatisch voor.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:180ms">
+          <p class="text-3xl font-extrabold gradient-text">3</p>
+          <h3 class="mt-3 text-lg font-bold">Exporteren</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Met één tik maak je een sluitend PDF- of Excel-rapport voor je boekhouder of een
+            controle van de Belastingdienst. Alles staat klaar.
+          </p>
+        </div>
+      </div>
+      <p class="mx-auto mt-12 max-w-2xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+        Wil je dieper ingaan op de techniek achter het automatisch herkennen van ritten?
+        Lees dan onze pagina over
+        <a href="/automatische-rittenregistratie" class="font-semibold text-merk underline">automatische rittenregistratie</a>
+        of vergelijk gerust met een traditioneel
+        <a href="/rittenregistratie-kastje" class="font-semibold text-merk underline">rittenregistratie kastje</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FUNCTIES -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Compleet</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Functies van de kilometerregistratie app</h2>
+      <p class="mt-4 text-zacht">
+        Alles wat een goed kilometerregistratiesysteem nodig heeft, in één app — van
+        automatische detectie tot een sluitend rapport.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {functies.map((f, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+          <h3 class="mt-5 text-lg font-bold">{f.t}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{f.d}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/prijzen" class="btn-ghost">Bekijk prijzen →</a>
+    </div>
+  </section>
+
+  <!-- BESTE APP -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Waarom kiezen</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat maakt dit de beste kilometerregistratie app?</h2>
+          <p class="mt-4 text-zacht">
+            Er zijn veel apps, maar weinig zijn zowel automatisch, eerlijk geprijsd én
+            volledig Belastingdienst-proof. Onze app combineert dat alles, met je privacy
+            voorop.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Begin gratis — geen creditcard, geen abonnement',
+              'Automatische detectie zonder extra hardware op Android',
+              'Sluitende administratie met alle 8 verplichte velden',
+              'Data in Nederland (EU/AVG), versleutelde cloud-back-up',
+              'Eerlijke taal: voldoet aan de eisen, geen vals keurmerk',
+              'Werkt als km teller app én complete administratie',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+            Of je nu een eenvoudige kilometer teller app zoekt of een volwaardig
+            kilometerregistratie systeem: deze app groeit met je mee. Vergelijk gerust
+            verder op onze pagina
+            <a href="/beste-rittenregistratie-app" class="font-semibold text-merk underline">beste rittenregistratie app</a>.
+          </p>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Deze maand · automatisch</p>
+            <p class="mt-1 text-3xl font-extrabold">1.480 km <span class="text-base font-semibold opacity-80">zakelijk</span></p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Ritten herkend</span><span class="font-bold">42</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Woon-werk</span><span class="font-bold">260 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Privé</span><span class="font-bold">190 km</span></div>
+              <div class="flex justify-between pt-1"><span class="opacity-80">Sluitend</span><span class="font-bold">✓ Ja</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">PDF</span>
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Excel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOOR ZZP & ZAKELIJK -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Voor wie</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Voor ZZP en zakelijke rijders</h2>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Een kilometerregistratie app is onmisbaar voor iedereen die zakelijk rijdt. Als
+        ZZP'er gebruik je een sluitende administratie om de onbelaste kilometervergoeding
+        van €0,23 per zakelijke kilometer te onderbouwen. Rijd je in een auto van de zaak,
+        dan bewaakt de app de grens van 500 privékilometers per jaar, zodat je bijtelling
+        kunt voorkomen. Voor werknemers met een eigen auto en een vergoeding per kilometer
+        is de app de eenvoudigste manier om elke kilometer netjes te declareren.
+      </p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Ook voor kleine bedrijven met meerdere voertuigen is de app geschikt: met Premium
+        beheer je onbeperkt auto's en bestelbussen, elk met een eigen sluitende
+        kilometeradministratie. Woon-werkverkeer wordt als aparte categorie bijgehouden,
+        precies zoals de Belastingdienst het wil zien. En omdat je je administratie 7 jaar
+        moet bewaren, staat met cloud-back-up alles automatisch veilig opgeslagen binnen de
+        EU. Meer over de fiscale kant lees je op onze pagina over
+        <a href="/kilometervergoeding" class="font-semibold text-merk underline">kilometervergoeding</a>,
+        en de bredere uitleg vind je op
+        <a href="/kilometerregistratie-app" class="font-semibold text-merk underline">kilometers bijhouden</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- GRATIS BEGINNEN -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl" data-reveal>
+        <span class="eyebrow">Zonder drempel</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Gratis beginnen, upgraden wanneer jij wilt</h2>
+        <p class="mt-5 text-lg leading-relaxed text-slate-700">
+          Je hoeft niets te betalen om te starten. In de gratis versie leg je onbeperkt
+          ritten handmatig vast volgens de eisen van de Belastingdienst, exporteer je naar
+          PDF of Excel en beheer je één voertuig. Wil je nooit meer een rit vergeten, dan
+          stap je over naar Premium voor {PRIJZEN.maand} per maand of {PRIJZEN.jaar} per
+          jaar. Daarmee krijg je automatische rit-detectie via GPS en auto-Bluetooth op
+          Android, optionele iBeacon, cloud-back-up in de EU en onbeperkt voertuigen.
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-slate-700">
+          Zo bepaal jij het tempo. Test eerst gratis of een app voor km registratie bij je
+          past, en upgrade pas als je het gemak van automatisering wilt. Geen
+          proefperiode die stilletjes doorloopt, geen verplicht abonnement — gewoon een
+          eerlijke kilometerregistratie app. Liever eerst handmatig? Bekijk dan onze
+          <a href="/gratis-rittenregistratie-app" class="font-semibold text-merk underline">gratis rittenregistratie app</a>.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/download" class="btn-primary">Gratis downloaden</a>
+          <a href="/prijzen" class="btn-ghost">Gratis vs Premium →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Kilometerregistratie app — veelgestelde vragen</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/" class="btn-ghost">Terug naar home →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

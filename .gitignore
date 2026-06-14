@@ -3,6 +3,6 @@ dist/
 .astro/
 .DS_Store
 *.log
-_preview.png
-_p_*.png
-_og.html
+_*.png
+_*.tsv
+_*.html

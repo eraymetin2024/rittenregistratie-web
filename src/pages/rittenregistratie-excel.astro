@@ -1,0 +1,377 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const kolommen = [
+  {
+    n: '1. Datum',
+    d: 'De datum van de rit. In een kilometerregistratie Excel zet je deze kolom vooraan, zodat je ritten chronologisch op volgorde staan.',
+  },
+  {
+    n: '2. Beginstand kilometerteller',
+    d: 'De kilometerstand bij vertrek. Samen met de eindstand maakt dit je rittenregistratie belastingdienst Excel sluitend.',
+  },
+  {
+    n: '3. Eindstand kilometerteller',
+    d: 'De kilometerstand bij aankomst. Het verschil met de beginstand is het aantal gereden kilometers.',
+  },
+  {
+    n: '4. Vertrekadres',
+    d: 'Het volledige adres waar de rit begon. Een postcode of plaatsnaam alleen is niet sluitend genoeg.',
+  },
+  {
+    n: '5. Aankomstadres',
+    d: 'Het volledige adres van de bestemming. Bij een retourrit registreer je de terugrit als aparte regel.',
+  },
+  {
+    n: '6. Gereden route',
+    d: 'De afgelegde route, vooral als je bent afgeweken van de kortste weg. Dit voorkomt discussie over het aantal kilometers.',
+  },
+  {
+    n: '7. Doel / karakter van de rit',
+    d: 'Het doel én of de rit zakelijk, woon-werk of privé is. Dit onderscheid is cruciaal voor je kilometervergoeding en bijtelling.',
+  },
+  {
+    n: '8. Aantal kilometers',
+    d: 'Het aantal kilometers van de rit (eindstand min beginstand). Handig als losse kolom om snel te kunnen optellen.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Is een rittenregistratie in Excel toegestaan door de Belastingdienst?',
+    a: 'Ja, een rittenregistratie belastingdienst Excel is toegestaan, mits de administratie sluitend is en alle verplichte velden bevat. Het probleem is in de praktijk niet dat Excel verboden is, maar dat een handmatige kilometerregistratie Excel vaak fouten of gaten bevat — en dan is hij niet meer sluitend.',
+  },
+  {
+    v: 'Waar vind ik een gratis rittenregistratie formulier of sjabloon?',
+    a: 'Je kunt eenvoudig zelf een gratis rittenregistratie formulier maken in Excel: zet de acht verplichte kolommen bovenaan en vul per rit een regel in. Hieronder beschrijven we precies welke kolommen je nodig hebt voor een sluitende km registratie formulier gratis opzet.',
+  },
+  {
+    v: 'Welke kolommen moet mijn kilometer registratie Excel bevatten?',
+    a: 'Een sluitende ritregistratie Excel bevat: datum, beginstand, eindstand, vertrekadres, aankomstadres, gereden route, het doel/karakter (zakelijk, woon-werk of privé) en het aantal kilometers. Mis je een van deze velden, dan is je administratie mogelijk niet sluitend.',
+  },
+  {
+    v: 'Wat is het verschil tussen kilometers bijhouden in Excel en een app?',
+    a: 'Kilometers bijhouden in Excel doe je volledig handmatig: elke rit tik je zelf in. Een app legt ritten automatisch vast via GPS en Bluetooth, vult adressen en kilometerstanden zelf in en is daardoor sluitender en veel minder foutgevoelig dan een ritregistratie Excel.',
+  },
+  {
+    v: 'Is Excel of een app sluitender voor de Belastingdienst?',
+    a: 'Een app is doorgaans sluitender. Bij km registratie zzp Excel is de kans groot dat je een rit vergeet of een kilometerstand verkeerd overtikt. Een app registreert automatisch en consequent, waardoor je administratie completer is en beter voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    v: 'Kan ik vanuit de app alsnog naar Excel exporteren?',
+    a: 'Ja. Je houdt je ritten automatisch bij in de app en exporteert ze met één tik naar Excel of PDF. Zo krijg je het beste van twee werelden: het gemak van automatisch registreren én een vertrouwd Excel-bestand voor je boekhouder.',
+  },
+  {
+    v: 'Hoe lang moet ik mijn rittenadministratie bewaren?',
+    a: 'De Belastingdienst kan tot zeven jaar terug controleren, dus je bewaart je rittenadministratie Excel of app-export minimaal zeven jaar. In de app staat je administratie veilig in de cloud (EU/AVG), zodat je niets kwijtraakt bij een nieuwe telefoon.',
+  },
+  {
+    v: 'Heb je een kilometerregistratie voorbeeld?',
+    a: 'Het kilometerregistratie voorbeeld hieronder toont een ingevulde regel met alle acht kolommen. Gebruik het als blauwdruk voor je eigen formulier rittenregistratie, of stap over op de app die deze regels automatisch voor je invult.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rittenregistratie Excel',
+    description:
+      'Gratis rittenregistratie Excel-sjabloon: welke kolommen je moet bijhouden voor de Belastingdienst en waarom een app sluitender is dan Excel.',
+    url: SITE.domein + '/rittenregistratie-excel',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Rittenregistratie Excel: gratis sjabloon en de verplichte kolommen',
+    inLanguage: 'nl-NL',
+    author: { '@type': 'Organization', name: SITE.bedrijf },
+    publisher: { '@type': 'Organization', name: SITE.bedrijf },
+    mainEntityOfPage: SITE.domein + '/rittenregistratie-excel',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Rittenregistratie Excel',
+        item: SITE.domein + '/rittenregistratie-excel',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Rittenregistratie Excel — gratis sjabloon & kolommen"
+  description="Rittenregistratie Excel: gratis sjabloon, welke kolommen je moet bijhouden voor de Belastingdienst en waarom een app sluitender en minder foutgevoelig is dan Excel."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Gratis sjabloon + eerlijke uitleg</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          <span class="gradient-text">Rittenregistratie Excel</span>: gratis sjabloon en alle verplichte kolommen
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Een rittenregistratie in Excel is een prima start: hieronder vind je een gratis
+          sjabloon en precies welke kolommen je nodig hebt om sluitend te zijn voor de
+          Belastingdienst. We laten ook eerlijk zien waar een kilometerregistratie Excel
+          tekortschiet — en waarom een app vaak sluitender en minder foutgevoelig is.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="#sjabloon" class="btn-primary">Naar het sjabloon</a>
+          <a href="/download" class="btn-ghost">Liever automatisch? →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ 8 verplichte velden</span>
+          <span>✓ Voldoet aan de eisen van de Belastingdienst</span>
+          <span>✓ Gratis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRATIS SJABLOON -->
+  <section id="sjabloon" class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Begin hier</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Gratis rittenregistratie Excel-sjabloon</h2>
+      <p class="mt-4 text-zacht">
+        Je hebt geen duur programma nodig om te beginnen. Wil je gewoon je kilometers bijhouden
+        Excel-gewijs, dan maak je in een paar minuten je eigen rittenregistratie formulier gratis
+        in Excel met onderstaande opzet. Maak één werkblad per voertuig en één regel per rit.
+      </p>
+    </div>
+
+    <!-- Sjabloon-tabel -->
+    <div class="mx-auto mt-12 max-w-4xl card overflow-x-auto" data-reveal>
+      <p class="eyebrow">Kilometerregistratie voorbeeld</p>
+      <h3 class="mt-2 text-lg font-bold">Zo ziet een ingevulde regel eruit</h3>
+      <table class="mt-5 w-full min-w-[640px] border-collapse text-left text-[14px]">
+        <thead>
+          <tr class="border-b-2 border-slate-200 text-zacht">
+            <th class="py-2 pr-4 font-bold">Datum</th>
+            <th class="py-2 pr-4 font-bold">Beginstand</th>
+            <th class="py-2 pr-4 font-bold">Eindstand</th>
+            <th class="py-2 pr-4 font-bold">Vertrekadres</th>
+            <th class="py-2 pr-4 font-bold">Aankomstadres</th>
+            <th class="py-2 pr-4 font-bold">Doel / karakter</th>
+            <th class="py-2 font-bold">Km</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-100">
+            <td class="py-2 pr-4">14-06-2026</td>
+            <td class="py-2 pr-4">52.140</td>
+            <td class="py-2 pr-4">52.187</td>
+            <td class="py-2 pr-4">Sloestraat 15, Lewedorp</td>
+            <td class="py-2 pr-4">Coolsingel 40, Rotterdam</td>
+            <td class="py-2 pr-4">Klantbezoek · zakelijk</td>
+            <td class="py-2 font-bold">47</td>
+          </tr>
+          <tr class="border-b border-slate-100">
+            <td class="py-2 pr-4">14-06-2026</td>
+            <td class="py-2 pr-4">52.187</td>
+            <td class="py-2 pr-4">52.234</td>
+            <td class="py-2 pr-4">Coolsingel 40, Rotterdam</td>
+            <td class="py-2 pr-4">Sloestraat 15, Lewedorp</td>
+            <td class="py-2 pr-4">Retour · zakelijk</td>
+            <td class="py-2 font-bold">47</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">15-06-2026</td>
+            <td class="py-2 pr-4">52.234</td>
+            <td class="py-2 pr-4">52.252</td>
+            <td class="py-2 pr-4">Sloestraat 15, Lewedorp</td>
+            <td class="py-2 pr-4">Stationsplein 1, Goes</td>
+            <td class="py-2 pr-4">Woon-werk</td>
+            <td class="py-2 font-bold">18</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-5 text-[13px] leading-relaxed text-zacht">
+        Tip: maak van "Doel / karakter" twee aparte kolommen (doel én zakelijk/woon-werk/privé) als
+        je het overzichtelijker wilt. Tel onderaan per categorie de kilometers op met een SOM-formule.
+      </p>
+    </div>
+
+    <p class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      Wil je liever helemaal niet zelf bijhouden? Bekijk dan onze
+      <a href="/gratis-rittenregistratie-app" class="font-semibold text-merk underline">gratis rittenregistratie app</a>
+      die deze kolommen automatisch voor je invult.
+    </p>
+  </section>
+
+  <!-- WELKE KOLOMMEN -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">De acht verplichte velden</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Welke kolommen moet je bijhouden?</h2>
+        <p class="mt-4 text-zacht">
+          Voor een sluitende rittenregistratie belastingdienst Excel zijn er acht velden die je
+          per rit moet vastleggen. Mis je er één, dan loop je het risico dat je administratie niet
+          sluitend is bij een controle.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2">
+        {kolommen.map((k, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <h3 class="text-lg font-bold">{k.n}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{k.d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+        Deze acht kolommen vormen samen het minimum voor een sluitend km registratie formulier gratis.
+        Meer weten over wat de fiscus precies eist? Lees
+        <a href="/rittenregistratie-belastingdienst" class="font-semibold text-merk underline">rittenregistratie en de Belastingdienst</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- EXCEL VS APP -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Eerlijk vergeleken</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Excel vs een app: wat is sluitender?</h2>
+      <p class="mt-4 text-zacht">
+        Een ritregistratie Excel is gratis en vertrouwd, maar heeft duidelijke nadelen. Hieronder
+        zetten we kilometers bijhouden in Excel eerlijk naast een automatische app. Steeds meer
+        ondernemers kiezen daarom voor online rittenregistratie, waarbij een online ritregistratie
+        in de cloud automatisch sluitend blijft.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 md:grid-cols-2">
+      <div class="card" data-reveal>
+        <h3 class="text-lg font-bold">Kilometers bijhouden in Excel</h3>
+        <ul class="mt-4 space-y-3 text-[15px] text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-groen">✓</span><span>Gratis en vertrouwd</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-groen">✓</span><span>Volledig zelf in te richten</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-rose-500">✕</span><span>Volledig handmatig — elke rit zelf intikken</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-rose-500">✕</span><span>Foutgevoelig: vergeten ritten en typefouten</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-rose-500">✕</span><span>Geen automatische adressen of kilometerstanden</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5 text-rose-500">✕</span><span>Snel niet meer sluitend bij een gat in de reeks</span></li>
+        </ul>
+      </div>
+      <div class="card bg-gradient-to-br from-merk to-violet text-white" data-reveal style="--reveal-delay:90ms">
+        <h3 class="text-lg font-bold">Automatische app</h3>
+        <ul class="mt-4 space-y-3 text-[15px] opacity-95">
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Automatische detectie via GPS, auto-Bluetooth en optioneel iBeacon</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Adressen en kilometerstanden worden zelf ingevuld</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Sluitend: alle 8 velden, geen gaten in de reeks</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Woon-werk apart en bewaking van de 500 km-grens</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Export naar PDF én Excel met één tik</span></li>
+          <li class="flex items-start gap-3"><span class="mt-0.5">✓</span><span>Veilige cloud-back-up (EU/AVG) — 7 jaar bewaard</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="mx-auto mt-10 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      Conclusie: een rittenadministratie Excel is een goede start, maar een app is doorgaans
+      sluitender en kost je veel minder tijd. Je begint gratis; voor automatische detectie en
+      cloud-back-up kies je Premium voor {PRIJZEN.maand} per maand of {PRIJZEN.jaar} per jaar.
+      Vergelijk gerust met een losse
+      <a href="/kilometerregistratie-app" class="font-semibold text-merk underline">kilometerregistratie app</a>.
+    </p>
+  </section>
+
+  <!-- HET BESTE VAN TWEE WERELDEN -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Toch je vertrouwde Excel</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Automatisch bijhouden, exporteren naar Excel</h2>
+          <p class="mt-4 text-zacht">
+            Je hoeft niet te kiezen tussen het gemak van een app en je vertrouwde Excel. De app houdt
+            je ritten automatisch bij en zet ze met één tik om in een Excel- of PDF-bestand. Zo lever
+            je bij een controle een sluitend rapport aan en kun je de data gebruiken voor je facturatie.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Ritten automatisch geregistreerd — geen formulier rittenregistratie meer overtypen',
+              'Export naar Excel of PDF, klaar voor je boekhouder',
+              'Alle 8 verplichte velden altijd compleet',
+              'Voldoet aan de eisen van de Belastingdienst',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/download" class="btn-primary">Gratis beginnen</a>
+            <a href="/functies" class="btn-ghost">Bekijk de functies →</a>
+          </div>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm">
+            <p class="eyebrow">Export · 2 formaten</p>
+            <h3 class="mt-2 text-2xl font-extrabold">Eén tik naar Excel of PDF</h3>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-zacht">Zakelijk</span><span class="font-bold">112 km</span></div>
+              <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-zacht">Woon-werk</span><span class="font-bold">36 km</span></div>
+              <div class="flex justify-between border-b border-slate-200 pb-2"><span class="text-zacht">Privé</span><span class="font-bold">14 km</span></div>
+              <div class="flex justify-between pt-1"><span class="text-zacht">Sluitend</span><span class="font-bold text-groen">✓ Ja</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-merk/10 px-3 py-1.5 text-xs font-bold text-merk">Excel</span>
+              <span class="rounded-lg bg-merk/10 px-3 py-1.5 text-xs font-bold text-merk">PDF</span>
+            </div>
+            <a href="/prijzen" class="btn-ghost mt-6 w-full text-center">Bekijk de prijzen →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie Excel — veelgestelde vragen</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

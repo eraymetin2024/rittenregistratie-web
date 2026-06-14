@@ -26,6 +26,20 @@ export const NAV = [
   { label: 'FAQ', href: '/faq' },
 ];
 
+// SEO-pillarpagina's (voor interne links in footer + home).
+export const TOPICS = [
+  { label: 'Gratis rittenregistratie app', href: '/gratis-rittenregistratie-app' },
+  { label: 'Kilometerregistratie app', href: '/kilometerregistratie-app' },
+  { label: 'Rittenregistratie Belastingdienst', href: '/rittenregistratie-belastingdienst' },
+  { label: 'Automatische rittenregistratie', href: '/automatische-rittenregistratie' },
+  { label: 'Rittenregistratie software', href: '/rittenregistratie-software' },
+  { label: 'Rittenregistratie Excel', href: '/rittenregistratie-excel' },
+  { label: 'Rittenregistratie kastje', href: '/rittenregistratie-kastje' },
+  { label: 'Kilometers bijhouden', href: '/kilometers-bijhouden' },
+  { label: 'Kilometervergoeding 2026', href: '/kilometervergoeding' },
+  { label: 'Beste rittenregistratie app', href: '/beste-rittenregistratie-app' },
+];
+
 export const PRIJZEN = {
   maand: '€3,99',
   jaar: '€29,99',

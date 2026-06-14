@@ -1,0 +1,400 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const gratis = [
+  {
+    t: 'Handmatige ritten — onbeperkt',
+    d: 'Leg elke zakelijke, woon-werk- of privérit met de hand vast. In de gratis versie zit geen limiet op het aantal ritten dat je registreert.',
+  },
+  {
+    t: 'Alle Belastingdienst-velden',
+    d: 'De gratis app vraagt netjes naar de 8 verplichte velden, zodat je rittenregistratie sluitend is en de toets van de fiscus doorstaat.',
+  },
+  {
+    t: 'PDF- en Excel-export',
+    d: 'Exporteer je administratie gratis als PDF of Excel — klaar voor je boekhouder of een controle, zonder dat je een cent betaalt.',
+  },
+  {
+    t: 'Eén voertuig',
+    d: 'Houd in de gratis versie één auto, bestelbus of motor bij. Voor onbeperkt voertuigen stap je over naar Premium.',
+  },
+  {
+    t: 'Data in Nederland (EU/AVG)',
+    d: 'Ook in de gratis app blijft je data binnen de EU en voldoet de verwerking aan de AVG. Jouw kilometers zijn van jou.',
+  },
+  {
+    t: 'Zonder abonnement',
+    d: 'Geen creditcard, geen proefperiode die stilletjes doorloopt. De gratis rittenregistratie blijft gratis, ook zonder abonnement.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Is de gratis rittenregistratie app echt volledig gratis?',
+    a: 'Ja. De gratis rittenregistratie app is écht gratis: je legt onbeperkt ritten handmatig vast, registreert alle verplichte velden, exporteert naar PDF of Excel en houdt één voertuig bij — zonder abonnement en zonder creditcard. Alleen automatische rit-detectie, cloud-back-up en onbeperkt voertuigen zitten in Premium.',
+  },
+  {
+    v: 'Wat is het verschil tussen gratis en Premium?',
+    a: `In de gratis versie leg je ritten handmatig vast volgens de eisen van de Belastingdienst en exporteer je naar PDF/Excel met één voertuig. Premium (${PRIJZEN.maand}/maand of ${PRIJZEN.jaar}/jaar) voegt automatische rit-detectie via GPS en auto-Bluetooth op Android toe, optionele iBeacon, cloud-back-up in de EU en onbeperkt voertuigen.`,
+  },
+  {
+    v: 'Voldoet een gratis rittenregistratie app aan de eisen van de Belastingdienst?',
+    a: 'Een rittenregistratie voldoet aan de eisen van de Belastingdienst zolang die alle 8 verplichte velden bevat en sluitend is. Dat kan ook in de gratis versie: je legt datum, kilometerstanden, adressen, route en doel vast en bewaart alles. Wij claimen geen keurmerk — de app helpt je gewoon om aan de wettelijke plicht te voldoen.',
+  },
+  {
+    v: 'Moet ik mijn creditcard opgeven om gratis te beginnen?',
+    a: 'Nee. Je downloadt de gratis km registratie app en begint direct, zonder betaalgegevens. Er is geen proefperiode die automatisch in een abonnement overgaat. Wil je later upgraden naar Premium, dan kies je dat zelf bewust.',
+  },
+  {
+    v: 'Is dit een goede km teller app gratis?',
+    a: 'Ja. De app houdt per rit de begin- en eindstand bij en telt je kilometers automatisch op, dus hij functioneert ook als km teller app gratis. Het verschil is dat je er meteen een complete, sluitende administratie omheen krijgt in plaats van alleen een losse teller — en dat allemaal zonder kosten.',
+  },
+  {
+    v: 'Kan ik de gratis app zonder abonnement blijven gebruiken?',
+    a: 'Ja. Rittenregistratie zonder abonnement is precies waar de gratis versie voor bedoeld is. Je kunt de handmatige registratie zo lang gebruiken als je wilt; er verandert niets aan je gratis functies als je niet upgradet.',
+  },
+  {
+    v: 'Hoeveel ritten kan ik gratis registreren?',
+    a: 'Onbeperkt. De gratis kilometerregistratie kent geen limiet op het aantal ritten. Je legt elke zakelijke, woon-werk- en privérit vast zoveel als nodig is voor een sluitende administratie.',
+  },
+  {
+    v: 'Kan ik mijn gratis administratie exporteren voor mijn boekhouder?',
+    a: 'Zeker. Ook gratis exporteer je je rittenregistratie als PDF of Excel. Zo lever je je boekhouder of de Belastingdienst in één tik een compleet, leesbaar overzicht aan.',
+  },
+  {
+    v: 'Hoelang moet ik mijn rittenregistratie bewaren?',
+    a: 'De Belastingdienst kan tot 7 jaar terug controleren, dus bewaar je rittenregistratie zeven jaar. In de gratis versie bewaar je dit lokaal; met Premium staat je back-up veilig in de cloud binnen de EU (AVG).',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Gratis rittenregistratie app',
+    url: `${SITE.domein}/gratis-rittenregistratie-app`,
+    description:
+      'Gratis rittenregistratie app: handmatig ritten vastleggen volgens de eisen van de Belastingdienst, PDF/Excel-export en één voertuig — zonder abonnement.',
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Gratis rittenregistratie app',
+        item: `${SITE.domein}/gratis-rittenregistratie-app`,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Gratis rittenregistratie app — zonder abonnement"
+  description="Gratis rittenregistratie app: onbeperkt ritten handmatig bijhouden volgens de eisen van de Belastingdienst, PDF/Excel-export, 1 voertuig, zonder abonnement."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Echt gratis beginnen</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          Gratis <span class="gradient-text">rittenregistratie app</span> — zonder abonnement
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-zacht">
+          Met een gratis rittenregistratie app houd je je zakelijke kilometers bij
+          volgens de eisen van de Belastingdienst, zonder dat het je een cent kost.
+          Je legt onbeperkt ritten handmatig vast, exporteert naar PDF of Excel en
+          beheert één voertuig — volledig gratis en zonder abonnement of creditcard.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis downloaden</a>
+          <a href="/prijzen" class="btn-ghost">Gratis vs Premium →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Geen abonnement</span>
+          <span>✓ Geen creditcard</span>
+          <span>✓ Belastingdienst-proof</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="container-x py-20">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <p class="text-lg leading-relaxed text-slate-700">
+        Iedereen die zakelijk rijdt, kent de zoektocht naar de beste gratis
+        rittenregistratie app. Of je nu zoekt op rittenregistratie app gratis,
+        op km registratie app gratis of op een kilometer registratie app gratis:
+        je komt steeds bij dezelfde behoefte uit. Logisch: een sluitende kilometeradministratie is
+        wettelijk verplicht als je de onbelaste kilometervergoeding wilt claimen of
+        bijtelling wilt voorkomen, maar je wilt er natuurlijk niet onnodig voor betalen.
+        Onze app draait het om. In plaats van je achter een betaalmuur te zetten,
+        krijg je alles wat je nodig hebt om aan de wettelijke plicht te voldoen
+        gewoon gratis. Dat is geen uitgeklede demo: de gratis kilometerregistratie
+        bevat de complete handmatige registratie inclusief alle verplichte velden,
+        export naar PDF en Excel en één voertuig.
+      </p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Waarom kan dat? Omdat wij vinden dat het voldoen aan de eisen van de
+        Belastingdienst geen luxe hoort te zijn. Veel mensen zoeken een
+        rittenregistratie app belastingdienst gratis omdat ze simpelweg hun plicht
+        willen nakomen. Die plicht — een sluitende administratie met de juiste
+        gegevens — dekken wij in de gratis versie volledig af. Voor wie de
+        administratie helemaal uit handen wil geven, is er Premium met automatische
+        rit-detectie. Maar je hoeft daar nooit aan te beginnen om aan de regels te
+        voldoen.
+      </p>
+    </div>
+  </section>
+
+  <!-- WAT KRIJG JE GRATIS -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Volledig gratis</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat kun je gratis met de app?</h2>
+        <p class="mt-4 text-zacht">
+          De gratis rittenregistratie geeft je alles om handmatig een sluitende
+          kilometeradministratie te voeren. Geen verborgen limieten op het aantal
+          ritten, geen verplicht abonnement.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {gratis.map((g, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+            <h3 class="mt-5 text-lg font-bold">{g.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{g.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/functies" class="btn-ghost">Bekijk alle functies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRATIS VS PREMIUM -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Eerlijk vergeleken</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Gratis vs Premium</h2>
+      <p class="mt-4 text-zacht">
+        De gratis km registratie app dekt je wettelijke plicht. Premium is er puur
+        voor het gemak van automatisering. Je kiest zelf wanneer — of óf — je upgradet.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 lg:grid-cols-2">
+      <div class="card" data-reveal>
+        <span class="eyebrow">Gratis</span>
+        <p class="mt-3 text-3xl font-extrabold gradient-text">€0</p>
+        <p class="mt-2 text-[15px] text-zacht">Voor altijd, zonder abonnement</p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Handmatige ritten — onbeperkt',
+            'Alle 8 verplichte Belastingdienst-velden',
+            'Sluitende administratie & woon-werk apart',
+            'PDF- en Excel-export',
+            '1 voertuig',
+            'Data in Nederland (EU/AVG)',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+              <span class="text-[15px] text-slate-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/download" class="btn-primary mt-8">Gratis beginnen</a>
+      </div>
+      <div class="card bg-gradient-to-br from-merk to-violet text-white" data-reveal style="--reveal-delay:120ms">
+        <span class="rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wide">Premium</span>
+        <p class="mt-3 text-3xl font-extrabold">{PRIJZEN.maand}<span class="text-base font-semibold opacity-80">/maand</span></p>
+        <p class="mt-2 text-[15px] opacity-80">of {PRIJZEN.jaar}/jaar — alles uit gratis, plus:</p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Automatische rit-detectie via GPS',
+            'Auto-Bluetooth-detectie op Android',
+            'Optionele iBeacon voor extra nauwkeurigheid',
+            'Cloud-back-up in de EU (AVG)',
+            'Onbeperkt voertuigen',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/15 text-sm">✓</span>
+              <span class="text-[15px]">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/prijzen" class="btn-ghost mt-8 !bg-white !text-merk">Bekijk Premium →</a>
+      </div>
+    </div>
+    <p class="mx-auto mt-10 max-w-2xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      Zoek je een app kilometerregistratie gratis omdat je je kilometers gewoon netjes
+      wilt bijhouden, dan is de gratis versie ruim voldoende. Wil je nooit meer een rit
+      vergeten, kijk dan eens naar
+      <a href="/automatische-rittenregistratie" class="font-semibold text-merk underline">automatische rittenregistratie</a>
+      in Premium.
+    </p>
+  </section>
+
+  <!-- ZONDER ABONNEMENT -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Geen verplichtingen</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie zonder abonnement</h2>
+          <p class="mt-4 text-zacht">
+            Veel apps lokken je met een gratis kilometerregistratie app, maar zetten je
+            na een paar dagen vast in een abonnement. Bij ons niet. De gratis versie is
+            geen proefperiode — het is een volwaardige, blijvende manier om je
+            kilometeradministratie te voeren.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Geen creditcard nodig om te starten',
+              'Geen automatisch doorlopend abonnement',
+              'Je gratis functies blijven gratis, ook over een jaar',
+              'Upgraden naar Premium is altijd een bewuste keuze',
+              'Je data blijft van jou — exporteer wanneer je wilt',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+            Of je nu een app voor km registratie gratis zoekt of een km app gratis voor
+            af en toe een zakelijke rit: je begint direct, zonder drempel. Zo werkt een
+            eerlijke app rittenregistratie gratis. Zoek je liever op
+            "kilometers bijhouden app gratis" of op een app voor kilometerregistratie gratis,
+            dan kom je bij precies dezelfde gratis functies uit.
+          </p>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm">
+            <p class="text-sm text-zacht">Jouw gratis administratie</p>
+            <p class="mt-1 text-3xl font-extrabold gradient-text">€0,00</p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-mist pb-2"><span class="text-zacht">Ritten deze maand</span><span class="font-bold">37</span></div>
+              <div class="flex justify-between border-b border-mist pb-2"><span class="text-zacht">Verplichte velden</span><span class="font-bold text-groen">✓ Compleet</span></div>
+              <div class="flex justify-between border-b border-mist pb-2"><span class="text-zacht">Sluitend</span><span class="font-bold text-groen">✓ Ja</span></div>
+              <div class="flex justify-between pt-1"><span class="text-zacht">Abonnement</span><span class="font-bold">Geen</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-merk/10 px-3 py-1.5 text-xs font-bold text-merk">PDF</span>
+              <span class="rounded-lg bg-merk/10 px-3 py-1.5 text-xs font-bold text-merk">Excel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BELASTINGDIENST-PROOF -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Wettelijk in orde</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Is een gratis rittenregistratie app Belastingdienst-proof?</h2>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Dat is misschien wel de belangrijkste vraag. Het korte antwoord: ja, mits je
+        registratie sluitend is en alle verplichte gegevens bevat. De Belastingdienst
+        stelt geen eis aan welke app je gebruikt — wij claimen dan ook geen keurmerk en
+        zeggen nooit dat de app "goedgekeurd" is. Wat telt, is dat je administratie aan
+        de eisen voldoet. En dat doet onze gratis app belastingdienst gratis prima.
+      </p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Bij elke rit leg je de 8 verplichte velden vast: de datum, de begin- en
+        eindstand van de kilometerteller, het vertrek- en aankomstadres, de gereden
+        route en het zakelijke doel van de rit. Woon-werkverkeer registreer je als
+        aparte categorie. Daardoor wordt je administratie sluitend: de
+        kilometerstanden lopen netjes op elkaar door, zonder gaten. Rijd je in een auto
+        van de zaak, dan helpt de app je onder de grens van 500 privékilometers per jaar
+        te blijven, zodat je bijtelling kunt voorkomen.
+      </p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">
+        Vergeet niet: je moet je rittenregistratie 7 jaar bewaren, want zo ver kan de
+        Belastingdienst terugkijken. In de gratis versie bewaar je dat lokaal op je
+        telefoon en exporteer je regelmatig een PDF of Excel als veiligheidskopie. Wil je
+        nooit meer nadenken over back-ups, dan biedt Premium automatische cloud-back-up
+        binnen de EU (AVG). Meer weten over de regels? Lees onze pagina over
+        <a href="/rittenregistratie-belastingdienst" class="font-semibold text-merk underline">rittenregistratie en de Belastingdienst</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- VOOR WIE -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl" data-reveal>
+        <span class="eyebrow">Voor wie</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Voor wie is de gratis versie ideaal?</h2>
+        <p class="mt-5 text-lg leading-relaxed text-slate-700">
+          De gratis rittenregistratie is gemaakt voor iedereen die zijn kilometers netjes
+          wil bijhouden zonder vaste kosten. Denk aan de ZZP'er die net begint en de
+          uitgaven laag wil houden, de werknemer met een vergoeding per kilometer, of de
+          rijder die maar af en toe een zakelijke rit maakt. Voor hen is een
+          kilometerregistratie app gratis precies genoeg: handmatig invoeren is goed te
+          doen als je niet honderden ritten per maand maakt.
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-slate-700">
+          Maak je veel ritten of wil je gewoon nooit meer omkijken naar je administratie?
+          Dan is de stap naar Premium snel gemaakt. Maar zelfs dan begin je gratis: je
+          downloadt de app, voert een paar ritten in en ervaart zelf of handmatig genoeg
+          is. Pas als je het gemak van automatisering wilt, upgrade je. Zo bepaal jij of
+          dit voor jou de beste gratis rittenregistratie app is — zonder risico. Ben je
+          zelfstandig? Kijk dan ook naar onze pagina <a href="/voor-zzp" class="font-semibold text-merk underline">rittenregistratie voor ZZP'ers</a>
+          en de bredere <a href="/kilometerregistratie-app" class="font-semibold text-merk underline">kilometerregistratie app</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Gratis rittenregistratie — veelgestelde vragen</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/" class="btn-ghost">Terug naar home →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

@@ -1,0 +1,326 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const stappen = [
+  {
+    t: 'Beweging detecteren',
+    d: 'De app merkt via je telefoon dat je gaat rijden — op basis van beweging en snelheid. Stilstand of lopen wordt herkend en genegeerd.',
+  },
+  {
+    t: 'GPS legt de route vast',
+    d: 'Zodra de rit loopt, registreert de gps-kilometerregistratie je werkelijke route en afstand. Geen geschatte, ronde getallen maar echte kilometers.',
+  },
+  {
+    t: 'Rit afronden & wachtrij',
+    d: 'Stap je uit, dan sluit de app de rit automatisch af en zet die in een wachtrij. Niets gaat verloren, ook als je het even vergeet.',
+  },
+  {
+    t: 'Classificeren met één veeg',
+    d: 'Je veegt elke rit als zakelijk, woon-werk of privé. De app leert je vaste adressen en stelt de juiste categorie vanzelf voor.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Wat is automatische rittenregistratie precies?',
+    a: 'Automatische rittenregistratie betekent dat je telefoon zelf herkent wanneer je rijdt en de rit volledig vastlegt — datum, route, afstand en adressen — zonder dat je een knop indrukt. Jij hoeft achteraf alleen nog te classificeren als zakelijk, woon-werk of privé.',
+  },
+  {
+    v: 'Hoe werkt de automatische km registratie zonder dat ik iets doe?',
+    a: 'De app combineert bewegingsdetectie met gps. Zodra je begint te rijden start de gps rittenregistratie automatisch; bij stilstand stopt die weer. De rit komt in een wachtrij die je met één veeg afhandelt. Zo werkt automatische kilometerregistratie volledig op de achtergrond.',
+  },
+  {
+    v: 'Werkt de gps rittenregistratie ook op de achtergrond?',
+    a: 'Ja. Op Android draait de detectie als achtergrondservice, zodat ritten ook worden vastgelegd als de app niet open is. Op iPhone werkt rittenregistratie via gps het best met de app open of recent op de achtergrond, of met een optionele iBeacon in de auto als trigger.',
+  },
+  {
+    v: 'Is automatische rittenregistratie slecht voor mijn batterij?',
+    a: 'Nee. De app is batterijvriendelijk gebouwd: de gps-kilometerregistratie schakelt pas vol in tijdens een rit en valt daarna terug naar een zuinige stand. Bewegingsdetectie kost vrijwel niets, dus je telefoon gaat een normale dag gewoon mee.',
+  },
+  {
+    v: 'Wat is het verschil tussen iPhone en Android?',
+    a: 'Op Android kan de auto-Bluetooth-koppeling én de achtergrondservice de detectie automatisch starten, zonder extra hardware. Op iPhone is automatische ritregistratie het betrouwbaarst met de app actief of met een optionele iBeacon. We zijn daar eerlijk over, zodat je weet wat je kunt verwachten.',
+  },
+  {
+    v: 'Heb ik hardware nodig voor automatische ritregistratie?',
+    a: 'Nee, niet verplicht. GPS en bewegingsdetectie zitten al in je telefoon. Op Android kun je gebruikmaken van de Bluetooth van je auto. Wil je op iPhone helemaal handsfree, dan is een optionele iBeacon een handige, goedkope trigger.',
+  },
+  {
+    v: 'Voldoet de automatische rittenregistratie aan de eisen van de Belastingdienst?',
+    a: 'Ja. Elke automatisch gedetecteerde rit bevat de verplichte velden: datum, kilometerstanden, vertrek- en aankomstadres, route en doel. Je administratie is sluitend en exporteerbaar als PDF of Excel, en voldoet daarmee aan de eisen van de Belastingdienst.',
+  },
+  {
+    v: 'Werkt automatische rittenregistratie op iPhone en Android?',
+    a: 'Ja, maar net iets anders per platform. Rittenregistratie android werkt het meest volledig: de app draait een achtergrondservice en kan via auto-Bluetooth een rit starten zonder dat je iets doet. Rittenregistratie iphone werkt door Apple&rsquo;s strengere achtergrondbeperkingen het best met de app open of recent op de achtergrond, óf met een optionele iBeacon als trigger. In beide gevallen levert de kilometerregistratie gps een sluitende, controleerbare administratie op.',
+  },
+  {
+    v: 'Hoe nauwkeurig is de gps ritregistratie?',
+    a: 'De gps ritregistratie legt je werkelijke route en afstand vast, niet een schatting. Door de rittenregistratie gps te combineren met bewegingsdetectie weet de app precies wanneer een rit begint en eindigt, zodat je km registratie gps tot op de kilometer klopt. Zo bouw je een gps rittenadministratie die bij een controle stand houdt.',
+  },
+  {
+    v: 'Houdt de app ook automatisch mijn kilometerstanden bij?',
+    a: 'Ja. De software automatische kilometerstand registratie koppelt elke gedetecteerde rit aan een doorlopende teller, zodat de standen netjes aansluiten. Dankzij deze software automatisch kilometerstanden registreren ontstaat er een automatische rittenadministratie zonder dat je iets met de hand bijhoudt. Deze rittenadministratie gps blijft daardoor altijd sluitend.',
+  },
+  {
+    v: 'Kan ik automatische rittenregistratie gratis proberen?',
+    a: `Je kunt gratis beginnen en handmatig ritten vastleggen. De volledige automatische rittenregistratie app met gps-detectie en cloud-back-up zit in Premium (${PRIJZEN.maand} per maand of ${PRIJZEN.jaar} per jaar).`,
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Automatische rittenregistratie: hoe gps-detectie werkt',
+    description:
+      'Hoe automatische rittenregistratie werkt met gps, bewegingsdetectie, auto-Bluetooth en optionele iBeacon — batterijvriendelijk en op de achtergrond.',
+    author: { '@type': 'Organization', name: SITE.bedrijf },
+    publisher: { '@type': 'Organization', name: SITE.naam },
+    mainEntityOfPage: `${SITE.domein}/automatische-rittenregistratie`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Automatische rittenregistratie',
+        item: `${SITE.domein}/automatische-rittenregistratie`,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Automatische rittenregistratie via GPS — zonder gedoe"
+  description="Automatische rittenregistratie: leg je kilometers automatisch vast via gps, bewegingsdetectie en auto-Bluetooth. Batterijvriendelijk, op de achtergrond, Belastingdienst-proof."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● GPS + beweging + Bluetooth</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          Automatische <span class="gradient-text">rittenregistratie</span>
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Met automatische rittenregistratie legt je telefoon elke zakelijke kilometer vanzelf vast — je hoeft geen
+          knop meer in te drukken. De app combineert gps, bewegingsdetectie en auto-Bluetooth om ritten te herkennen,
+          de route te registreren en alles batterijvriendelijk op de achtergrond bij te houden. Jij veegt achteraf
+          alleen nog of een rit zakelijk, woon-werk of privé was.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/hoe-het-werkt" class="btn-ghost">Hoe het werkt →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ GPS-route per rit</span>
+          <span>✓ Batterijvriendelijk</span>
+          <span>✓ Op de achtergrond</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOE WERKT HET -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">In vier stappen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Hoe werkt automatische rittenregistratie?</h2>
+      <p class="mt-4 text-zacht">
+        Automatische ritregistratie klinkt high-tech, maar het verloopt heel natuurlijk. Van het moment dat je
+        wegrijdt tot de classificatie achteraf doet de app het zware werk.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {stappen.map((s, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">{i + 1}</div>
+          <h3 class="mt-5 text-base font-bold">{s.t}</h3>
+          <p class="mt-2 text-[14px] leading-relaxed text-zacht">{s.d}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl text-[15px] leading-relaxed text-zacht" data-reveal>
+      <p>
+        Het mooie aan automatische kilometerregistratie is dat je nooit meer een rit vergeet. Een handmatige
+        rittenregistratie of een losse <a href="/rittenregistratie-excel">rittenregistratie in Excel</a> leunt volledig
+        op je geheugen — en juist die vergeten ritten kosten je geld of breken je administratie. Met automatische km
+        registratie staat elke kilometer er al voordat je eraan denkt. Wil je liever de bredere vergelijking lezen?
+        Bekijk dan onze <a href="/kilometerregistratie-app">kilometerregistratie app</a> en de
+        <a href="/beste-rittenregistratie-app">beste rittenregistratie app</a> uitleg.
+      </p>
+    </div>
+  </section>
+
+  <!-- GPS + BLUETOOTH -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Slim gecombineerd</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">GPS + Bluetooth: zonder gedoe</h2>
+          <p class="mt-4 text-zacht">
+            De kracht van automatische ritregistratie zit in de combinatie. Bewegingsdetectie kost vrijwel geen
+            energie en weet wanneer je in beweging komt. De gps rittenregistratie legt vervolgens de exacte route en
+            afstand vast. En de auto-Bluetooth van je telefoon weet wanneer je in de auto stapt.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Auto-Bluetooth (Android): rit start zodra je telefoon met de auto koppelt',
+              'GPS-kilometerregistratie legt de werkelijke route vast, niet een schatting',
+              'Bewegingsdetectie onderscheidt rijden van lopen of stilstaan',
+              'Optionele iBeacon als betrouwbare trigger — ook handig op iPhone',
+              'Reverse-geocoding zet coördinaten om in leesbare vertrek- en aankomstadressen',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+            Zo ontstaat een rittenregistratie via gps die zichzelf vult. Geen hardware verplicht, geen abonnement op een
+            kastje: alles wat nodig is voor gps kilometerregistratie zit al in je telefoon. Wil je toch een fysieke
+            trigger? Lees dan over de <a href="/beacon">iBeacon</a> en het verschil met een
+            <a href="/rittenregistratie-kastje">rittenregistratie kastje</a>.
+          </p>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Rit gedetecteerd · automatisch</p>
+            <p class="mt-1 text-2xl font-extrabold">Amsterdam → Utrecht</p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Afstand (GPS)</span><span class="font-bold">42,6 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Trigger</span><span class="font-bold">Auto-Bluetooth</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Route</span><span class="font-bold">Vastgelegd ✓</span></div>
+              <div class="flex justify-between pt-1"><span class="opacity-80">Status</span><span class="font-bold">Classificeren</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Zakelijk</span>
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Woon-werk</span>
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Privé</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BATTERIJVRIENDELIJK -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Zuinig met je accu</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Batterijvriendelijk</h2>
+      <p class="mt-5 text-[15px] leading-relaxed text-zacht">
+        De grootste zorg bij automatische rittenregistratie is meestal de batterij. Terecht: een app die de hele dag
+        de gps op vol vermogen laat draaien, leegt je telefoon in een paar uur. Daarom werkt onze automatische
+        kilometerregistratie anders. In rust kost de app vrijwel niets: alleen lichte bewegingsdetectie staat aan.
+        Die verbruikt nauwelijks energie en kan toch herkennen wanneer je in beweging komt.
+      </p>
+      <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+        Pas wanneer je daadwerkelijk gaat rijden, schakelt de gps-kilometerregistratie vol in om je route nauwkeurig
+        vast te leggen. Stap je uit, dan valt de app meteen terug naar de zuinige stand. Het resultaat: een rittenregistratie
+        automatisch bijgehouden, terwijl je telefoon een normale werkdag gewoon meegaat. Geen aparte software automatische
+        kilometerstand registratie of extern kastje dat je elke avond moet opladen.
+      </p>
+      <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+        Wil je nog zuiniger? Op Android kun je vertrouwen op de auto-Bluetooth-trigger, zodat de gps alleen aangaat als
+        je echt in de auto zit. En met een iBeacon weet de app zelfs zonder continue gps-scan precies wanneer een rit
+        begint en eindigt. Zo houd je controle over je accu én over je administratie. Bekijk de
+        <a href="/functies">volledige functielijst</a> of vergelijk meteen <a href="/prijzen">de prijzen</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- IPHONE EN ANDROID -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Eerlijk per platform</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">iPhone en Android</h2>
+        <p class="mt-4 text-zacht">
+          We zijn er eerlijk over: automatische ritregistratie werkt op Android en iPhone net iets anders. Zo weet je
+          vooraf wat je kunt verwachten.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        <div class="card" data-reveal>
+          <h3 class="text-xl font-bold">Android</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Op Android werkt automatische rittenregistratie het meest volledig. De app mag een achtergrondservice
+            draaien, dus ritten worden ook gedetecteerd als de app niet open is. Daarnaast kan de auto-Bluetooth van je
+            telefoon een rit automatisch starten zodra je instapt — zonder enige hardware. De combinatie van gps
+            rittenregistratie, beweging en Bluetooth maakt het op Android vrijwel volledig handsfree.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:90ms">
+          <h3 class="text-xl font-bold">iPhone</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Op iPhone is automatische kilometerregistratie ook mogelijk, maar Apple beperkt achtergrondtaken strenger.
+            Daarom werkt rittenregistratie via gps op iPhone het best met de app open of recent op de achtergrond, óf
+            met een optionele iBeacon in je auto als betrouwbare trigger. De iBeacon wekt de app op het juiste moment,
+            zodat je toch handsfree registreert. We beloven hier liever niet te veel dan te veel.
+          </p>
+        </div>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl text-[15px] leading-relaxed text-zacht" data-reveal>
+        <p>
+          Welke telefoon je ook hebt, het eindresultaat is een sluitende administratie die voldoet aan de eisen van de
+          Belastingdienst, met alle verplichte velden en export naar PDF of Excel. Of je nu kiest voor de gratis versie
+          of voor Premium met volledige automatische rittenregistratie app-functionaliteit
+          ({PRIJZEN.maand} per maand, {PRIJZEN.jaar} per jaar): je kilometers staan klaar wanneer je ze nodig hebt.
+          Speciaal zelfstandig? Lees dan ook <a href="/voor-zzp">rittenregistratie voor ZZP&rsquo;ers</a>.
+        </p>
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/download" class="btn-primary">Download de app</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Automatische rittenregistratie — uitgelegd</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

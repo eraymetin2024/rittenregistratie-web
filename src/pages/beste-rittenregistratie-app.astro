@@ -1,0 +1,310 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const criteria = [
+  {
+    t: 'Voldoet aan de eisen van de Belastingdienst',
+    d: 'De beste kilometerregistratie app legt per rit alle verplichte velden vast: datum, begin- en eindstand, vertrek- en aankomstadres, route en doel. Zonder die volledigheid is je registratie niet sluitend.',
+  },
+  {
+    t: 'Automatische rit-detectie',
+    d: 'Handmatig starten en stoppen leidt tot vergeten ritten. De beste km registratie app detecteert ritten automatisch via GPS en auto-Bluetooth, met optionele iBeacon-koppeling.',
+  },
+  {
+    t: 'Eerlijke prijs zonder lock-in',
+    d: 'Let op een gratis startoptie en een betaalbaar Premium-tarief. Vermijd apps die je data gijzelen achter een duur abonnement of geen export toestaan.',
+  },
+  {
+    t: 'Privacy en EU/AVG',
+    d: 'Je rijgedrag is gevoelige data. De beste rittenregistratie bewaart je gegevens binnen de EU, conform de AVG, bij voorkeur met opslag in Nederland.',
+  },
+  {
+    t: 'Volledige export (PDF & Excel)',
+    d: 'Je moet je administratie altijd kunnen meenemen. PDF voor de Belastingdienst, Excel voor je boekhouder — zonder beperkingen of extra kosten.',
+  },
+  {
+    t: 'Betrouwbaar en batterijvriendelijk',
+    d: 'Een goede ritregistratie software draait op de achtergrond zonder je accu leeg te trekken en mist geen ritten door slimme detectie.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Wat is de beste rittenregistratie app van 2026?',
+    a: 'Dé universeel beste app bestaat niet — het hangt af van je situatie. Wel zijn de criteria helder: voldoen aan de eisen van de Belastingdienst, automatische detectie, een eerlijke prijs, privacy binnen de EU en volledige export. Rittenregistratie.app is ontworpen rond precies die punten en biedt een gratis startoptie plus Premium voor wie alles wil automatiseren.',
+  },
+  {
+    v: 'Is er een goede gratis rittenregistratie app?',
+    a: `Ja. Je kunt bij ons volledig gratis beginnen met handmatig registreren en exporteren. Dat is genoeg om je eerste kilometers Belastingdienst-proof vast te leggen. Wil je de beste gratis rittenregistratie app uitbreiden met automatische detectie en onbeperkte cloud-back-up, dan stap je over op Premium (${PRIJZEN.maand}/maand of ${PRIJZEN.jaar}/jaar). Bekijk de gratis opzet op onze pagina over de gratis rittenregistratie app.`,
+  },
+  {
+    v: 'Wat maakt een app Belastingdienst-proof?',
+    a: 'Een app is Belastingdienst-proof als elke rit de verplichte velden bevat en de registratie sluitend is — dus zonder gaten of onverklaarbare kilometers. Onze app dwingt deze volledigheid af en waarschuwt bij afwijkingen, zodat je administratie voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    v: 'Wat is de beste km registratie app voor ZZP\'ers?',
+    a: 'Voor zelfstandigen telt vooral: automatische detectie (geen vergeten ritten), woon-werk als aparte categorie, betrouwbare export en een eerlijke prijs. Onze app is hierop afgestemd; lees meer op de pagina voor ZZP over de beste ritregistratie software voor freelancers.',
+  },
+  {
+    v: 'Heb ik speciale hardware nodig zoals een rittenregistratie-kastje?',
+    a: 'Nee. Een rittenregistratie-kastje in je auto is niet nodig — je telefoon detecteert ritten al via GPS en auto-Bluetooth. Wil je extra zekerheid over automatisch starten, dan koppel je optioneel een iBeacon. Zo houd je de kosten laag zonder in te leveren op betrouwbaarheid.',
+  },
+  {
+    v: 'Is een app beter dan een rittenregistratie in Excel?',
+    a: 'Voor de meeste mensen wel. Een rittenregistratie in Excel werkt, maar is foutgevoelig en kost veel tijd: je moet alles handmatig natikken en vergeet snel een rit. De beste manier van kilometerregistratie is automatisch, met directe export naar zowel PDF als Excel wanneer je dat nodig hebt.',
+  },
+  {
+    v: 'Wat is de beste manier van kilometerregistratie voor onkostenvergoedingen?',
+    a: 'De beste manier kilometerregistratie onkostenvergoedingen nederland 2026 is een automatische, sluitende registratie: elke rit wordt via GPS en auto-Bluetooth vastgelegd met alle verplichte velden, zodat je vergoeding altijd onderbouwd is. Zo voorkom je vergeten ritten en kun je je onkostenvergoedingen probleemloos onderbouwen bij je werkgever of de Belastingdienst.',
+  },
+  {
+    v: 'Hoe zit het met mijn privacy?',
+    a: 'Je gegevens staan in een cloud-back-up binnen de EU, conform de AVG, met data opgeslagen in Nederland. We verkopen je locatiegegevens niet en je kunt je account en data op elk moment verwijderen.',
+  },
+  {
+    v: 'Kan ik later eenvoudig overstappen of mijn data meenemen?',
+    a: 'Ja. Omdat je altijd volledig kunt exporteren naar PDF en Excel, zit je nergens aan vast. Het beste rittenregistratiesysteem gijzelt je data niet — je houdt de controle over je eigen administratie.',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Beste rittenregistratie app',
+      item: SITE.domein + '/beste-rittenregistratie-app',
+    },
+  ],
+};
+
+const webpage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Beste rittenregistratie app 2026 — koopgids & criteria',
+  description:
+    'Waaraan herken je de beste rittenregistratie app? De criteria: Belastingdienst-eisen, automatische detectie, prijs, privacy en export — en hoe onze app scoort.',
+  inLanguage: 'nl-NL',
+  url: SITE.domein + '/beste-rittenregistratie-app',
+  isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  publisher: { '@type': 'Organization', name: SITE.bedrijf, url: SITE.domein },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.v,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Beste rittenregistratie app 2026 — koopgids & criteria"
+  description="Beste rittenregistratie app van 2026? Vergelijk op Belastingdienst-eisen, automatische detectie, prijs, privacy en export — en zie hoe onze app scoort."
+  jsonld={[breadcrumb, webpage, faqLd]}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Koopgids 2026</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          De <span class="gradient-text">beste rittenregistratie app</span>
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Zoek je de beste rittenregistratie app voor 2026? In deze eerlijke koopgids leggen we de
+          criteria uit waar het echt op aankomt — Belastingdienst-eisen, automatische detectie, prijs,
+          privacy en export — en laten we open zien hoe onze app daarop scoort. Geen verzonnen
+          concurrent-reviews, alleen de feiten.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/functies" class="btn-ghost">Bekijk de functies →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Belastingdienst-proof</span>
+          <span>✓ Automatische detectie</span>
+          <span>✓ Eerlijke prijs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAAR LET JE OP -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Begin hier</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Waar let je op bij de beste rittenregistratie app?</h2>
+      <p class="mt-5 text-[17px] leading-relaxed text-zacht">
+        De beste rittenregistratie app is niet simpelweg de bekendste of de duurste — het is de app
+        die jouw kilometers betrouwbaar, volledig en privacyvriendelijk vastlegt. Voordat je kiest,
+        is het slim om eerst te bepalen wat jij nodig hebt: rijd je veel zakelijke kilometers, wil je
+        bijtelling voorkomen, of declareer je vooral bij een werkgever? Pas daarna vergelijk je apps
+        op een vaste set criteria. Zo voorkom je dat je je laat leiden door marketing in plaats van
+        door functionaliteit.
+      </p>
+      <p class="mt-4 text-[17px] leading-relaxed text-zacht">
+        Wat alle goede opties gemeen hebben: ze maken van je losse ritten één sluitend geheel.
+        Een sterke <a href="/automatische-rittenregistratie" class="text-merk font-semibold underline-offset-2 hover:underline">automatische rittenregistratie</a>
+        scheelt je uren werk per maand en voorkomt fouten. Of je nu de beste kilometer registratie app
+        zoekt, de beste kilometerregistratie app nederland 2026 wilt vergelijken, of de beste gratis
+        rittenregistratie app om mee te starten, de onderstaande criteria helpen je objectief te kiezen.
+      </p>
+    </div>
+  </section>
+
+  <!-- CRITERIA -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">De checklist</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Criteria: Belastingdienst, automatisch, prijs, privacy</h2>
+        <p class="mt-4 text-zacht">
+          Zes punten waaraan je de beste rittenregistratie herkent. Loop ze stuk voor stuk na bij
+          elke app die je overweegt.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {criteria.map((c, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">{i + 1}</div>
+            <h3 class="mt-5 text-lg font-bold">{c.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl text-center" data-reveal>
+        <p class="text-[16px] leading-relaxed text-zacht">
+          Scoort een app op alle zes punten, dan zit je goed. Twijfel je nog tussen een app en een
+          klassieke <a href="/rittenregistratie-excel" class="text-merk font-semibold underline-offset-2 hover:underline">rittenregistratie in Excel</a>,
+          bedenk dan dat een sluitende, automatische registratie vrijwel altijd nauwkeuriger en
+          minder tijdrovend is dan een spreadsheet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESTE VOOR ZZP -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Voor zelfstandigen</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Beste app voor ZZP'ers in 2026</h2>
+        <p class="mt-5 text-[16px] leading-relaxed text-zacht">
+          Voor ZZP'ers en freelancers gelden net iets andere prioriteiten. Je hebt geen
+          declaratieportaal van een werkgever, maar moet zelf een sluitende administratie voeren die
+          een controle doorstaat. De beste ritregistratie software voor freelancers detecteert daarom
+          automatisch elke rit, houdt woon-werk apart en exporteert in één tik een compleet rapport.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Automatische detectie zodat je geen zakelijke kilometer mist',
+            'Woon-werk als aparte, derde categorie — precies zoals de fiscus het wil',
+            'Onbeperkt voertuigen voor wie in meerdere auto\'s rijdt',
+            'Directe export naar PDF en Excel voor je boekhouder',
+            'Bewaakt de 500 km-grens om bijtelling te voorkomen',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+              <span class="text-[15px] text-slate-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/voor-zzp" class="btn-ghost mt-8">Meer voor ZZP'ers →</a>
+      </div>
+      <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+        <div class="card w-full max-w-sm">
+          <p class="eyebrow">Beste manier van kilometerregistratie</p>
+          <div class="mt-4 space-y-3 text-[15px]">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3"><span class="text-zacht">Automatisch detecteren</span><span class="font-bold text-groen">✓</span></div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3"><span class="text-zacht">Belastingdienst-proof</span><span class="font-bold text-groen">✓</span></div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3"><span class="text-zacht">PDF & Excel-export</span><span class="font-bold text-groen">✓</span></div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3"><span class="text-zacht">EU/AVG · data in NL</span><span class="font-bold text-groen">✓</span></div>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3"><span class="text-zacht">Gratis startoptie</span><span class="font-bold text-groen">✓</span></div>
+            <div class="flex items-center justify-between"><span class="text-zacht">Geen lock-in</span><span class="font-bold text-groen">✓</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAAROM RITTENREGISTRATIE.APP -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Onze app, eerlijk</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Waarom Rittenregistratie.app</h2>
+        <p class="mt-4 text-zacht">
+          We claimen niet dat we "goedgekeurd" zijn of een keurmerk hebben — die bestaan niet.
+          Wel laten we eerlijk zien hoe we op de criteria scoren.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-5">
+        <p class="text-[16px] leading-relaxed text-zacht">
+          Rittenregistratie.app is gebouwd rond de zes criteria uit deze gids. Elke rit bevat de
+          verplichte velden, zodat je registratie voldoet aan de eisen van de Belastingdienst. De
+          <a href="/kilometerregistratie-app" class="text-merk font-semibold underline-offset-2 hover:underline">kilometerregistratie app</a>
+          detecteert ritten automatisch via GPS en auto-Bluetooth, met een optionele iBeacon voor wie
+          honderd procent zekerheid wil over automatisch starten — zonder dat je een duur
+          rittenregistratie-kastje hoeft aan te schaffen.
+        </p>
+        <p class="text-[16px] leading-relaxed text-zacht">
+          De prijs is bewust eerlijk: je begint gratis en betaalt pas voor Premium als je de volledige
+          automatisering wilt — {PRIJZEN.maand} per maand of {PRIJZEN.jaar} per jaar. Geen verborgen
+          kosten, geen data-lock-in. Je gegevens staan in een cloud-back-up binnen de EU, conform de
+          AVG, met opslag in Nederland, en je kunt altijd volledig exporteren naar PDF en Excel. Zie
+          alle details op <a href="/prijzen" class="text-merk font-semibold underline-offset-2 hover:underline">prijzen</a>
+          of lees op de <a href="/" class="text-merk font-semibold underline-offset-2 hover:underline">homepage</a>
+          hoe alles samenkomt.
+        </p>
+        <p class="text-[16px] leading-relaxed text-zacht">
+          Daarmee is Rittenregistratie.app voor veel mensen een serieuze kandidaat voor het beste
+          rittenregistratiesysteem van 2026: betrouwbaar, betaalbaar, privacyvriendelijk en zonder dat
+          je vastzit aan een abonnement. Of het de beste keuze voor jóu is, beoordeel je het beste door
+          de app gratis te proberen.
+        </p>
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/download" class="btn-primary">Gratis proberen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">De beste rittenregistratie app — kort uitgelegd</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

@@ -1,0 +1,397 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const voordelenApp = [
+  {
+    t: 'Geen abonnement',
+    d: 'Waar een rittenregistratie kastje bijna altijd een maandelijks abonnement vraagt, betaal je bij de app alleen eenmalig voor Premium of gebruik je de gratis versie. Geen verrassingen op je rekening.',
+  },
+  {
+    t: 'Geen installatie',
+    d: 'Je hoeft niets te laten inbouwen. Geen ritregistratie installatie bij een garage, geen OBD-stekker, geen monteur. Je downloadt de app en bent binnen een minuut klaar.',
+  },
+  {
+    t: 'Automatische detectie',
+    d: 'De app detecteert je ritten automatisch via GPS en — op Android — via auto-Bluetooth. Net als een gps tracker kilometerregistratie, maar dan in je broekzak.',
+  },
+  {
+    t: 'Belastingdienst-proof export',
+    d: 'Elke rit krijgt de verplichte velden. In één tik exporteer je een sluitend PDF- of Excel-rapport dat voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    t: 'Werkt in elke auto',
+    d: 'Een gps rittenregistratiesysteem zit vast in één voertuig. De app rijdt met je mee in elke auto, bus of zelfs huurwagen. Beheer onbeperkt voertuigen.',
+  },
+  {
+    t: 'iBeacon voor kastje-betrouwbaarheid',
+    d: 'Wil je de zekerheid van een ingebouwd systeem? Plaats een optionele iBeacon in je auto. De app start dan automatisch zodra je instapt — zonder vaste inbouw.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Wat is een rittenregistratie kastje precies?',
+    a: 'Een rittenregistratie kastje is een fysiek apparaatje dat je in je auto plaatst om automatisch je kilometers te registreren. Meestal is het een OBD-dongle die je in de OBD-poort steekt, of een gps tracker die je vast laat inbouwen. Het kastje stuurt je ritten naar een online portaal. In vrijwel alle gevallen hoort daar een maandelijks abonnement bij.',
+  },
+  {
+    v: 'Heb ik een kastje nodig of kan een app het ook?',
+    a: 'Een app kan exact hetzelfde: automatisch ritten detecteren, classificeren en een sluitend rapport maken dat voldoet aan de eisen van de Belastingdienst. Het grote verschil is dat een app geen installatie en geen abonnement nodig heeft. Wil je de betrouwbaarheid van een ingebouwd systeem, dan voeg je een optionele iBeacon toe.',
+  },
+  {
+    v: 'Bestaat er kilometer registratie zonder abonnement?',
+    a: 'Ja. De meeste OBD-kastjes en gps-trackers werken op abonnementsbasis, maar met een app houd je je kilometers bij zonder doorlopende kosten. Je gebruikt de gratis versie of betaalt eenmalig voor Premium (' + PRIJZEN.maand + ' per maand of ' + PRIJZEN.jaar + ' per jaar). Er is dus zeker kilometer registratie kastje zonder abonnement als alternatief: de app.',
+  },
+  {
+    v: 'Werkt OBD rittenregistratie zonder abonnement?',
+    a: 'De meeste OBD rittenregistratie-systemen vereisen een abonnement om bij je gegevens in het portaal te komen. Stopt het abonnement, dan vervalt vaak je toegang. Een app slaat je data lokaal en in de cloud (EU/AVG) op, zodat je altijd bij je administratie kunt — ook zonder doorlopend abonnement.',
+  },
+  {
+    v: 'Hoe betrouwbaar is een app vergeleken met een gps rittenregistratiesysteem?',
+    a: 'Voor verreweg de meeste rijders is GPS-detectie via de app meer dan nauwkeurig genoeg en voldoet de registratie aan de eisen van de Belastingdienst. Wil je de "altijd raak"-zekerheid van een ingebouwd gps rittenregistratiesysteem, dan combineer je de app met een iBeacon die automatisch herkent dat je in de auto zit.',
+  },
+  {
+    v: 'Moet ik iets laten inbouwen?',
+    a: 'Nee. Bij een rittenregistratie kastje hoort meestal rittenregistratie inbouwen of een ritregistratie installatie. Bij de app niet: je hoeft niets te laten monteren. De optionele iBeacon plaats je zelf los in de auto, zonder gereedschap en zonder garage.',
+  },
+  {
+    v: 'Kan ik overstappen van een kastje naar de app?',
+    a: 'Ja. Je kunt je oude kastje en abonnement opzeggen en direct met de app verder. Je begint gratis, registreert vanaf dat moment automatisch en bespaart de maandelijkse kosten van je oude ritregistratiesysteem.',
+  },
+  {
+    v: 'Voor wie is de app bedoeld?',
+    a: 'Voor ZZP\'ers, zelfstandigen en werknemers met een auto van de zaak die hun zakelijke kilometers willen onderbouwen — voor de kilometervergoeding of om bijtelling te voorkomen — zonder de kosten en gedoe van een fysiek kastje.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rittenregistratie kastje of app?',
+    url: SITE.domein + '/rittenregistratie-kastje',
+    description:
+      'Wat is een rittenregistratie kastje en wat is het beste alternatief? Vergelijk OBD/GPS-kastjes met een app: zonder abonnement, zonder installatie.',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Rittenregistratie kastje',
+        item: SITE.domein + '/rittenregistratie-kastje',
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Rittenregistratie kastje of app? (zonder abonnement)"
+  description="Rittenregistratie kastje nodig? Vergelijk OBD/GPS-kastjes met de app: km registratie kastje zonder abonnement, zonder installatie en Belastingdienst-proof."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Kastje vs app</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          <span class="gradient-text">Rittenregistratie kastje</span> of app — wat is slimmer?
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Een rittenregistratie kastje belooft automatische kilometerregistratie, maar
+          kost je vaak een maandelijks abonnement en een installatie. In dit artikel
+          lees je wat zo'n km registratie kastje precies is, wat de voor- en nadelen
+          zijn en waarom een app — zonder abonnement, zonder inbouw — voor de meeste
+          rijders de slimmere keuze is.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/prijzen" class="btn-ghost">Bekijk de prijzen →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ Zonder abonnement</span>
+          <span>✓ Zonder installatie</span>
+          <span>✓ Belastingdienst-proof</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT IS EEN KASTJE -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">De basis</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat is een rittenregistratie kastje?</h2>
+      <p class="mt-4 text-zacht">
+        Een rittenregistratie kastje is een fysiek apparaat dat je kilometers
+        automatisch vastlegt. Er zijn grofweg twee soorten.
+      </p>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl space-y-5 text-[15px] leading-relaxed text-slate-700">
+      <p>
+        Het bekendste type is de <strong>OBD-dongle</strong>. Die steek je in de OBD-poort
+        van je auto, vaak onder het dashboard. Het kastje leest je kilometerstand en
+        ritten uit en stuurt die naar een online portaal. Zo'n vorm van
+        <strong>obd kilometerregistratie</strong> werkt prima, maar je betaalt er bijna
+        altijd een doorlopend abonnement voor. Wil je <strong>obd rittenregistratie
+        zonder abonnement</strong>, dan kom je bij de meeste aanbieders bedrogen uit:
+        zonder abonnement verlies je toegang tot je gegevens.
+      </p>
+      <p>
+        Het tweede type is een <strong>gps tracker kilometerregistratie</strong>: een
+        vast ingebouwd kastje met een eigen gps-module. Zo'n
+        <strong>gps rittenregistratiesysteem</strong> registreert je route nauwkeurig,
+        maar vraagt om <strong>rittenregistratie inbouwen</strong> door een monteur. Deze
+        <strong>ritregistratie installatie</strong> kost geld en tijd, en het kastje zit
+        daarna vast in één auto. Rijd je in een andere wagen, dan telt die rit niet mee.
+      </p>
+      <p>
+        Beide soorten <strong>ritregistratiesystemen</strong> doen in de kern hetzelfde
+        als een goede app: ze leggen automatisch je <strong>kilometerregistratie
+        kastje</strong>-waardige gegevens vast. Het verschil zit in de kosten, de
+        installatie en de flexibiliteit. Zoek je een echte <strong>kilometerregistratie
+        kastje zonder abonnement</strong>, dan kom je bij vrijwel alle hardware-aanbieders
+        bedrogen uit — en is een app het slimmere alternatief. Daar komen we zo op terug.
+      </p>
+    </div>
+  </section>
+
+  <!-- KASTJE VS APP -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">De vergelijking</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Kastje vs app: voor- en nadelen</h2>
+        <p class="mt-4 text-zacht">
+          Hieronder zie je hoe een fysiek <strong>kilometer registratie kastje</strong>
+          zich verhoudt tot de app. Beide kunnen voldoen aan de eisen van de
+          Belastingdienst — de praktische verschillen geven de doorslag.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 max-w-4xl overflow-x-auto" data-reveal>
+        <table class="w-full min-w-[640px] border-collapse text-left text-[15px]">
+          <thead>
+            <tr class="border-b border-slate-300">
+              <th class="py-3 pr-4 font-bold">Kenmerk</th>
+              <th class="py-3 pr-4 font-bold">Rittenregistratie kastje</th>
+              <th class="py-3 font-bold gradient-text">De app</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-700">
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Abonnement</td>
+              <td class="py-3 pr-4">Meestal verplicht, maandelijks</td>
+              <td class="py-3">Gratis of eenmalig Premium</td>
+            </tr>
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Installatie</td>
+              <td class="py-3 pr-4">Inbouw of OBD-stekker nodig</td>
+              <td class="py-3">Geen installatie, app downloaden</td>
+            </tr>
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Meerdere auto's</td>
+              <td class="py-3 pr-4">Eén kastje per auto</td>
+              <td class="py-3">Onbeperkt voertuigen</td>
+            </tr>
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Automatische detectie</td>
+              <td class="py-3 pr-4">Ja, via hardware</td>
+              <td class="py-3">Ja, via GPS + auto-Bluetooth</td>
+            </tr>
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Belastingdienst-proof</td>
+              <td class="py-3 pr-4">Ja</td>
+              <td class="py-3">Ja, voldoet aan de eisen</td>
+            </tr>
+            <tr class="border-b border-slate-200">
+              <td class="py-3 pr-4 font-semibold">Export</td>
+              <td class="py-3 pr-4">Portaal, soms beperkt</td>
+              <td class="py-3">PDF en Excel in één tik</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-semibold">Extra zekerheid</td>
+              <td class="py-3 pr-4">Vaste inbouw</td>
+              <td class="py-3">Optionele iBeacon</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl space-y-4 text-[15px] leading-relaxed text-slate-700" data-reveal>
+        <p>
+          De grootste voordelen van een fysiek kastje zijn de "set it and forget
+          it"-werking en de vaste koppeling aan je auto. De nadelen wegen voor de
+          meeste rijders echter zwaarder: doorlopende abonnementskosten, een
+          installatie en het feit dat het kastje aan één voertuig vastzit. Een app
+          heeft die nadelen niet en blijft toch automatisch.
+        </p>
+        <p>
+          Wil je een bredere afweging maken? Lees ook onze pagina over de
+          <a href="/automatische-rittenregistratie" class="font-semibold text-merk underline-offset-2 hover:underline">automatische rittenregistratie</a>
+          en bekijk waarom dit volgens veel gebruikers de
+          <a href="/beste-rittenregistratie-app" class="font-semibold text-merk underline-offset-2 hover:underline">beste rittenregistratie-app</a>
+          is.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONDER ABONNEMENT -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Geen vaste lasten</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Zonder abonnement & zonder installatie</h2>
+        <p class="mt-4 text-zacht">
+          Het grootste bezwaar tegen een rittenregistratie kastje zijn de
+          terugkerende kosten en de inbouw. De app draait dat om: je begint
+          gratis en betaalt — als je wilt — eenmalig voor Premium.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Gratis versie om handmatig of half-automatisch te starten',
+            'Premium voor volledig automatische detectie: ' + PRIJZEN.maand + ' p/m of ' + PRIJZEN.jaar + ' per jaar',
+            'Geen OBD-stekker, geen monteur, geen ritregistratie installatie',
+            'Je data lokaal én in de cloud (EU/AVG) — altijd toegankelijk',
+            'Stop wanneer je wilt zonder je administratie te verliezen',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+              <span class="text-[15px] text-slate-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/prijzen" class="btn-primary">Bekijk prijzen</a>
+          <a href="/functies" class="btn-ghost">Alle functies →</a>
+        </div>
+      </div>
+      <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+        <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+          <p class="text-sm opacity-80">Kosten per jaar</p>
+          <p class="mt-1 text-3xl font-extrabold">{PRIJZEN.jaar} <span class="text-base font-semibold opacity-80">eenmalig</span></p>
+          <div class="mt-5 space-y-2 text-sm">
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Abonnement kastje</span><span class="font-bold line-through">€ 6–12 p/m</span></div>
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Installatie</span><span class="font-bold line-through">€ 0</span></div>
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Voertuigen</span><span class="font-bold">Onbeperkt</span></div>
+            <div class="flex justify-between pt-1"><span class="opacity-80">Belastingdienst</span><span class="font-bold">✓ Proof</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IBEACON -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Het beste van beide</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">iBeacon: het beste van beide werelden</h2>
+        <p class="mt-4 text-zacht">
+          Mis je de zekerheid van een vast ingebouwd kastje? Combineer de app met
+          een optionele iBeacon en je krijgt kastje-achtige betrouwbaarheid —
+          zonder abonnement en zonder inbouw.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <div class="card" data-reveal>
+          <h3 class="text-lg font-bold">Plaats hem zelf</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            De iBeacon ({PRIJZEN.beacon}) leg je los in je auto. Geen gereedschap,
+            geen garage, geen rittenregistratie inbouwen.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:90ms">
+          <h3 class="text-lg font-bold">Start automatisch</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Stap je in, dan herkent de app de iBeacon en start de rit direct — net
+            zo betrouwbaar als een ingebouwd gps rittenregistratiesysteem.
+          </p>
+        </div>
+        <div class="card" data-reveal style="--reveal-delay:180ms">
+          <h3 class="text-lg font-bold">Verhuist met je mee</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+            Andere auto? Leg de iBeacon erin. Geen vaste koppeling aan één
+            voertuig zoals bij een klassiek kastje.
+          </p>
+        </div>
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/beacon" class="btn-primary">Meer over de iBeacon</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOORDELEN APP -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Waarom de app</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Alle voordelen van een kastje, geen nadelen</h2>
+    </div>
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {voordelenApp.map((v, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+          <h3 class="mt-5 text-lg font-bold">{v.t}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{v.d}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl text-center text-[15px] leading-relaxed text-zacht" data-reveal>
+      <p>
+        Of je nu zoekt naar een <a href="/kilometerregistratie-app" class="font-semibold text-merk underline-offset-2 hover:underline">kilometerregistratie-app</a>,
+        een gratis startpunt via de <a href="/" class="font-semibold text-merk underline-offset-2 hover:underline">homepage</a>
+        of je app meteen wilt installeren via de <a href="/download" class="font-semibold text-merk underline-offset-2 hover:underline">downloadpagina</a> —
+        je krijgt automatische registratie zonder de lasten van een fysiek kastje.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie kastje — veelgestelde vragen</h2>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-4">
+        {faq.map((f, i) => (
+          <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+              {f.v}
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

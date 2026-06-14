@@ -1,0 +1,366 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const velden = [
+  {
+    t: 'Datum van de rit',
+    d: 'Elke zakelijke en privérit krijgt een exacte datum. De app zet die automatisch op het moment van detectie, zodat er geen gaten in je administratie ontstaan.',
+  },
+  {
+    t: 'Begin- en eindstand kilometerteller',
+    d: 'De kilometerstand bij vertrek en aankomst. De app berekent de afstand via GPS en koppelt die aan een doorlopende stand, zodat de teller netjes blijft aansluiten.',
+  },
+  {
+    t: 'Vertrekadres',
+    d: 'Het adres waar de rit begint, automatisch omgezet naar een leesbaar adres via reverse-geocoding — geen losse coördinaten.',
+  },
+  {
+    t: 'Aankomstadres',
+    d: 'Het adres waar de rit eindigt. Samen met het vertrekadres vormt dit de basis van een controleerbare route.',
+  },
+  {
+    t: 'De gereden route',
+    d: 'De daadwerkelijk afgelegde route wordt vastgelegd en is per rit op de kaart terug te zien. Zo is de afstand onderbouwd en niet zomaar een rond getal.',
+  },
+  {
+    t: 'Het doel van de rit',
+    d: 'Het karakter: zakelijk, woon-werkverkeer of privé. Je classificeert met één veeg, of laat de app het op basis van je vaste adressen voorstellen.',
+  },
+  {
+    t: 'Zakelijk of privé',
+    d: 'Per rit leg je vast of die zakelijk, woon-werk of privé is. Deze splitsing bepaalt je kilometervergoeding én je bijtelling.',
+  },
+  {
+    t: 'Bestemming / opmerking',
+    d: 'Een korte toelichting of de naam van de klant of relatie. Handig bij een controle en verplicht voor een echt sluitende onderbouwing.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Is deze rittenregistratie app door de Belastingdienst goedgekeurd?',
+    a: 'De Belastingdienst geeft geen officieel keurmerk uit voor rittenregistratie-apps. Wel stelt de fiscus duidelijke eisen aan een sluitende rittenadministratie. Onze rittenregistratie app voldoet aan de eisen van de Belastingdienst: alle verplichte velden worden vastgelegd, de administratie is sluitend en je bewaart hem desgewenst zeven jaar in de cloud.',
+  },
+  {
+    v: 'Welke gegevens eist de Belastingdienst per rit?',
+    a: 'Per rit leg je datum, begin- en eindkilometerstand, vertrek- en aankomstadres, de gereden route en het doel (zakelijk, woon-werk of privé) vast. Dat zijn de acht verplichte gegevens. De app registreert ze automatisch, zodat je niets handmatig hoeft bij te houden.',
+  },
+  {
+    v: 'Wat betekent een sluitende rittenadministratie?',
+    a: 'Sluitend betekent dat er geen kilometers ontbreken: de eindstand van de ene rit sluit aan op de beginstand van de volgende, en het totaal komt overeen met je werkelijke kilometerstand. De app bewaakt dit doorlopend en signaleert gaten of verdachte ronde getallen.',
+  },
+  {
+    v: 'Wat is de 500 km privé-grens?',
+    a: 'Rijd je met een auto van de zaak minder dan 500 privékilometers per kalenderjaar, dan hoef je geen bijtelling te betalen. Daarvoor heb je een sluitende rittenregistratie nodig als bewijs. De app houdt je privékilometers bij en waarschuwt voordat je de grens nadert.',
+  },
+  {
+    v: 'Wat is een verklaring geen privégebruik?',
+    a: 'Met een verklaring geen privégebruik auto vraag je de Belastingdienst om geen bijtelling toe te passen. Je moet dan kunnen aantonen dat je onder de 500 privékilometers blijft, met een sluitende rittenregistratie. Zonder dat bewijs riskeer je een naheffing met boete.',
+  },
+  {
+    v: 'Kan ik mijn rittenregistratie ook gratis bijhouden?',
+    a: `Ja. De gratis versie van de rittenregistratie app belastingdienst laat je ritten handmatig vastleggen met alle verplichte velden en exporteren. Wil je automatische detectie en cloud-back-up, dan kies je Premium (${PRIJZEN.maand} per maand of ${PRIJZEN.jaar} per jaar).`,
+  },
+  {
+    v: 'Wat is het verschil tussen een ritregistratie app en een spreadsheet?',
+    a: 'Een spreadsheet dwingt niets af: je moet zelf onthouden om je rittenregistratie bijhouden vol te houden en elke kolom correct in te vullen. Een echte ritregistratie app legt de verplichte velden automatisch vast en bewaakt dat je administratie sluitend blijft. Een digitale rittenregistratie via een app is daardoor doorgaans nauwkeuriger en kost je minder tijd dan een los Excel-bestand.',
+  },
+  {
+    v: 'Voor wie is een eenvoudige rittenregistratie geschikt?',
+    a: 'Een eenvoudige rittenregistratie is ideaal voor ondernemers, ZZP&rsquo;ers en werknemers met een auto van de zaak die zonder gedoe willen voldoen aan de eisen van de Belastingdienst. Of je nu kiest voor een rittenadministratie app of een ritten registratie app: zolang alle verplichte gegevens per rit worden vastgelegd en de standen aansluiten, is je ritten registratie volledig controleerbaar.',
+  },
+  {
+    v: 'Kan ik de rittenregistratie exporteren als Belastingdienst-rapport?',
+    a: 'Ja. Je exporteert je rittenregistratie als PDF of Excel, per maand of per jaar. Het rapport bevat alle verplichte velden en is direct te delen met je boekhouder of bij een controle aan te leveren — een alternatief voor rittenregistratie via een belastingdienst excel-bestand.',
+  },
+  {
+    v: 'Hoe lang moet ik mijn rittenregistratie bewaren?',
+    a: 'De Belastingdienst kan tot zeven jaar terug controleren, dus bewaar je administratie minstens zo lang. Met cloud-back-up (EU/AVG, data in Nederland) staat je rittenregistratie veilig en blijft die al die jaren beschikbaar.',
+  },
+];
+
+const jsonld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rittenregistratie app Belastingdienst',
+    description:
+      'Hoe een rittenregistratie app voldoet aan de eisen van de Belastingdienst: 8 verplichte velden, sluitende administratie, 500 km privé-grens en bijtelling.',
+    url: `${SITE.domein}/rittenregistratie-belastingdienst`,
+    isPartOf: { '@type': 'WebSite', name: SITE.naam, url: SITE.domein },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Rittenregistratie app Belastingdienst',
+        item: `${SITE.domein}/rittenregistratie-belastingdienst`,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.v,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Rittenregistratie app Belastingdienst: voldoet aan de eisen"
+  description="Rittenregistratie app belastingdienst: leg automatisch de 8 verplichte velden vast, houd een sluitende rittenadministratie bij en voorkom bijtelling. Gratis beginnen."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Voldoet aan de eisen van de Belastingdienst</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          Rittenregistratie app <span class="gradient-text">belastingdienst</span>
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Een rittenregistratie app belastingdienst-proof houden lijkt ingewikkeld, maar dat is het niet:
+          je legt simpelweg de juiste gegevens per rit vast en houdt je administratie sluitend. Op deze
+          pagina lees je welke eisen de Belastingdienst stelt en hoe de app daar automatisch aan voldoet —
+          inclusief de 500 km privé-grens, bijtelling en de verklaring geen privégebruik.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/hoe-het-werkt" class="btn-ghost">Hoe het werkt →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ 8 verplichte velden</span>
+          <span>✓ Sluitende administratie</span>
+          <span>✓ 7 jaar bewaren</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EERLIJK OVER KEURMERK -->
+  <section class="container-x py-20">
+    <div class="mx-auto max-w-3xl card" data-reveal>
+      <span class="eyebrow">Eerlijk over &lsquo;goedgekeurd&rsquo;</span>
+      <h2 class="mt-4 text-2xl font-extrabold sm:text-3xl">Geen keurmerk — wél aan de eisen van de Belastingdienst</h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+        Veel aanbieders roepen dat hun software &lsquo;door de Belastingdienst is goedgekeurd&rsquo;. Dat klopt niet:
+        de Belastingdienst geeft geen officieel keurmerk uit voor een rittenregistratie belastingdienst app.
+        Wat de fiscus wél doet, is duidelijke eisen stellen aan je rittenadministratie. Onze app is daarop gebouwd
+        en voldoet aan de eisen van de Belastingdienst — niets meer en niets minder. Zo weet je precies waar je aan toe bent.
+      </p>
+    </div>
+  </section>
+
+  <!-- WAT EIST DE BELASTINGDIENST -->
+  <section class="container-x py-12">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">De spelregels</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat eist de Belastingdienst van een rittenregistratie?</h2>
+      <p class="mt-4 text-zacht">
+        Een rittenregistratie belastingdienst is verplicht zodra je de onbelaste kilometervergoeding wilt claimen
+        of bijtelling op je auto van de zaak wilt voorkomen. De fiscus vraagt dan om een sluitende, controleerbare administratie.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      <div class="card" data-reveal>
+        <p class="text-3xl font-extrabold gradient-text">8 velden</p>
+        <h3 class="mt-3 text-lg font-bold">Verplichte gegevens per rit</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          Datum, kilometerstanden, adressen, route en doel: alle acht verplichte gegevens worden per rit vastgelegd.
+        </p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay:90ms">
+        <p class="text-3xl font-extrabold gradient-text">Sluitend</p>
+        <h3 class="mt-3 text-lg font-bold">Geen kilometers kwijt</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          De eindstand van elke rit sluit aan op de volgende. De app bewaakt dat je sluitende rittenadministratie klopt.
+        </p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay:180ms">
+        <p class="text-3xl font-extrabold gradient-text">7 jaar</p>
+        <h3 class="mt-3 text-lg font-bold">Bewaarplicht</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          De Belastingdienst kan zeven jaar terug controleren. Je back-up staat veilig in de cloud (EU/AVG, data in Nederland).
+        </p>
+      </div>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl text-[15px] leading-relaxed text-zacht" data-reveal>
+      <p>
+        Rittenregistratie is dus niet altijd verplicht, maar wel het moment dat er een fiscaal voordeel mee gemoeid is.
+        Heb je een auto van de zaak en wil je bijtelling vermijden? Dan is de rittenregistratie belastingdienst je
+        belangrijkste bewijsstuk. Claim je als ondernemer of werknemer de onbelaste kilometervergoeding? Ook dan moet je
+        per rit kunnen aantonen waar je naartoe reed en waarom. De app neemt dit volledig uit handen, zodat je nooit
+        achteraf hoeft te reconstrueren. Wil je liever zelf de losse functies vergelijken, kijk dan op de
+        <a href="/functies">functiepagina</a> of bekijk <a href="/prijzen">de prijzen</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- DE 8 VERPLICHTE GEGEVENS -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Checklist</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">De 8 verplichte gegevens</h2>
+        <p class="mt-4 text-zacht">
+          Dit zijn de gegevens die de Belastingdienst per rit wil zien. De app legt ze automatisch vast — handmatig
+          natikken hoeft niet meer.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {velden.map((v, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">{i + 1}</div>
+            <h3 class="mt-5 text-base font-bold">{v.t}</h3>
+            <p class="mt-2 text-[14px] leading-relaxed text-zacht">{v.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl text-[15px] leading-relaxed text-zacht" data-reveal>
+        <p>
+          Doordat de app deze acht gegevens automatisch invult, voorkom je de meest gemaakte fout bij een controle:
+          ontbrekende of geschatte ritten. Een spreadsheet dwingt niets af, maar een goede app voor rittenregistratie
+          wel: een betrouwbare rit registratie app houdt je administratie sluitend zonder dat je iets hoeft te onthouden.
+          Wil je toch nog eens een
+          rittenregistratie via belastingdienst excel vergelijken met een echte app? Lees dan onze uitleg over
+          <a href="/rittenregistratie-excel">rittenregistratie in Excel</a> en waarom een
+          <a href="/kilometerregistratie-app">kilometerregistratie app</a> bijna altijd nauwkeuriger en sluitender is.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLUITEND + 500 KM -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Sluitend bewijs</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Sluitende administratie &amp; de 500 km privé-grens</h2>
+        <p class="mt-4 text-zacht">
+          Een sluitende rittenadministratie is het hart van de eisen van de Belastingdienst. Sluitend wil zeggen:
+          álle kilometers zijn verklaard en de standen lopen netjes in elkaar over. Zodra er een gat zit, kan de fiscus
+          de hele administratie verwerpen.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Elke rit telt door op de vorige — geen losse, niet-aansluitende standen',
+            'De app signaleert verdachte ronde getallen en te laat ingevoerde ritten',
+            'Je privékilometers worden apart geteld voor de 500 km grens',
+            'Een waarschuwing voordat je de 500 km privé nadert',
+            'Woon-werkverkeer als aparte, derde categorie geregistreerd',
+          ].map((p) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+              <span class="text-[15px] text-slate-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-[15px] leading-relaxed text-zacht">
+          De grens van 500 km privé per kalenderjaar is bepalend voor je bijtelling. Blijf je eronder met een auto van
+          de zaak, en kun je dat met een sluitende rittenregistratie aantonen, dan vervalt de bijtelling. De app houdt
+          de teller bij, zodat je nooit per ongeluk over de grens gaat. Meer weten over hoe je
+          <a href="/kilometers-bijhouden">kilometers bijhouden</a> in de praktijk werkt?
+        </p>
+      </div>
+      <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+        <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+          <p class="text-sm opacity-80">Privékilometers · 2026</p>
+          <p class="mt-1 text-3xl font-extrabold">312 <span class="text-base font-semibold opacity-80">/ 500 km</span></p>
+          <div class="mt-4 h-3 w-full rounded-full bg-white/20">
+            <div class="h-3 rounded-full bg-white" style="width:62%"></div>
+          </div>
+          <div class="mt-5 space-y-2 text-sm">
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Zakelijk</span><span class="font-bold">4.180 km</span></div>
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Woon-werk</span><span class="font-bold">920 km</span></div>
+            <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Privé</span><span class="font-bold">312 km</span></div>
+            <div class="flex justify-between pt-1"><span class="opacity-80">Status</span><span class="font-bold">✓ Sluitend</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERKLARING GEEN PRIVEGEBRUIK + BIJTELLING -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl" data-reveal>
+        <span class="eyebrow">Auto van de zaak</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Verklaring geen privégebruik &amp; bijtelling</h2>
+        <p class="mt-5 text-[15px] leading-relaxed text-zacht">
+          Heb je een auto van de zaak, dan rekent de Belastingdienst standaard bijtelling: een percentage van de
+          cataloguswaarde wordt bij je inkomen opgeteld. Wil je die bijtelling vermijden, dan vraag je een
+          <strong>verklaring geen privégebruik auto</strong> aan. Met die verklaring zeg je toe dat je de auto voor
+          maximaal 500 km per jaar privé gebruikt.
+        </p>
+        <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+          Het cruciale punt: zo&rsquo;n verklaring is alleen waterdicht als je het ook kúnt bewijzen. En dat bewijs is
+          precies een sluitende rittenregistratie. Kun je bij een controle geen kloppende administratie overleggen, dan
+          legt de Belastingdienst alsnog bijtelling op — vaak met een naheffing en boete over meerdere jaren. Daarom is
+          een rittenregistratie belastingdienst app die automatisch, sluitend en zeven jaar bewaarbaar registreert geen
+          luxe, maar je verzekering tegen een dure verrassing.
+        </p>
+        <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+          De app helpt je hierbij op drie manieren. Ten eerste worden je privékilometers continu geteld en bewaakt ten
+          opzichte van de 500 km grens. Ten tweede staat elke rit sluitend in de administratie, met datum, adressen,
+          route en doel. Ten derde exporteer je in één tik een compleet rapport (PDF of Excel) dat je direct bij de
+          verklaring geen privégebruik kunt voegen. Zo is je rittenregistratie belastingdienst-proof, ook als de fiscus
+          jaren later nog terugkijkt. Ben je zelfstandig? Bekijk dan ook onze pagina
+          <a href="/voor-zzp">rittenregistratie voor ZZP&rsquo;ers</a>.
+        </p>
+        <p class="mt-4 text-[15px] leading-relaxed text-zacht">
+          Let op het verschil tussen de twee voordelen. De <strong>kilometervergoeding</strong> draait om je zakelijke
+          kilometers met een eigen of privéauto: die mag je onbelast vergoed krijgen. De <strong>bijtelling</strong>
+          draait om de auto van de zaak en je privégebruik. In beide gevallen is de onderbouwing identiek: een
+          sluitende rittenregistratie die voldoet aan de eisen van de Belastingdienst. Of je nu kiest voor de
+          gratis versie om handmatig te registreren of voor Premium met automatische detectie ({PRIJZEN.maand} per maand,
+          {PRIJZEN.jaar} per jaar) — de verplichte velden zitten er altijd in.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/download" class="btn-primary">Download de app</a>
+          <a href="/" class="btn-ghost">Naar de homepage →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie &amp; Belastingdienst — uitgelegd</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

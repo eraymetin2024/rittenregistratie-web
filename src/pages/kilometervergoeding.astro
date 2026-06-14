@@ -1,0 +1,310 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const faq = [
+  {
+    v: 'Hoeveel bedraagt de zakelijke kilometervergoeding in 2026?',
+    a: 'De onbelaste kilometervergoeding ligt al enkele jaren rond €0,23 per kilometer. Wij noemen €0,23 als richtbedrag, maar het exacte tarief voor 2026 stelt de Belastingdienst jaarlijks vast. Controleer daarom altijd het actuele tarief op belastingdienst.nl voordat je een grote kilometerdeclaratie indient. De app rekent met het tarief dat jij instelt, zodat je berekening altijd klopt.',
+  },
+  {
+    v: 'Mag ik als ZZP\'er een kilometervergoeding declareren?',
+    a: 'Rijd je zakelijke kilometers met je privéauto, dan mag je per zakelijke kilometer een vast bedrag (richtbedrag €0,23) ten laste van je winst brengen. Dit is geen aftrekpost die je los declareert bij een werkgever, maar een zakelijke kostenpost in je administratie. Een sluitende rittenregistratie is de onderbouwing die de Belastingdienst verwacht.',
+  },
+  {
+    v: 'Hoe declareer ik kilometers bij mijn werkgever?',
+    a: 'Werknemers dienen meestal een kilometerdeclaratie of onkostenvergoeding in via een reiskosten-app of declaratieformulier. Je werkgever mag de zakelijke kilometers tot het richtbedrag van €0,23 per kilometer onbelast vergoeden. Met onze app exporteer je een overzicht per periode dat je rechtstreeks als bijlage kunt meesturen.',
+  },
+  {
+    v: 'Telt woon-werkverkeer mee voor de kilometervergoeding?',
+    a: 'Voor de onbelaste reiskostenvergoeding mag een werkgever ook woon-werkkilometers tot het richtbedrag vergoeden. De app houdt woon-werk als aparte categorie bij, los van zuiver zakelijke ritten en privéritten, zodat je declaratie en je administratie altijd kloppen.',
+  },
+  {
+    v: 'Wat moet er in mijn registratie staan om kilometers te mogen declareren?',
+    a: 'Voor een sluitende registratie leg je per rit vast: de datum, de begin- en eindstand van de kilometerteller, het vertrek- en aankomstadres, de gereden route en het doel van de rit. De app vult deze velden automatisch in op basis van GPS, zodat je declaratie voldoet aan de eisen van de Belastingdienst.',
+  },
+  {
+    v: 'Berekent de app de kilometervergoeding automatisch?',
+    a: 'Ja. Je stelt het tarief per kilometer in (richtbedrag €0,23) en de app vermenigvuldigt dit automatisch met je zakelijke kilometers. Je ziet per maand, kwartaal of jaar direct welk bedrag je mag declareren of als kostenpost mag opvoeren, en je exporteert dit als PDF of Excel.',
+  },
+  {
+    v: 'Is de gratis versie genoeg om kilometers te declareren?',
+    a: `Je begint volledig gratis met handmatig registreren en exporteren. Wil je de automatische detectie, onbeperkte cloud-back-up en de automatische berekening van je kilometervergoeding, dan kies je Premium voor ${PRIJZEN.maand} per maand of ${PRIJZEN.jaar} per jaar.`,
+  },
+  {
+    v: 'Worden mijn declaratiegegevens veilig bewaard?',
+    a: 'Je rittenadministratie staat in een cloud-back-up binnen de EU, conform de AVG, met je data opgeslagen in Nederland. Zo blijven je kilometerdeclaraties en reiskosten privé en zijn ze tegelijk veilig en altijd terug te halen.',
+  },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.domein + '/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Zakelijke kilometervergoeding',
+      item: SITE.domein + '/kilometervergoeding',
+    },
+  ],
+};
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Zakelijke kilometervergoeding 2026 — €0,23 per km berekenen en declareren',
+  description:
+    'Hoe werkt de zakelijke kilometervergoeding in 2026? Richtbedrag €0,23 per km, wie mag declareren en hoe je kilometers automatisch berekent en exporteert.',
+  inLanguage: 'nl-NL',
+  mainEntityOfPage: SITE.domein + '/kilometervergoeding',
+  author: { '@type': 'Organization', name: SITE.bedrijf },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.naam,
+    url: SITE.domein,
+  },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.v,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Zakelijke kilometervergoeding 2026 — €0,23 per km"
+  description="Zakelijke kilometervergoeding in 2026: richtbedrag €0,23 per km, wie mag declareren, en hoe je kilometers automatisch berekent en als PDF/Excel exporteert."
+  jsonld={[breadcrumb, article, faqLd]}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Belastingjaar 2026</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          <span class="gradient-text">Zakelijke kilometervergoeding</span> in 2026
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          De zakelijke kilometervergoeding is het bedrag dat je per zakelijke kilometer
+          onbelast mag declareren of als kostenpost mag opvoeren — in 2026 een richtbedrag
+          van €0,23 per km. Met de app houd je elke kilometer automatisch bij, bereken je
+          je vergoeding tot op de cent en exporteer je alles Belastingdienst-proof.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/functies" class="btn-ghost">Bekijk de functies →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ €0,23 per km (richtbedrag)</span>
+          <span>✓ Automatisch berekend</span>
+          <span>✓ PDF & Excel-export</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT IS DE KILOMETERVERGOEDING -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Uitleg</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Wat is de zakelijke kilometervergoeding in 2026?</h2>
+      <p class="mt-5 text-[17px] leading-relaxed text-zacht">
+        De zakelijke kilometervergoeding is de vergoeding die je ontvangt — of als kosten mag
+        opvoeren — voor elke zakelijke kilometer die je met je eigen auto, motor of fiets rijdt.
+        Voor een werknemer is dit een onbelaste reiskostenvergoeding die de werkgever uitkeert;
+        voor een ondernemer is het een aftrekbare kostenpost. In beide gevallen geldt in 2026
+        een vast richtbedrag van €0,23 per kilometer. Omdat de Belastingdienst dit bedrag
+        jaarlijks opnieuw vaststelt, adviseren wij je het actuele tarief altijd te controleren
+        op belastingdienst.nl voordat je een grote kilometerdeclaratie indient.
+      </p>
+      <p class="mt-4 text-[17px] leading-relaxed text-zacht">
+        Het mooie van deze regeling is de eenvoud: je hoeft geen brandstofbonnen, afschrijving of
+        onderhoud op te tellen. Bij zakelijk rijden hoef je alleen je kilometers te registreren en
+        ze te vermenigvuldigen met het tarief. Dat maakt een goede <a href="/kilometerregistratie-app" class="text-merk font-semibold underline-offset-2 hover:underline">kilometerregistratie app</a>
+        onmisbaar: zonder een sluitend overzicht van je kilometers kun je je onkostenvergoedingen
+        niet onderbouwen. Een zakelijke kilometervergoeding app neemt het tellen, classificeren en
+        berekenen volledig uit handen.
+      </p>
+    </div>
+  </section>
+
+  <!-- €0,23 PER KM -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Het tarief</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">€0,23 per kilometer: hoe werkt het?</h2>
+          <p class="mt-5 text-[16px] leading-relaxed text-zacht">
+            Het richtbedrag van €0,23 per km is een maximumbedrag dat je onbelast mag vergoeden of
+            declareren. Rijd je in een jaar 6.000 zakelijke kilometers, dan kom je uit op een
+            reiskostenvergoeding van €1.380. Die bedragen lopen snel op, en juist daarom is het zo
+            belangrijk dat je geen enkele rit mist. Elke vergeten kilometer is geld dat je laat liggen.
+          </p>
+          <p class="mt-4 text-[16px] leading-relaxed text-zacht">
+            Het richtbedrag geldt ongeacht het vervoermiddel: of je nu met de auto, motor, scooter of
+            fiets rijdt, je rekent met hetzelfde bedrag per kilometer. Wil je meer vergoeden dan het
+            richtbedrag, dan is het meerdere belast loon. Houd je het netjes bij €0,23, dan blijft de
+            volledige reiskostenvergoeding onbelast — mits je de kilometers kunt onderbouwen met een
+            correcte registratie.
+          </p>
+          <a href="/automatische-rittenregistratie" class="btn-ghost mt-8">Automatisch registreren →</a>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Kilometerdeclaratie · 2026</p>
+            <p class="mt-1 text-3xl font-extrabold">€ 1.380,00 <span class="text-base font-semibold opacity-80">onbelast</span></p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Zakelijke km</span><span class="font-bold">6.000 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Tarief</span><span class="font-bold">€0,23 / km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Periode</span><span class="font-bold">Jan – dec</span></div>
+              <div class="flex justify-between pt-1"><span class="opacity-80">Sluitend</span><span class="font-bold">✓ Ja</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">PDF</span>
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Excel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZZP OF WERKNEMER -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Wie mag declareren?</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Kilometers declareren als ZZP'er of werknemer</h2>
+      <p class="mt-4 text-zacht">
+        De regels verschillen iets per situatie. Hieronder zie je hoe het werkt voor zelfstandigen
+        en voor mensen in loondienst.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 md:grid-cols-2">
+      <div class="card" data-reveal>
+        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">Z</div>
+        <h3 class="mt-5 text-xl font-bold">Als ZZP'er</h3>
+        <p class="mt-3 text-[15px] leading-relaxed text-zacht">
+          Rijd je zakelijke kilometers met je privéauto, dan voer je per kilometer het richtbedrag
+          van €0,23 op als kostenpost in je winstaangifte. Je declareert dit niet bij een derde, maar
+          verwerkt het in je eigen boekhouding. De onderbouwing is een sluitende rittenregistratie.
+          Lees meer op onze pagina <a href="/voor-zzp" class="text-merk font-semibold underline-offset-2 hover:underline">voor ZZP</a>
+          over hoe je dit Belastingdienst-proof bijhoudt.
+        </p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay:90ms">
+        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">W</div>
+        <h3 class="mt-5 text-xl font-bold">Als werknemer</h3>
+        <p class="mt-3 text-[15px] leading-relaxed text-zacht">
+          Je werkgever mag je zakelijke kilometers en woon-werkkilometers onbelast vergoeden tot
+          €0,23 per km. Je dient hiervoor een kilometerdeclaratie in, vaak via een reiskosten-app of
+          declaratieportaal. Met een nauwkeurig overzicht voorkom je discussie over het aantal
+          kilometers en krijg je je reiskostenvergoeding sneller uitbetaald.
+        </p>
+      </div>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl" data-reveal>
+      <p class="text-[16px] leading-relaxed text-zacht">
+        In beide gevallen is de kern hetzelfde: je moet kunnen aantonen welke kilometers zakelijk
+        waren. Daarom registreer je per rit het doel, de route en de kilometerstand. Wie kilometers
+        declareren serieus neemt, doet dit niet meer met een
+        <a href="/rittenregistratie-excel" class="text-merk font-semibold underline-offset-2 hover:underline">rittenregistratie in Excel</a>
+        maar met een app die de gegevens automatisch en betrouwbaar vastlegt. Zo voorkom je gaten in
+        je administratie en blijft elke onkostenvergoeding verdedigbaar bij een controle.
+      </p>
+    </div>
+  </section>
+
+  <!-- AUTOMATISCH BEREKENEN -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">De app</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Automatisch berekenen met de app</h2>
+        <p class="mt-4 text-zacht">
+          De zakelijke kilometervergoeding app doet het rekenwerk voor je — van detectie tot export.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          {
+            t: 'Automatische detectie',
+            d: 'De app detecteert je ritten automatisch via GPS en auto-Bluetooth, met optionele iBeacon-koppeling. Je hoeft niets handmatig te starten.',
+          },
+          {
+            t: 'Veeg-classificatie',
+            d: 'Zakelijk, woon-werk of privé: classificeer elke rit in één veegbeweging. De app leert je vaste adressen en stelt de juiste categorie voor.',
+          },
+          {
+            t: 'Vergoeding tot op de cent',
+            d: 'Stel het tarief in (richtbedrag €0,23) en de app berekent automatisch je kilometervergoeding per maand, kwartaal en jaar.',
+          },
+          {
+            t: 'PDF & Excel-export',
+            d: 'Exporteer je kilometerdeclaratie in één tik als PDF of Excel — klaar voor je boekhouder, werkgever of de Belastingdienst.',
+          },
+          {
+            t: 'Cloud-back-up (EU/AVG)',
+            d: 'Je gegevens staan veilig in een cloud-back-up binnen de EU, conform de AVG, met data opgeslagen in Nederland.',
+          },
+          {
+            t: 'Belastingdienst-proof',
+            d: 'Elke rit bevat de verplichte velden, zodat je registratie voldoet aan de eisen van de Belastingdienst.',
+          },
+        ].map((v, i) => (
+          <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+            <h3 class="mt-5 text-lg font-bold">{v.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{v.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl text-center" data-reveal>
+        <p class="text-[16px] leading-relaxed text-zacht">
+          Begin gratis met handmatig registreren. Wil je de volledige automatisering — detectie,
+          onbeperkte cloud-back-up en de automatische berekening van je reiskostenvergoeding — dan
+          kies je Premium voor {PRIJZEN.maand} per maand of {PRIJZEN.jaar} per jaar. Bekijk alle
+          opties op de pagina <a href="/prijzen" class="text-merk font-semibold underline-offset-2 hover:underline">prijzen</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Veelgestelde vragen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Kilometervergoeding & declareren</h2>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl space-y-4">
+      {faq.map((f, i) => (
+        <details class="card group" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+            {f.v}
+            <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+          </summary>
+          <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <div class="mt-10 text-center" data-reveal>
+      <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

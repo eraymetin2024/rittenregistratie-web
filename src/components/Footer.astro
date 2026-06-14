@@ -1,10 +1,10 @@
 ---
-import { SITE, NAV } from '../consts';
+import { SITE, TOPICS } from '../consts';
 import Logo from './Logo.astro';
 const jaar = 2026;
 ---
 <footer class="mt-24 border-t border-slate-100 bg-mist">
-  <div class="container-x grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+  <div class="container-x grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1.1fr_1fr_1fr]">
     <div>
       <a href="/" class="flex items-center gap-2.5 font-extrabold text-ink">
         <Logo />
@@ -17,10 +17,9 @@ const jaar = 2026;
     </div>
 
     <div>
-      <h3 class="text-sm font-bold text-ink">Product</h3>
+      <h3 class="text-sm font-bold text-ink">Onderwerpen</h3>
       <ul class="mt-4 space-y-2.5 text-sm text-zacht">
-        {NAV.map((i) => (<li><a class="hover:text-merk" href={i.href}>{i.label}</a></li>))}
-        <li><a class="hover:text-merk" href="/download">Download</a></li>
+        {TOPICS.map((i) => (<li><a class="hover:text-merk" href={i.href}>{i.label}</a></li>))}
       </ul>
     </div>
 

@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const updates = [
+  {
+    versie: 'v1.0',
+    datum: 'Lancering',
+    nieuw: true,
+    items: [
+      'Automatische rit-detectie (GPS + auto-Bluetooth op Android)',
+      'Belastingdienst-conforme administratie: sluitend, woon-werk, 500 km privé-grens',
+      'PDF- en Excel-export, per maand of jaar',
+      'Cloud-back-up & synchronisatie (EU/AVG)',
+      'Werktijden, slim classificeren en meerdere voertuigen',
+    ],
+  },
+  {
+    versie: 'Binnenkort',
+    datum: 'Op de planning',
+    items: [
+      'iBeacon-ondersteuning voor maximale betrouwbaarheid (ook iPhone)',
+      'Koppeling met boekhoudpakketten (Moneybird, e-Boekhouden)',
+      'Push-herinneringen voor ritten die nog bevestigd moeten worden',
+    ],
+  },
+];
+---
+<Layout title="Updates" description="Wat is er nieuw in Rittenregistratie.app? Bekijk de laatste updates, verbeteringen en wat er op de planning staat.">
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 text-center lg:py-24">
+      <h1 data-reveal class="text-4xl font-extrabold sm:text-5xl">Updates & <span class="gradient-text">verbeteringen</span></h1>
+      <p data-reveal style="--reveal-delay:120ms" class="mx-auto mt-5 max-w-xl text-lg text-zacht">
+        We blijven de app doorontwikkelen. Hier zie je wat er nieuw is en wat eraan komt.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-x pb-24">
+    <div class="mx-auto max-w-3xl space-y-6">
+      {updates.map((u, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded-full bg-gradient-to-r from-merk to-violet px-3 py-1 text-sm font-extrabold text-white">{u.versie}</span>
+            <span class="text-sm font-semibold text-zacht">{u.datum}</span>
+            {u.nieuw && <span class="rounded-full bg-groen/10 px-2.5 py-0.5 text-xs font-bold text-groen">Nieuw</span>}
+          </div>
+          <ul class="mt-5 space-y-2.5">
+            {u.items.map((it) => (
+              <li class="flex items-start gap-3"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-merk/10 text-sm text-merk">✓</span><span class="text-[15px] text-slate-700">{it}</span></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-10 text-center text-sm text-zacht" data-reveal>
+      Een idee of wens? Mail ons via <a href="/support" class="font-semibold text-merk">Support</a> — we horen graag van je.
+    </p>
+  </section>
+</Layout>
