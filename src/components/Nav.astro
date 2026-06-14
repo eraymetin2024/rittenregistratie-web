@@ -1,0 +1,59 @@
+---
+import { NAV, SITE } from '../consts';
+import Logo from './Logo.astro';
+const pad = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b border-slate-100/80 bg-white/80 backdrop-blur-xl">
+  <nav class="container-x flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2.5 font-extrabold text-ink">
+      <Logo />
+      <span>Rittenregistratie<span class="text-merk">.app</span></span>
+    </a>
+
+    <div class="hidden items-center gap-1 lg:flex">
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'rounded-full px-4 py-2 text-[15px] font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-ink',
+              pad === item.href && 'text-merk',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="/download" class="btn-primary !px-5 !py-2.5 text-sm">Download</a>
+      <button
+        id="menu-btn"
+        class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 lg:hidden"
+        aria-label="Menu"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="hidden border-t border-slate-100 bg-white lg:hidden">
+    <div class="container-x flex flex-col gap-1 py-4">
+      {
+        NAV.map((item) => (
+          <a href={item.href} class="rounded-xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-100">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact" class="rounded-xl px-3 py-3 font-semibold text-slate-700 hover:bg-slate-100">Contact</a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

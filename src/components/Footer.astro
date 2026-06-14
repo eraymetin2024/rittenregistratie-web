@@ -1,0 +1,54 @@
+---
+import { SITE, NAV } from '../consts';
+import Logo from './Logo.astro';
+const jaar = 2026;
+---
+<footer class="mt-24 border-t border-slate-100 bg-mist">
+  <div class="container-x grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <div>
+      <a href="/" class="flex items-center gap-2.5 font-extrabold text-ink">
+        <Logo />
+        <span>Rittenregistratie<span class="text-merk">.app</span></span>
+      </a>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-zacht">
+        Automatische, Belastingdienst-proof rittenregistratie voor ZZP'ers en
+        ondernemers in Nederland.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold text-ink">Product</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-zacht">
+        {NAV.map((i) => (<li><a class="hover:text-merk" href={i.href}>{i.label}</a></li>))}
+        <li><a class="hover:text-merk" href="/download">Download</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold text-ink">Bedrijf</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-zacht">
+        <li><a class="hover:text-merk" href="/over-ons">Over ons</a></li>
+        <li><a class="hover:text-merk" href="/contact">Contact</a></li>
+        <li><a class="hover:text-merk" href="/privacy">Privacybeleid</a></li>
+        <li><a class="hover:text-merk" href="/voorwaarden">Voorwaarden</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-bold text-ink">Contact</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-zacht">
+        <li><a class="hover:text-merk" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        <li>{SITE.bedrijf}</li>
+        <li>KvK {SITE.kvk}</li>
+        <li>{SITE.adres}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-200/70">
+    <div class="container-x flex flex-col items-center justify-between gap-3 py-6 text-sm text-zacht sm:flex-row">
+      <p>© {jaar} {SITE.bedrijf}. Alle rechten voorbehouden.</p>
+      <p>Gemaakt in Nederland 🇳🇱 · AVG-proof</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../consts';
+
+const stappen = [
+  {
+    n: '1',
+    t: 'Installeer de app',
+    d: 'Download Rittenregistratie.app op Android of iPhone, maak een account aan en je bent binnen een minuut klaar om te starten. Gratis beginnen, geen creditcard nodig.',
+  },
+  {
+    n: '2',
+    t: 'Voeg je auto toe en zet automatische detectie aan',
+    d: 'Voeg je voertuig(en) toe met kenteken en beginstand. Schakel de automatische rit-detectie in — vanaf nu hoef je niets meer handmatig te starten. Op Android kan de app via auto-Bluetooth herkennen wanneer je instapt.',
+  },
+  {
+    n: '3',
+    t: 'Geef de juiste toestemmingen',
+    d: 'Sta locatie "altijd toe" toe zodat ritten ook op de achtergrond worden vastgelegd, en zet batterijoptimalisatie voor de app uit. Dit is eenmalig en zorgt dat geen enkele kilometer gemist wordt.',
+  },
+  {
+    n: '4',
+    t: 'Rijd gewoon — je ritten worden herkend',
+    d: 'Stap in en rijd. De app detecteert automatisch wanneer een rit begint en eindigt, en legt route, vertrek- en aankomstadres en het exacte aantal kilometers vast. Jij doet niets.',
+  },
+  {
+    n: '5',
+    t: 'Veeg om zakelijk of privé te bevestigen',
+    d: 'Open de app en veeg elke rit naar zakelijk, woon-werk of privé. De app leert je vaste adressen en stelt automatisch de juiste categorie voor, zodat bevestigen seconden kost.',
+  },
+  {
+    n: '6',
+    t: 'Exporteer voor de Belastingdienst',
+    d: 'Maak met één tik een sluitend PDF- of Excel-rapport per maand of jaar — met alle verplichte velden. Klaar om te delen met je boekhouder of te bewaren voor een controle.',
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Hoe werkt automatische rittenregistratie?',
+  description:
+    'Stap voor stap je kilometerregistratie automatiseren met Rittenregistratie.app — van installeren tot een Belastingdienst-proof PDF/Excel-export.',
+  totalTime: 'PT2M',
+  step: stappen.map((s) => ({
+    '@type': 'HowToStep',
+    position: Number(s.n),
+    name: s.t,
+    text: s.d,
+  })),
+};
+---
+
+<Layout
+  title="Hoe het werkt"
+  description="Zo werkt automatische rittenregistratie: installeren, auto toevoegen, detectie aanzetten, rijden, zakelijk/privé bevestigen en exporteren naar PDF of Excel — Belastingdienst-proof."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● In een paar stappen geregeld</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          Hoe je <span class="gradient-text">rittenregistratie</span> volledig automatisch werkt
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Eénmalig instellen, daarna nooit meer omkijken. De app herkent je ritten,
+          legt je kilometers sluitend vast en levert een Belastingdienst-proof export —
+          zonder dat jij een knop hoeft in te drukken.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/functies" class="btn-ghost">Bekijk alle functies →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAPPEN -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Stap voor stap</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Van installeren tot export — in 6 stappen</h2>
+      <p class="mt-4 text-zacht">
+        Je hoeft maar één keer iets in te stellen. Daarna draait je kilometerregistratie
+        volledig op de achtergrond.
+      </p>
+    </div>
+    <div class="mx-auto mt-16 max-w-3xl space-y-6">
+      {stappen.map((s, i) => (
+        <div class="card flex items-start gap-5" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white shadow-glow">{s.n}</span>
+          <div>
+            <h3 class="text-lg font-bold">{s.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-zacht">{s.d}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- BATTERIJVRIENDELIJK -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Zuinig op je batterij</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Slim met je accu — geen lege telefoon</h2>
+          <p class="mt-4 text-zacht">
+            De app draait niet de hele dag je GPS leeg. Hij luistert eerst naar beweging
+            van je telefoon en schakelt de nauwkeurige GPS-locatie pas in zodra je
+            daadwerkelijk onderweg bent. Sta je stil, dan slaapt de app.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Bewegingsdetectie eerst, GPS pas bij een echte rit',
+              'Stel werktijden in: buiten je werkuren staat detectie uit',
+              'Geen continue achtergrond-tracking — alleen wanneer nodig',
+              'Merkbaar minder accuverbruik dan altijd-aan GPS-apps',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Werktijden</p>
+            <p class="mt-1 text-2xl font-extrabold">Ma–Vr · 07:00–18:00</p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex items-center justify-between border-b border-white/15 pb-2"><span class="opacity-80">Buiten werktijd</span><span class="font-bold">Detectie uit 🔋</span></div>
+              <div class="flex items-center justify-between border-b border-white/15 pb-2"><span class="opacity-80">In rust</span><span class="font-bold">GPS slaapt</span></div>
+              <div class="flex items-center justify-between pt-1"><span class="opacity-80">Onderweg</span><span class="font-bold">Nauwkeurig ✓</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- iBEACON -->
+  <section class="bg-ink py-24 text-white">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-bold text-merk-light">Optioneel · maximale betrouwbaarheid</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Nog zekerder met de iBeacon</h2>
+        <p class="mt-4 text-white/70">
+          Wil je dat écht geen enkele rit gemist wordt — ook niet op de iPhone? Plaats een
+          klein iBeacon-baken in je auto. Zodra je instapt, weet de app dat er een rit begint.
+        </p>
+      </div>
+      <div class="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
+        {[
+          { t: 'Werkt ook op iPhone', d: 'Het baken triggert de app betrouwbaar op iOS, waar achtergrond-detectie normaal beperkter is.' },
+          { t: 'Ook als de app dicht is', d: 'De rit start automatisch, zelfs wanneer de app volledig gesloten is. Jij hoeft niets te openen.' },
+          { t: 'Jaren batterij in het baken', d: 'Eén klein knoopcel-baken in je auto gaat jaren mee. Plakken en vergeten.' },
+        ].map((c, i) => (
+          <div class="card border-white/10 bg-white/5 text-white" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <h3 class="text-lg font-bold">{c.t}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-white/70">{c.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/beacon" class="btn-primary">Meer over de beacon →</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

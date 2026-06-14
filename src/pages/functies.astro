@@ -1,0 +1,376 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const kernfuncties = [
+  {
+    titel: 'Automatische rit-detectie',
+    tekst:
+      'Ritten starten en stoppen vanzelf via GPS, aangevuld met auto-Bluetooth op Android en optionele iBeacon. Geen knop, geen vergeten ritten.',
+    icon: 'gps',
+  },
+  {
+    titel: 'Belastingdienst-proof',
+    tekst:
+      'Een sluitende kilometeradministratie met alle 8 verplichte velden, woon-werkverkeer als aparte categorie en bewaking van de 500 km privé-grens.',
+    icon: 'shield',
+  },
+  {
+    titel: 'Swipe-classificatie',
+    tekst:
+      'Veeg elke rit in één beweging als zakelijk of privé. Snel, intuïtief en altijd in lijn met de regels voor bijtelling.',
+    icon: 'swipe',
+  },
+  {
+    titel: 'PDF & Excel-export',
+    tekst:
+      'Exporteer je volledige rittenregistratie met één tik naar PDF of Excel — klaar voor je boekhouder of de aangifte.',
+    icon: 'bestand',
+  },
+  {
+    titel: 'Werktijden instellen',
+    tekst:
+      'Stel je werkdagen en -uren in zodat de app ritten slimmer voorclassificeert. Minder handwerk, meer nauwkeurigheid.',
+    icon: 'clock',
+  },
+  {
+    titel: 'Cloud-back-up (EU/AVG)',
+    tekst:
+      'Met een gratis account staat je administratie veilig in de EU-cloud. Nieuwe telefoon? Je ritten zijn er gewoon weer.',
+    icon: 'cloud',
+  },
+];
+
+const icons = {
+  gps: 'M12 21s-7-6.5-7-11a7 7 0 1114 0c0 4.5-7 11-7 11z M12 10a2 2 0 100-4 2 2 0 000 4z',
+  shield: 'M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z M9 12l2 2 4-4',
+  swipe: 'M4 12h12 M12 7l5 5-5 5 M20 6v12',
+  bestand:
+    'M12 3v12 M8 7l4-4 4 4 M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4',
+  clock: 'M12 21a9 9 0 100-18 9 9 0 000 18z M12 7v5l3 2',
+  cloud:
+    'M7 18a4 4 0 01-.5-7.97A5 5 0 0116 9.5a3.5 3.5 0 011 6.86 M7 18h10',
+};
+---
+
+<Layout
+  title="Functies"
+  description="Ontdek alle functies: automatische kilometerregistratie via GPS en Bluetooth, Belastingdienst-proof administratie, swipe-classificatie, PDF/Excel-export, cloud-back-up en onbeperkt voertuigen voor ZZP'ers."
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <span class="eyebrow" data-reveal>Functies</span>
+      <h1
+        data-reveal
+        class="mt-5 text-4xl font-extrabold leading-[1.1] sm:text-5xl"
+      >
+        Alles voor een
+        <span class="gradient-text">automatische rittenregistratie</span>
+      </h1>
+      <p data-reveal class="mt-5 max-w-xl text-lg text-zacht">
+        Van automatische rit-detectie tot Belastingdienst-proof export —
+        {SITE.naam} legt je zakelijke kilometers vast zonder gedoe. Bedacht voor
+        ZZP'ers en ondernemers die hun kilometeradministratie sluitend en
+        moeiteloos willen houden.
+      </p>
+    </div>
+  </section>
+
+  <!-- Kernfuncties grid -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Overzicht</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        De functies in het kort
+      </h2>
+      <p class="mt-4 text-zacht">
+        Een complete km-administratie in je broekzak — gratis te beginnen.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        kernfuncties.map((f, i) => (
+          <div
+            class="card p-6"
+            data-reveal
+            style={`--reveal-delay:${(i % 3) * 80}ms`}
+          >
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-merk/10 text-merk">
+              <svg
+                class="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d={icons[f.icon]} />
+              </svg>
+            </div>
+            <h3 class="mt-5 text-lg font-bold">{f.titel}</h3>
+            <p class="mt-2 text-sm text-zacht">{f.tekst}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Automatische detectie (twee-koloms) -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Automatisch</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+          Rit-detectie die vanzelf werkt
+        </h2>
+        <p class="mt-5 text-zacht">
+          {SITE.naam} herkent automatisch wanneer je gaat rijden. Op de
+          achtergrond combineert de app GPS met je auto-Bluetooth (Android) zodat
+          ritten vanzelf starten en stoppen — batterijvriendelijk en zonder dat
+          je iets hoeft te doen. Wil je het waterdicht maken, ook op iPhone? Koppel
+          dan een optionele iBeacon ({PRIJZEN.beacon}) voor gegarandeerde
+          detectie.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-merk"></span>
+            GPS-detectie op de achtergrond, zuinig met je accu
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-merk"></span>
+            Auto-Bluetooth-trigger op Android — geen extra hardware nodig
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-merk"></span>
+            Optionele iBeacon voor 100% sluitende ritdetectie
+          </li>
+        </ul>
+      </div>
+      <div
+        class="card grid aspect-[4/3] place-items-center bg-gradient-to-br from-merk/15 via-violet/10 to-teal/15 p-10"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        <svg
+          class="h-24 w-24 text-merk"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 21s-7-6.5-7-11a7 7 0 1114 0c0 4.5-7 11-7 11z"></path>
+          <circle cx="12" cy="10" r="2.5"></circle>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Belastingdienst-proof (twee-koloms, omgedraaid) -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div
+        class="card order-last grid aspect-[4/3] place-items-center bg-gradient-to-br from-groen/15 via-teal/10 to-merk/15 p-10 lg:order-first"
+        data-reveal
+      >
+        <svg
+          class="h-24 w-24 text-groen"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <div data-reveal style="--reveal-delay:120ms">
+        <span class="eyebrow">Belastingdienst-proof</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+          Een sluitende administratie waar de fiscus om vraagt
+        </h2>
+        <p class="mt-5 text-zacht">
+          Elke rit bevat automatisch alle 8 verplichte velden die de
+          Belastingdienst eist: datum, beginstand, eindstand, vertrek- en
+          aankomstadres, de gereden route, het privé- of zakelijke karakter en
+          het doel van de rit. Woon-werkverkeer wordt als aparte, derde categorie
+          bijgehouden en de app bewaakt de 500 km privé-grens om bijtelling te
+          onderbouwen.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-groen"></span>
+            Alle 8 verplichte velden, automatisch gevuld
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-groen"></span>
+            Sluitende administratie, geen gaten in je kilometerstand
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-groen"></span>
+            Woon-werkverkeer en de 500 km-grens netjes bewaakt
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Classificatie & export grid -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Verwerken & delen</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Classificeren en exporteren in seconden
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2">
+      <div class="card p-8" data-reveal>
+        <div
+          class="flex h-11 w-11 items-center justify-center rounded-xl bg-violet/10 text-violet"
+        >
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 12h12 M12 7l5 5-5 5"></path>
+          </svg>
+        </div>
+        <h3 class="mt-5 text-lg font-bold">Swipe zakelijk of privé</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Veeg elke rit in één beweging naar de juiste categorie. De app onthoudt
+          je vaste routes en stelt classificaties voor, zodat je nog minder hoeft
+          te doen.
+        </p>
+      </div>
+      <div class="card p-8" data-reveal style="--reveal-delay:120ms">
+        <div
+          class="flex h-11 w-11 items-center justify-center rounded-xl bg-oranje/10 text-oranje"
+        >
+          <svg
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3v12 M8 7l4-4 4 4 M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4"
+            ></path>
+          </svg>
+        </div>
+        <h3 class="mt-5 text-lg font-bold">PDF & Excel-export</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Genereer een overzichtelijk rittenoverzicht voor een willekeurige
+          periode en deel het direct met je boekhouder of gebruik het bij de
+          aangifte inkomstenbelasting.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cloud & voertuigen (twee-koloms) -->
+  <section class="container-x py-24">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div data-reveal>
+        <span class="eyebrow">Veilig & schaalbaar</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+          Cloud-back-up en onbeperkt voertuigen
+        </h2>
+        <p class="mt-5 text-zacht">
+          Met een gratis account staat je rittenregistratie veilig in de EU-cloud,
+          volledig AVG-conform. Wissel je van telefoon, dan haal je alles met één
+          login terug. Heb je meerdere auto's, bestelbussen of een wagenpark? Met
+          Premium beheer je onbeperkt voertuigen, elk met een eigen sluitende
+          administratie.
+        </p>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-teal"></span>
+            Versleutelde back-up op EU-servers (AVG)
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-teal"></span>
+            Onbeperkt voertuigen met Premium ({PRIJZEN.jaar}/jaar)
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 h-2 w-2 flex-none rounded-full bg-teal"></span>
+            Synchroniseer naadloos tussen apparaten
+          </li>
+        </ul>
+      </div>
+      <div
+        class="card grid aspect-[4/3] place-items-center bg-gradient-to-br from-teal/15 via-merk/10 to-violet/15 p-10"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        <svg
+          class="h-24 w-24 text-teal"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M7 18a4 4 0 01-.5-7.97A5 5 0 0116 9.5a3.5 3.5 0 011 6.86"
+          ></path>
+          <path d="M7 18h10"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kaart, adressen & kalibratie grid -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Nauwkeurig</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Kaart, echte adressen en kalibratie
+      </h2>
+      <p class="mt-4 text-zacht">
+        Tot in de details kloppend, zodat je administratie elke controle
+        doorstaat.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="card p-6" data-reveal>
+        <h3 class="text-lg font-bold">Kaart & route</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Bekijk elke rit op de kaart met de werkelijk gereden route, zodat je
+          altijd ziet welke afstand is geregistreerd.
+        </p>
+      </div>
+      <div class="card p-6" data-reveal style="--reveal-delay:80ms">
+        <h3 class="text-lg font-bold">Echte adressen</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Vertrek- en aankomstpunten worden automatisch omgezet naar herkenbare
+          straat- en plaatsnamen — geen kale coördinaten.
+        </p>
+      </div>
+      <div class="card p-6" data-reveal style="--reveal-delay:160ms">
+        <h3 class="text-lg font-bold">Kalibratie</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Stem de gemeten kilometers af op de teller van je auto, zodat je
+          eind- en beginstanden tot op de kilometer kloppen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

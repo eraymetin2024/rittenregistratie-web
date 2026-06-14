@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../consts';
+
+const waarden = [
+  {
+    titel: 'Privacy & EU',
+    tekst:
+      'Je gegevens zijn van jou. Alles draait op servers in de EU, conform de AVG. We verkopen nooit data en tonen geen advertenties.',
+  },
+  {
+    titel: 'Eerlijkheid',
+    tekst:
+      'Geen verborgen kosten, geen donkere patronen. De gratis versie dekt je volledige wettelijke plicht — Premium betaal je alleen voor het gemak van automatisering.',
+  },
+  {
+    titel: 'Eenvoud',
+    tekst:
+      'Rittenregistratie hoort geen avondwerk te zijn. We maken het zó simpel dat je administratie zichzelf bijna bijhoudt.',
+  },
+];
+---
+
+<Layout
+  title="Over ons"
+  description="Rittenregistratie.app is gemaakt door Raysel Digital Solutions, een Nederlands bedrijf dat rittenregistratie eenvoudig en eerlijk maakt voor ZZP'ers."
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <span class="eyebrow" data-reveal>Over ons</span>
+      <h1
+        data-reveal
+        class="mt-5 text-4xl font-extrabold leading-[1.1] sm:text-5xl"
+      >
+        Rittenregistratie zonder <span class="gradient-text">gedoe</span>
+      </h1>
+      <p data-reveal class="mt-5 max-w-2xl text-lg text-zacht">
+        Rittenregistratie.app is gemaakt door {SITE.bedrijf}, een Nederlands
+        bedrijf dat software bouwt die ondernemers tijd bespaart. Wij vinden dat
+        een sluitende, Belastingdienst-proof kilometeradministratie binnen
+        handbereik hoort te liggen van elke ZZP'er — zonder dure software of
+        ingewikkelde spreadsheets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Verhaal -->
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <span class="eyebrow">Ons verhaal</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Gebouwd voor de Nederlandse ZZP'er
+      </h2>
+      <p class="mt-5 text-lg text-zacht leading-relaxed">
+        Te veel ondernemers verliezen aan het einde van het jaar uren — of
+        kostbare aftrek — omdat hun ritten niet sluitend zijn vastgelegd. De
+        Belastingdienst stelt strenge eisen, maar de bestaande tools waren duur,
+        omslachtig of vol verborgen kosten.
+      </p>
+      <p class="mt-4 text-lg text-zacht leading-relaxed">
+        Daarom bouwden we Rittenregistratie.app: een app die alle 8 verplichte
+        velden vastlegt, ritten automatisch detecteert en je administratie met
+        één tik exporteert naar PDF of Excel. Eerlijk geprijsd, met een gratis
+        versie die echt volstaat om aan de wet te voldoen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Missie -->
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto max-w-3xl text-center" data-reveal>
+      <span class="eyebrow">Onze missie</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Administratie die zichzelf bijhoudt
+      </h2>
+      <p class="mt-5 text-lg text-zacht leading-relaxed">
+        We willen dat rittenregistratie het laatste is waar een ondernemer 's
+        avonds over hoeft na te denken. Onze missie is om fiscaal sluitende
+        kilometeradministratie zo eenvoudig, betrouwbaar en betaalbaar te maken
+        dat niemand meer een rit hoeft te missen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Waarden -->
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Onze waarden</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Waar we voor staan
+      </h2>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-3">
+      {
+        waarden.map((w, i) => (
+          <div
+            class="card p-8"
+            data-reveal
+            style={`--reveal-delay:${i * 100}ms`}
+          >
+            <h3 class="text-lg font-bold">{w.titel}</h3>
+            <p class="mt-3 text-zacht">{w.tekst}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Waarom wij -->
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto max-w-3xl" data-reveal>
+      <div class="card p-8 sm:p-10">
+        <span class="eyebrow">Waarom wij</span>
+        <h2 class="mt-4 text-2xl font-extrabold sm:text-3xl">
+          Een Nederlands team, dichtbij
+        </h2>
+        <p class="mt-4 text-zacht leading-relaxed">
+          {SITE.bedrijf} is een gevestigd Nederlands bedrijf (KvK {SITE.kvk}).
+          We kennen de Belastingdienst-eisen, bouwen onze app met de AVG in het
+          achterhoofd en houden je gegevens binnen de EU. Geen anoniem
+          buitenlands platform, maar een aanspreekbaar team dat luistert naar
+          wat ZZP'ers echt nodig hebben.
+        </p>
+        <ul class="mt-6 space-y-2 text-sm text-zacht">
+          <li>• Data en back-ups in de EU — AVG-proof</li>
+          <li>• Nederlandstalige support, snel bereikbaar</li>
+          <li>• Doorlopend verbeterd op basis van feedback van gebruikers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

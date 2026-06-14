@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const vragen = [
+  {
+    v: 'Is de app Belastingdienst-proof?',
+    a:
+      'Ja. Bij elke rit leg je alle verplichte gegevens vast die de ' +
+      'Belastingdienst voor een sluitende rittenregistratie vereist: datum, ' +
+      'begin- en eindadres, de gereden route, de kilometerstand en het karakter ' +
+      'van de rit (zakelijk, privé of woon-werkverkeer). Je administratie blijft ' +
+      'controleerbaar en je exporteert hem als PDF of Excel voor je boekhouder ' +
+      'of de aangifte.',
+  },
+  {
+    v: 'Werkt automatische detectie op de achtergrond?',
+    a:
+      'Op Android werkt automatische rit-detectie betrouwbaar op de ' +
+      'achtergrond via GPS, bewegingsherkenning en auto-Bluetooth. Je hoeft de ' +
+      'app niet open te hebben; ritten verschijnen vanzelf in je wachtrij om te ' +
+      'classificeren.',
+  },
+  {
+    v: 'En op de iPhone?',
+    a:
+      'Eerlijk antwoord: iOS is strenger met achtergrondprocessen dan Android. ' +
+      'Achtergronddetectie werkt op iPhone het best wanneer de app open of op ' +
+      'de achtergrond staat, of — voor de hoogste betrouwbaarheid — in ' +
+      'combinatie met onze optionele iBeacon. iOS mag een bekend Bluetooth-baken ' +
+      'namelijk herkennen en de app daarvoor wekken, ook als hij gesloten is. ' +
+      'Zonder baken kun je een rit op iPhone altijd handmatig of vanuit het ' +
+      'meldingscentrum starten.',
+  },
+  {
+    v: 'Wat kost het?',
+    a:
+      `De basisversie is gratis. Premium kost ${PRIJZEN.maand} per maand of ` +
+      `${PRIJZEN.jaar} per jaar (jaarlijks is voordeliger). De optionele iBeacon ` +
+      `is ${PRIJZEN.beacon} eenmalig, en gratis bij een jaarabonnement.`,
+  },
+  {
+    v: 'Is er een gratis versie?',
+    a:
+      'Ja. Met de gratis versie houd je een volledige, Belastingdienst-proof ' +
+      'rittenregistratie bij: alle verplichte velden, classificatie met een ' +
+      'swipe, en PDF/Excel-export. Premium voegt automatische rit-detectie, ' +
+      'cloud-back-up en onbeperkt voertuigen toe.',
+  },
+  {
+    v: 'Hoe zit het met mijn privacy en gegevens (EU/AVG)?',
+    a:
+      'Je gegevens zijn van jou. De cloud-back-up draait op servers binnen de ' +
+      'EU en is volledig AVG-conform. We verkopen geen data en delen niets met ' +
+      'adverteerders. Gebruik je geen cloud-back-up, dan blijven je ritten ' +
+      'lokaal op je telefoon staan. Je kunt je account en gegevens altijd ' +
+      'verwijderen.',
+  },
+  {
+    v: 'Kan ik exporteren naar PDF of Excel?',
+    a:
+      'Ja, in elke versie. Je exporteert je rittenregistratie per maand of per ' +
+      'jaar naar PDF of Excel — ideaal om door te sturen naar je boekhouder of ' +
+      'mee te nemen in je aangifte.',
+  },
+  {
+    v: 'Wat is woon-werkverkeer?',
+    a:
+      'Woon-werkverkeer zijn de ritten tussen je woonadres en je vaste ' +
+      'werkplek. Fiscaal valt dit niet onder zakelijke kilometers. Daarom kun je ' +
+      'een rit als apart karakter classificeren — zakelijk, privé óf ' +
+      'woon-werkverkeer — zodat je administratie klopt.',
+  },
+  {
+    v: 'Wat is de 500 km privé-grens / bijtelling?',
+    a:
+      'Rijd je in een auto van de zaak en wil je geen bijtelling betalen, dan ' +
+      'mag je per kalenderjaar maximaal 500 km privé met die auto rijden. Je ' +
+      'moet dat met een sluitende rittenregistratie kunnen onderbouwen. De app ' +
+      'houdt je privékilometers bij en exporteert het overzicht waarmee je dat ' +
+      'aantoont.',
+  },
+  {
+    v: 'Heb ik de iBeacon nodig?',
+    a:
+      'Nee, de iBeacon is optioneel. Automatische detectie werkt ook zonder, ' +
+      'via GPS en auto-Bluetooth. Het baken voegt de hoogste betrouwbaarheid toe ' +
+      '— vooral handig op iPhone, waar het de app mag wekken voor automatische ' +
+      'detectie, ook als de app gesloten is.',
+  },
+  {
+    v: 'Werkt het zonder internet?',
+    a:
+      'Ja. Ritten worden lokaal op je telefoon vastgelegd, ook zonder ' +
+      'verbinding. Heb je Premium met cloud-back-up, dan synchroniseert je ' +
+      'administratie automatisch zodra je weer online bent.',
+  },
+  {
+    v: 'Hoeveel voertuigen kan ik beheren?',
+    a:
+      'In de gratis versie beheer je één voertuig. Met Premium beheer je ' +
+      'onbeperkt voertuigen — handig als je meerdere auto’s rijdt of een ' +
+      'wagenpark bijhoudt.',
+  },
+  {
+    v: 'Werkt de app op zowel Android als iPhone?',
+    a:
+      'Ja, de app is beschikbaar voor zowel Android als iPhone. De ' +
+      'achtergronddetectie verschilt per platform (zie de vraag over de iPhone), ' +
+      'maar alle kernfuncties — registreren, classificeren, exporteren en ' +
+      'back-up — werken op beide.',
+  },
+  {
+    v: 'Kan ik opzeggen?',
+    a:
+      'Ja, altijd. Je beheert je abonnement rechtstreeks in de App Store of ' +
+      'Google Play en zegt daar met één tik op. Na opzegging behoud je je ' +
+      'bestaande ritten en blijft de gratis versie gewoon werken.',
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: vragen.map((q) => ({
+    '@type': 'Question',
+    name: q.v,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: q.a,
+    },
+  })),
+};
+---
+
+<Layout
+  title="Veelgestelde vragen"
+  description="Antwoorden op veelgestelde vragen over Rittenregistratie.app: Belastingdienst-proof, automatische detectie op Android en iPhone, prijzen, privacy (EU/AVG), PDF/Excel-export en de iBeacon."
+  jsonld={jsonld}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <span class="eyebrow" data-reveal>FAQ</span>
+      <h1
+        data-reveal
+        class="mt-5 text-4xl font-extrabold leading-[1.1] sm:text-5xl"
+      >
+        Veelgestelde <span class="gradient-text">vragen</span>
+      </h1>
+      <p data-reveal class="mt-5 max-w-xl text-lg text-zacht">
+        Alles over Belastingdienst-proof registreren, automatische detectie,
+        privacy en prijzen. Staat je vraag er niet bij? Mail ons op
+        <a href={`mailto:${SITE.email}`} class="font-semibold text-merk">
+          {SITE.email}
+        </a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Vragen -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-3xl space-y-4">
+      {
+        vragen.map((q, i) => (
+          <details
+            class="card group p-6"
+            data-reveal
+            style={`--reveal-delay:${(i % 4) * 80}ms`}
+          >
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold"
+            >
+              <span>{q.v}</span>
+              <svg
+                class="h-5 w-5 flex-none text-merk transition-transform group-open:rotate-180"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M5 8l5 5 5-5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-zacht">{q.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

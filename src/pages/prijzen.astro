@@ -1,0 +1,252 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, PRIJZEN } from '../consts';
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${SITE.naam} Premium`,
+  description:
+    'Automatische rittenregistratie met GPS- en Bluetooth-detectie, ' +
+    'Belastingdienst-proof kilometeradministratie, PDF/Excel-export, ' +
+    'cloud-back-up en onbeperkt voertuigen.',
+  brand: { '@type': 'Brand', name: SITE.naam },
+  offers: {
+    '@type': 'Offer',
+    price: '29.99',
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+    url: `${SITE.domein}/prijzen`,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '29.99',
+      priceCurrency: 'EUR',
+      billingDuration: 'P1Y',
+    },
+  },
+};
+
+const gratisFeatures = [
+  'Volledige handmatige rittenregistratie',
+  'Belastingdienst-proof: alle 8 verplichte velden',
+  'Zakelijk, privé én woon-werkverkeer als categorie',
+  'Swipe-classificatie zakelijk/privé',
+  'PDF- en Excel-export voor je administratie',
+  'Eén voertuig',
+];
+
+const premiumFeatures = [
+  'Alles uit Gratis, plus:',
+  'Automatische rit-detectie (GPS + auto-Bluetooth)',
+  'Optionele iBeacon-koppeling voor extra nauwkeurigheid',
+  'Cloud-back-up (EU/AVG) — nooit meer ritten kwijt',
+  'Onbeperkt voertuigen',
+  'Werktijden instellen voor slimme classificatie',
+  'Prioriteit bij support',
+];
+---
+
+<Layout
+  title="Prijzen"
+  description="Begin gratis met je rittenregistratie en voldoe aan de Belastingdienst. Upgrade naar Premium voor €29,99/jaar: automatische km-detectie, cloud-back-up en onbeperkt voertuigen."
+  jsonld={jsonld}
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <span class="eyebrow" data-reveal>Prijzen</span>
+      <h1
+        data-reveal
+        class="mt-5 text-4xl font-extrabold leading-[1.1] sm:text-5xl"
+      >
+        Begin gratis. Upgrade wanneer je
+        <span class="gradient-text">automatisering</span> wilt.
+      </h1>
+      <p data-reveal class="mt-5 max-w-xl text-lg text-zacht">
+        De gratis versie dekt je volledige wettelijke rittenregistratie-plicht —
+        Belastingdienst-proof, met PDF- en Excel-export. Premium voegt
+        automatische kilometerregistratie, cloud-back-up en onbeperkt voertuigen
+        toe vanaf {PRIJZEN.jaar} per jaar.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Vergelijk</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Kies wat bij jou past
+      </h2>
+      <p class="mt-4 text-zacht">
+        Geen verborgen kosten. Stop of upgrade wanneer je wilt.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
+      <!-- Gratis -->
+      <div class="card flex flex-col p-8" data-reveal>
+        <h3 class="text-xl font-bold">Gratis</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Voldoe aan de Belastingdienst — voor altijd gratis.
+        </p>
+        <div class="mt-6 flex items-baseline gap-1">
+          <span class="text-4xl font-extrabold">€0</span>
+          <span class="text-zacht">/altijd</span>
+        </div>
+        <a href={SITE.playUrl} class="btn-ghost mt-6">Gratis beginnen</a>
+        <ul class="mt-8 space-y-3 text-sm">
+          {
+            gratisFeatures.map((f) => (
+              <li class="flex items-start gap-3">
+                <svg
+                  class="mt-0.5 h-5 w-5 flex-none text-groen"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 10l4 4 8-8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Premium -->
+      <div
+        class="card relative flex flex-col p-8 ring-2 ring-merk/20"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        <span
+          class="absolute -top-3 left-8 rounded-full bg-merk px-3 py-1 text-xs font-semibold text-white"
+        >
+          Populair
+        </span>
+        <h3 class="text-xl font-bold">Premium</h3>
+        <p class="mt-2 text-sm text-zacht">
+          Volledige automatisering, cloud-back-up en onbeperkt voertuigen.
+        </p>
+        <div class="mt-6 flex items-baseline gap-1">
+          <span class="text-4xl font-extrabold">{PRIJZEN.jaar}</span>
+          <span class="text-zacht">/jaar</span>
+        </div>
+        <p class="mt-1 text-sm text-zacht">
+          of {PRIJZEN.maand} per maand — jaarlijks is voordeliger
+        </p>
+        <a href={SITE.playUrl} class="btn-primary mt-6">Premium proberen</a>
+        <ul class="mt-8 space-y-3 text-sm">
+          {
+            premiumFeatures.map((f, i) => (
+              <li class="flex items-start gap-3">
+                <svg
+                  class="mt-0.5 h-5 w-5 flex-none text-merk"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 10l4 4 8-8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span class={i === 0 ? 'font-semibold' : ''}>{f}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gratis vs Premium uitleg -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">In het kort</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+        Wat zit er in Gratis vs Premium?
+      </h2>
+      <p class="mt-4 text-zacht">
+        Gratis is genoeg om aan de wet te voldoen. Premium bespaart je tijd door
+        alles te automatiseren.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+      <div class="card p-8" data-reveal>
+        <h3 class="text-lg font-bold">Gratis is voor jou als…</h3>
+        <p class="mt-4 text-zacht">
+          …je een sluitende, Belastingdienst-proof kilometeradministratie wilt
+          bijhouden en het niet erg vindt om ritten zelf in te voeren. Je legt
+          alle 8 verplichte velden vast, classificeert ritten als zakelijk,
+          privé of woon-werkverkeer met een swipe, en exporteert wanneer je wilt
+          naar PDF of Excel voor je boekhouder of de aangifte.
+        </p>
+      </div>
+      <div
+        class="card p-8 ring-2 ring-merk/20"
+        data-reveal
+        style="--reveal-delay:120ms"
+      >
+        <h3 class="text-lg font-bold">Premium is voor jou als…</h3>
+        <p class="mt-4 text-zacht">
+          …je geen rit meer wilt missen en geen tijd wilt verspillen aan
+          handmatig invoeren. Ritten worden automatisch gedetecteerd via GPS en
+          auto-Bluetooth (Android), je back-up staat veilig in de EU-cloud, en je
+          beheert onbeperkt voertuigen. Ideaal om de 500 km privé-grens en
+          bijtelling moeiteloos te onderbouwen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- iBeacon blok -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-4xl" data-reveal>
+      <div class="card overflow-hidden p-8 sm:p-10">
+        <div class="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div>
+            <span class="eyebrow">Optioneel</span>
+            <h2 class="mt-4 text-2xl font-extrabold sm:text-3xl">
+              iBeacon voor automatische detectie zonder gedoe
+            </h2>
+            <p class="mt-4 text-zacht">
+              Wil je gegarandeerde, batterijvriendelijke rit-detectie — ook op
+              iPhone? Met een kleine iBeacon in je auto weet de app precies
+              wanneer je instapt en uitstapt. Geen Bluetooth-koppeling met je
+              auto nodig, geen handmatig starten.
+            </p>
+            <ul class="mt-6 space-y-2 text-sm text-zacht">
+              <li>• Eenmalige aanschaf, geen abonnement op de hardware</li>
+              <li>• Werkt op iOS én Android</li>
+              <li>• Plug-and-play: plaatsen, koppelen, klaar</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl bg-mist p-6 text-center">
+            <p class="text-sm text-zacht">iBeacon</p>
+            <p class="mt-2 text-4xl font-extrabold gradient-text">
+              {PRIJZEN.beacon}
+            </p>
+            <p class="mt-2 text-sm text-zacht">eenmalig</p>
+            <p
+              class="mt-4 rounded-xl bg-groen/10 px-3 py-2 text-sm font-semibold text-groen"
+            >
+              Gratis bij een jaarabonnement
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

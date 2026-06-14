@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Pagina niet gevonden" description="Deze pagina bestaat niet." noindex={true}>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x grid place-items-center py-32 text-center">
+      <p class="text-7xl font-extrabold gradient-text">404</p>
+      <h1 class="mt-4 text-3xl font-extrabold sm:text-4xl">Pagina niet gevonden</h1>
+      <p class="mt-4 max-w-md text-zacht">
+        Deze pagina bestaat niet (meer). Ga terug naar de homepage of bekijk de functies.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn-primary">Naar home</a>
+        <a href="/functies" class="btn-ghost">Bekijk functies</a>
+      </div>
+    </div>
+  </section>
+</Layout>

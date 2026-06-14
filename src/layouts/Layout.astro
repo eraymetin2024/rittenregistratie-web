@@ -1,0 +1,113 @@
+---
+import { SITE } from '../consts';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  jsonld?: object | object[];
+}
+
+const {
+  title,
+  description = SITE.beschrijving,
+  image = '/og.png',
+  noindex = false,
+  jsonld,
+} = Astro.props;
+
+const volledigeTitel = title
+  ? `${title} · ${SITE.naam}`
+  : `${SITE.naam} — ${SITE.slogan}`;
+const canonical = new URL(Astro.url.pathname, SITE.domein).href;
+const ogImage = new URL(image, SITE.domein).href;
+
+const jsonldArray = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld]) : [];
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{volledigeTitel}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#2F6BFF" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- Markeer dat JS beschikbaar is (zo blijft content zichtbaar zonder JS). -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.naam} />
+    <meta property="og:title" content={volledigeTitel} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="nl_NL" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={volledigeTitel} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {
+      jsonldArray.map((obj) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(obj)}
+        />
+      ))
+    }
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      // Scroll-reveal: voeg .in toe zodra een [data-reveal] in beeld komt.
+      (() => {
+        const els = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window) || !els.length) {
+          els.forEach((el) => el.classList.add('in'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.08 }
+        );
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>

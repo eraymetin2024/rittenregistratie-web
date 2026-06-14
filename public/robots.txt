@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rittenregistratie.app/sitemap-index.xml

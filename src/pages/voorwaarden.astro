@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../consts';
+---
+
+<Layout
+  title="Algemene voorwaarden"
+  description="De algemene voorwaarden voor het gebruik van Rittenregistratie.app van Raysel Digital Solutions."
+  noindex={true}
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20">
+      <span class="eyebrow" data-reveal>Juridisch</span>
+      <h1 data-reveal class="mt-5 text-4xl font-extrabold sm:text-5xl">
+        Algemene voorwaarden
+      </h1>
+      <p data-reveal class="mt-4 max-w-2xl text-lg text-zacht">
+        Laatst bijgewerkt: 14 juni 2026. Deze voorwaarden gelden voor het
+        gebruik van Rittenregistratie.app van {SITE.bedrijf}.
+      </p>
+    </div>
+  </section>
+
+  <div class="container-x py-20">
+    <div class="max-w-3xl">
+      <p class="text-slate-700 leading-relaxed">
+        Door Rittenregistratie.app te gebruiken ga je akkoord met deze algemene
+        voorwaarden. Lees ze daarom goed door.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">1. Gebruik van de app</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Rittenregistratie.app helpt je bij het bijhouden van je
+        kilometeradministratie. Je mag de app gebruiken voor je eigen
+        (zakelijke) administratie. Je bent zelf verantwoordelijk voor het
+        juiste en volledige gebruik van de app en voor de gegevens die je
+        invoert.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">2. Gratis versie en Premium</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        De app kent een gratis versie en een betaald Premium-abonnement.
+        Premium koop je via de App Store (Apple) of Google Play. Het abonnement
+        wordt automatisch verlengd, tenzij je het uiterlijk 24 uur voor het
+        einde van de lopende periode opzegt. Opzeggen en beheren doe je via de
+        instellingen van je App Store- of Google Play-account; betalingen en
+        terugbetalingen verlopen via die platforms en hun voorwaarden.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">3. Automatische detectie</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        De app kan ritten automatisch detecteren via GPS en Bluetooth. Wij
+        spannen ons in om dit zo betrouwbaar mogelijk te maken, maar kunnen niet
+        garanderen dat de automatische detectie in alle gevallen 100% sluitend
+        of nauwkeurig is. Je blijft te allen tijde zelf verantwoordelijk voor
+        een juiste en volledige administratie en dient gedetecteerde ritten te
+        controleren en waar nodig aan te vullen of te corrigeren.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">4. Aansprakelijkheid</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        De app wordt aangeboden "zoals deze is". Voor zover wettelijk
+        toegestaan, is {SITE.bedrijf} niet aansprakelijk voor indirecte schade,
+        gevolgschade, gemiste aftrek, boetes of schade die voortvloeit uit
+        onjuiste, onvolledige of niet-sluitende administratie. Onze
+        aansprakelijkheid is in alle gevallen beperkt tot het bedrag dat je in
+        de twaalf maanden voorafgaand aan het schadeveroorzakende feit voor de
+        app hebt betaald.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">5. Intellectueel eigendom</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Alle rechten op de app, de software, het ontwerp en de inhoud berusten
+        bij {SITE.bedrijf}. Je krijgt een persoonlijk, niet-overdraagbaar recht
+        om de app te gebruiken. Je gegevens blijven van jou.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">6. Wijzigingen</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        We kunnen deze voorwaarden en de app van tijd tot tijd aanpassen,
+        bijvoorbeeld bij nieuwe functies of gewijzigde wet- en regelgeving. De
+        meest recente versie vind je altijd op deze pagina. Blijf je de app
+        gebruiken na een wijziging, dan ga je akkoord met de aangepaste
+        voorwaarden.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">7. Toepasselijk recht</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Op deze voorwaarden en het gebruik van de app is uitsluitend Nederlands
+        recht van toepassing. Geschillen worden voorgelegd aan de bevoegde
+        rechter in Nederland.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">8. Contact</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Vragen over deze voorwaarden? Neem contact met ons op:
+      </p>
+      <ul class="mt-3 list-none space-y-1 text-slate-700 leading-relaxed">
+        <li>{SITE.bedrijf}</li>
+        <li>
+          <a class="text-merk hover:underline" href={`mailto:${SITE.email}`}>
+            {SITE.email}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</Layout>

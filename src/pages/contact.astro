@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../consts';
+---
+
+<Layout
+  title="Contact"
+  description="Neem contact op met Raysel Digital Solutions, makers van Rittenregistratie.app. Mail ons of gebruik het contactformulier."
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <span class="eyebrow" data-reveal>Contact</span>
+      <h1
+        data-reveal
+        class="mt-5 text-4xl font-extrabold leading-[1.1] sm:text-5xl"
+      >
+        We helpen je graag <span class="gradient-text">verder</span>
+      </h1>
+      <p data-reveal class="mt-5 max-w-xl text-lg text-zacht">
+        Vragen over de app, je abonnement of de Belastingdienst-eisen? Stuur ons
+        een bericht. Mailen is doorgaans het snelst.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-x py-20 lg:py-24">
+    <div class="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
+      <!-- Contactgegevens -->
+      <div class="card p-8" data-reveal>
+        <span class="eyebrow">Direct contact</span>
+        <h2 class="mt-4 text-2xl font-bold">Mail ons</h2>
+        <p class="mt-3 text-zacht">
+          We reageren meestal binnen één werkdag. Voor support is e-mail de
+          snelste route.
+        </p>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="btn-primary mt-6 inline-flex"
+        >
+          {SITE.email}
+        </a>
+
+        <div class="mt-10 border-t border-mist pt-8">
+          <h3 class="text-lg font-bold">Bedrijfsgegevens</h3>
+          <dl class="mt-4 space-y-2 text-sm text-zacht">
+            <div class="flex gap-2">
+              <dt class="w-28 flex-none font-semibold text-ink">Bedrijf</dt>
+              <dd>{SITE.bedrijf}</dd>
+            </div>
+            <div class="flex gap-2">
+              <dt class="w-28 flex-none font-semibold text-ink">KvK</dt>
+              <dd>{SITE.kvk}</dd>
+            </div>
+            <div class="flex gap-2">
+              <dt class="w-28 flex-none font-semibold text-ink">BTW</dt>
+              <dd>{SITE.btw}</dd>
+            </div>
+            <div class="flex gap-2">
+              <dt class="w-28 flex-none font-semibold text-ink">Adres</dt>
+              <dd>{SITE.adres}</dd>
+            </div>
+            <div class="flex gap-2">
+              <dt class="w-28 flex-none font-semibold text-ink">E-mail</dt>
+              <dd>
+                <a class="text-merk hover:underline" href={`mailto:${SITE.email}`}>
+                  {SITE.email}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Contactformulier -->
+      <div class="card p-8" data-reveal style="--reveal-delay:120ms">
+        <span class="eyebrow">Of stuur een bericht</span>
+        <h2 class="mt-4 text-2xl font-bold">Contactformulier</h2>
+        <p class="mt-3 text-sm text-zacht">
+          Liever direct contact? Mailen via
+          <a class="text-merk hover:underline" href={`mailto:${SITE.email}`}>
+            {SITE.email}</a
+          > is doorgaans het snelst.
+        </p>
+
+        <form action="#" class="mt-6 space-y-5">
+          <div>
+            <label for="naam" class="block text-sm font-semibold text-ink">
+              Naam
+            </label>
+            <input
+              id="naam"
+              name="naam"
+              type="text"
+              autocomplete="name"
+              placeholder="Je naam"
+              class="mt-2 w-full rounded-xl border border-mist bg-white px-4 py-3 text-ink outline-none transition focus:border-merk focus:ring-2 focus:ring-merk/20"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-semibold text-ink">
+              E-mail
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="jij@voorbeeld.nl"
+              class="mt-2 w-full rounded-xl border border-mist bg-white px-4 py-3 text-ink outline-none transition focus:border-merk focus:ring-2 focus:ring-merk/20"
+            />
+          </div>
+          <div>
+            <label for="bericht" class="block text-sm font-semibold text-ink">
+              Bericht
+            </label>
+            <textarea
+              id="bericht"
+              name="bericht"
+              rows="5"
+              placeholder="Waar kunnen we je mee helpen?"
+              class="mt-2 w-full resize-y rounded-xl border border-mist bg-white px-4 py-3 text-ink outline-none transition focus:border-merk focus:ring-2 focus:ring-merk/20"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full">
+            Verstuur bericht
+          </button>
+          <p class="text-xs text-zacht">
+            Dit formulier is indicatief. Voor een gegarandeerde, snelle reactie
+            mail je rechtstreeks naar {SITE.email}.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>

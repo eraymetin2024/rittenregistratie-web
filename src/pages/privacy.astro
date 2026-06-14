@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../consts';
+---
+
+<Layout
+  title="Privacybeleid"
+  description="Privacybeleid van Rittenregistratie.app: welke gegevens we verwerken, waarvoor, hoe lang we ze bewaren en welke rechten je hebt onder de AVG."
+  noindex={true}
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20">
+      <span class="eyebrow" data-reveal>Juridisch</span>
+      <h1 data-reveal class="mt-5 text-4xl font-extrabold sm:text-5xl">
+        Privacybeleid
+      </h1>
+      <p data-reveal class="mt-4 max-w-2xl text-lg text-zacht">
+        Laatst bijgewerkt: 14 juni 2026. Dit beleid legt uit hoe
+        {SITE.bedrijf} omgaat met je persoonsgegevens in Rittenregistratie.app.
+      </p>
+    </div>
+  </section>
+
+  <div class="container-x py-20">
+    <div class="max-w-3xl">
+      <p class="text-slate-700 leading-relaxed">
+        {SITE.bedrijf} (hierna "wij") respecteert je privacy en verwerkt je
+        persoonsgegevens in overeenstemming met de Algemene Verordening
+        Gegevensbescherming (AVG/GDPR). In dit beleid lees je welke gegevens we
+        verwerken, waarom, hoe lang we ze bewaren en welke rechten je hebt.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">1. Welke gegevens we verwerken</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Wij verwerken alleen de gegevens die nodig zijn om de app te laten
+        werken:
+      </p>
+      <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700 leading-relaxed">
+        <li>
+          <strong>Account-e-mailadres</strong> — om je account aan te maken, in
+          te loggen en je gegevens veilig met de cloud te synchroniseren.
+        </li>
+        <li>
+          <strong>Ritgegevens</strong> — datum, tijd, begin- en eindadres,
+          afstand, kilometerstand, voertuig en de classificatie (zakelijk,
+          privé of woon-werkverkeer) van je ritten.
+        </li>
+        <li>
+          <strong>Locatiegegevens</strong> — uitsluitend om ritten automatisch
+          te detecteren en de afgelegde afstand te bepalen. Locatie wordt
+          alleen verwerkt wanneer je automatische detectie zelf inschakelt.
+        </li>
+        <li>
+          <strong>Voertuig- en uitgavengegevens</strong> — die je zelf invoert
+          voor je administratie.
+        </li>
+      </ul>
+
+      <h2 class="mt-10 text-2xl font-bold">2. Waarvoor we de gegevens gebruiken</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        We gebruiken je gegevens om je een Belastingdienst-proof
+        kilometeradministratie te bieden, ritten automatisch te detecteren, je
+        gegevens te synchroniseren en te back-uppen, en je rapportages te laten
+        exporteren. We gebruiken je gegevens niet voor advertenties.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">3. Bewaartermijn</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Omdat een rittenregistratie fiscale administratie is, kun je je
+        gegevens tot 7 jaar bewaren — de wettelijke fiscale bewaarplicht. Je
+        bepaalt zelf of en wanneer je gegevens verwijdert. Verwijder je je
+        account, dan wissen we je gegevens uit onze systemen.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">4. Opslag in de EU</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Je gegevens worden opgeslagen op onze eigen servers binnen de Europese
+        Unie. We dragen je gegevens niet over naar landen buiten de EU.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">5. Geen verkoop van gegevens</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Wij verkopen of verhuren je persoonsgegevens nooit aan derden. We delen
+        gegevens uitsluitend met de verwerkers die nodig zijn om de dienst te
+        leveren (zie hieronder).
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">6. Jouw rechten</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Onder de AVG heb je recht op inzage, correctie en verwijdering van je
+        gegevens, en op gegevensoverdraagbaarheid. Je kunt je gegevens op elk
+        moment exporteren vanuit de app. Je account — inclusief alle bijbehorende
+        gegevens — verwijder je rechtstreeks in de app onder Instellingen. Voor
+        andere verzoeken mail je ons via {SITE.email}.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">7. Verwerkers</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Voor het leveren van de dienst maken we gebruik van de volgende
+        verwerkers:
+      </p>
+      <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700 leading-relaxed">
+        <li>
+          <strong>Supabase (self-hosted, EU)</strong> — voor accountbeheer en
+          de opslag/synchronisatie van je gegevens.
+        </li>
+        <li>
+          <strong>Sentry</strong> — voor het opsporen van technische fouten,
+          zodat we de app stabiel houden.
+        </li>
+        <li>
+          <strong>RevenueCat</strong> — voor het beheren van Premium-abonnementen.
+        </li>
+        <li>
+          <strong>Firebase</strong> — uitsluitend voor het versturen van
+          (push)meldingen.
+        </li>
+      </ul>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Met al onze verwerkers zijn verwerkersovereenkomsten gesloten en zij
+        verwerken gegevens uitsluitend in onze opdracht.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">8. Contact</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Heb je vragen over dit privacybeleid of wil je een verzoek indienen?
+        Neem contact met ons op:
+      </p>
+      <ul class="mt-3 list-none space-y-1 text-slate-700 leading-relaxed">
+        <li>{SITE.bedrijf}</li>
+        <li>KvK {SITE.kvk}</li>
+        <li>{SITE.adres}</li>
+        <li>
+          <a class="text-merk hover:underline" href={`mailto:${SITE.email}`}>
+            {SITE.email}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</Layout>

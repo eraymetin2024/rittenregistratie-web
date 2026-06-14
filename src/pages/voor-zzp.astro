@@ -1,0 +1,227 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../consts';
+
+const voordelen = [
+  {
+    t: 'Automatisch elke zakelijke kilometer',
+    d: 'Geen enkele rit meer vergeten. De app legt je zakelijke kilometers automatisch vast, zodat je nooit aftrek of vergoeding misloopt.',
+  },
+  {
+    t: 'Onderbouw je €0,23 per kilometer',
+    d: 'Een sluitende registratie is de basis voor de onbelaste kilometervergoeding. Alles staat klaar, tot op de kilometer nauwkeurig.',
+  },
+  {
+    t: 'Bijtelling vermijden',
+    d: 'Blijf je onder de 500 privé-kilometers? De app bewaakt de grens, zodat je je verklaring geen privégebruik hard kunt maken.',
+  },
+  {
+    t: 'Klaar voor een controle',
+    d: 'Bij een controle van de Belastingdienst lever je in één tik een compleet, sluitend rapport aan. Geen stress, geen naspeurwerk.',
+  },
+  {
+    t: 'Woon-werk apart geregeld',
+    d: 'Woon-werkverkeer wordt als aparte, derde categorie bijgehouden — precies zoals de fiscus het wil zien.',
+  },
+  {
+    t: 'Meerdere voertuigen',
+    d: 'Rijd je in de bus én de privéauto? Beheer onbeperkt voertuigen en houd per auto een aparte, sluitende administratie bij.',
+  },
+];
+
+const faq = [
+  {
+    v: 'Ben ik als ZZP\'er verplicht een rittenregistratie bij te houden?',
+    a: 'Wil je de onbelaste kilometervergoeding van €0,23 per zakelijke kilometer claimen, of bijtelling op je auto van de zaak voorkomen, dan moet je een sluitende rittenregistratie kunnen overleggen. De app houdt deze automatisch en Belastingdienst-proof bij.',
+  },
+  {
+    v: 'Wat is de 500-kilometergrens precies?',
+    a: 'Rijd je met een auto van de zaak minder dan 500 privé-kilometers per jaar, dan hoef je geen bijtelling te betalen. Daarvoor heb je wel een sluitende rittenregistratie nodig als bewijs. De app bewaakt deze grens en waarschuwt je tijdig.',
+  },
+  {
+    v: 'Telt woon-werkverkeer als zakelijk of privé?',
+    a: 'Voor de bijtelling telt woon-werkverkeer als zakelijk. De app registreert woon-werk als aparte categorie, zodat je administratie klopt en je niets verkeerd opgeeft.',
+  },
+  {
+    v: 'Wat heb ik nodig bij een controle van de Belastingdienst?',
+    a: 'Een sluitende registratie met alle verplichte velden: datum, begin- en eindstand, vertrek- en aankomstadres, de gereden route en het doel van de rit. De app legt dit allemaal vast en exporteert het direct als PDF of Excel.',
+  },
+];
+
+const jsonld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.v,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Layout
+  title="Rittenregistratie voor ZZP'ers"
+  description="Rittenregistratie voor ZZP'ers: automatisch je zakelijke kilometers vastleggen, bijtelling vermijden, €0,23/km onderbouwen en Belastingdienst-proof exporteren. Gratis beginnen."
+  jsonld={jsonld}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="grid-mask absolute inset-0 -z-10"></div>
+    <div class="container-x py-20 lg:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow" data-reveal>● Gemaakt voor zelfstandigen</span>
+        <h1
+          data-reveal
+          style="--reveal-delay:60ms"
+          class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl"
+        >
+          Rittenregistratie voor <span class="gradient-text">ZZP'ers</span> — automatisch en sluitend
+        </h1>
+        <p data-reveal style="--reveal-delay:140ms" class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-zacht">
+          Als zelfstandige rijd je belangrijke kilometers. Leg ze automatisch vast,
+          claim je kilometervergoeding, voorkom bijtelling en wees altijd klaar voor
+          een controle van de Belastingdienst — zonder gedoe met spreadsheets.
+        </p>
+        <div data-reveal style="--reveal-delay:220ms" class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="/download" class="btn-primary">Gratis beginnen</a>
+          <a href="/hoe-het-werkt" class="btn-ghost">Hoe het werkt →</a>
+        </div>
+        <div data-reveal style="--reveal-delay:300ms" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-zacht">
+          <span>✓ €0,23 per zakelijke km</span>
+          <span>✓ Bijtelling vermijden</span>
+          <span>✓ Belastingdienst-proof</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAAROM BELANGRIJK -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Waarom het ertoe doet</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Een sluitende rittenregistratie scheelt je echt geld</h2>
+      <p class="mt-4 text-zacht">
+        Voor ZZP'ers en zelfstandigen is je kilometeradministratie geen formaliteit —
+        het bepaalt je vergoeding én voorkomt een naheffing.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      <div class="card" data-reveal>
+        <p class="text-3xl font-extrabold gradient-text">€0,23</p>
+        <h3 class="mt-3 text-lg font-bold">Per zakelijke kilometer</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          De onbelaste kilometervergoeding loopt snel op. Met een sluitende registratie
+          claim je elke gereden kilometer en laat je geen geld liggen.
+        </p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay:90ms">
+        <p class="text-3xl font-extrabold gradient-text">&lt; 500 km</p>
+        <h3 class="mt-3 text-lg font-bold">Privé — geen bijtelling</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          Rijd je minder dan 500 privé-kilometers met de auto van de zaak, dan voorkom je
+          bijtelling. De app bewaakt de grens en waarschuwt op tijd.
+        </p>
+      </div>
+      <div class="card" data-reveal style="--reveal-delay:180ms">
+        <p class="text-3xl font-extrabold gradient-text">7 jaar</p>
+        <h3 class="mt-3 text-lg font-bold">Klaar voor controle</h3>
+        <p class="mt-2 text-[15px] leading-relaxed text-zacht">
+          De Belastingdienst kan tot 7 jaar terug controleren. Je administratie staat
+          veilig in de cloud (EU/AVG) en is altijd compleet en sluitend.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIJD BESPAREN -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div data-reveal>
+          <span class="eyebrow">Tijd is je kostbaarste uur</span>
+          <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Bespaar uren per maand aan administratie</h2>
+          <p class="mt-4 text-zacht">
+            Als ZZP'er wil je je tijd aan je werk besteden, niet aan het natikken van
+            kilometerstanden. De app neemt het bijhouden volledig uit handen.
+          </p>
+          <ul class="mt-6 space-y-3">
+            {[
+              'Automatische rit-detectie via GPS en auto-Bluetooth (Android)',
+              'Veeg-classificatie: zakelijk, woon-werk of privé in één beweging',
+              'De app leert je vaste adressen en stelt de categorie voor',
+              'Eén tik naar een sluitend PDF- of Excel-rapport voor je boekhouder',
+              'Geen spreadsheets, geen losse briefjes, geen vergeten ritten meer',
+            ].map((p) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-groen/10 text-sm text-groen">✓</span>
+                <span class="text-[15px] text-slate-700">{p}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="/hoe-het-werkt" class="btn-ghost mt-8">Zo werkt het →</a>
+        </div>
+        <div class="flex justify-center" data-reveal style="--reveal-delay:120ms">
+          <div class="card w-full max-w-sm bg-gradient-to-br from-merk to-violet text-white">
+            <p class="text-sm opacity-80">Rapport · Q2 2026</p>
+            <p class="mt-1 text-3xl font-extrabold">€ 312,80 <span class="text-base font-semibold opacity-80">vergoeding</span></p>
+            <div class="mt-5 space-y-2 text-sm">
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Zakelijk</span><span class="font-bold">1.360 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Woon-werk</span><span class="font-bold">240 km</span></div>
+              <div class="flex justify-between border-b border-white/15 pb-2"><span class="opacity-80">Privé</span><span class="font-bold">180 km</span></div>
+              <div class="flex justify-between pt-1"><span class="opacity-80">Sluitend</span><span class="font-bold">✓ Ja</span></div>
+            </div>
+            <div class="mt-6 flex gap-2">
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">PDF</span>
+              <span class="rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold">Excel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOORDELEN-GRID -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Voor ZZP'ers</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Alles wat je als zelfstandige nodig hebt</h2>
+    </div>
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {voordelen.map((v, i) => (
+        <div class="card" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+          <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-merk to-violet text-lg font-extrabold text-white">✓</div>
+          <h3 class="mt-5 text-lg font-bold">{v.t}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-zacht">{v.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- MINI-FAQ -->
+  <section class="bg-mist/60 py-24">
+    <div class="container-x">
+      <div class="mx-auto max-w-2xl text-center" data-reveal>
+        <span class="eyebrow">Veelgestelde vragen</span>
+        <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Rittenregistratie & ZZP — kort uitgelegd</h2>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-4">
+        {faq.map((f, i) => (
+          <details class="card group" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+              {f.v}
+              <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-merk/10 text-merk transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="mt-3 text-[15px] leading-relaxed text-zacht">{f.a}</p>
+          </details>
+        ))}
+      </div>
+      <div class="mt-10 text-center" data-reveal>
+        <a href="/faq" class="btn-ghost">Alle veelgestelde vragen →</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>
