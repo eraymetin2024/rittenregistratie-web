@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../consts';
+---
+
+<Layout
+  title="Account en gegevens verwijderen"
+  description="Vraag het verwijderen van je Rittenregistratie.app-account en de bijbehorende gegevens aan — rechtstreeks in de app of per e-mail. Lees welke gegevens worden verwijderd en welke we wettelijk moeten bewaren."
+  noindex={true}
+>
+  <section class="relative overflow-hidden">
+    <div class="aurora absolute inset-0 -z-10"></div>
+    <div class="container-x py-20">
+      <span class="eyebrow" data-reveal>Juridisch</span>
+      <h1 data-reveal class="mt-5 text-4xl font-extrabold sm:text-5xl">
+        Account en gegevens verwijderen
+      </h1>
+      <p data-reveal class="mt-4 max-w-2xl text-lg text-zacht">
+        Je kunt je account van {SITE.naam} en de bijbehorende gegevens op elk
+        moment laten verwijderen. Op deze pagina lees je hoe, en welke gegevens
+        worden verwijderd.
+      </p>
+    </div>
+  </section>
+
+  <div class="container-x py-20">
+    <div class="max-w-3xl">
+      <p class="text-slate-700 leading-relaxed">
+        {SITE.naam} is een app van {SITE.bedrijf}. De meeste gegevens staan
+        lokaal op je toestel. Heb je een (gratis) account aangemaakt voor
+        cloud-back-up en synchronisatie, dan kun je dat account en alle
+        bijbehorende gegevens op twee manieren laten verwijderen.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">1. In de app (snelste manier)</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Open de app en ga naar <strong>Instellingen → Account</strong>. Kies daar
+        <strong>“Account verwijderen”</strong>. Hiermee verwijder je je account en
+        de gegevens die met dat account zijn gesynchroniseerd. Wil je ook de
+        gegevens op je eigen toestel wissen, gebruik dan
+        <strong>“Alle gegevens wissen”</strong> of verwijder de app.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">2. Per e-mail aanvragen</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Heb je geen toegang meer tot de app? Stuur dan een e-mail naar
+        <a class="text-merk hover:underline" href={`mailto:${SITE.email}?subject=Accountverwijdering`}>
+          {SITE.email}</a>
+        met als onderwerp <strong>“Accountverwijdering”</strong>, vanaf het
+        e-mailadres waarmee je account is aangemaakt. We verifiëren je verzoek en
+        verwijderen je account en bijbehorende gegevens.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">3. Welke gegevens worden verwijderd</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Bij verwijdering wissen we de aan je account gekoppelde gegevens van onze
+        servers, waaronder:
+      </p>
+      <ul class="mt-3 list-disc space-y-2 pl-6 text-slate-700 leading-relaxed">
+        <li>je account-e-mailadres en inloggegevens;</li>
+        <li>je gesynchroniseerde ritgegevens (datum, tijden, adressen, route,
+          afstand, classificatie);</li>
+        <li>je voertuig- en uitgavengegevens;</li>
+        <li>verzamelde locatiegegevens die bij je ritten horen.</li>
+      </ul>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Gegevens die alleen lokaal op je toestel staan en nooit zijn
+        gesynchroniseerd, verwijder je door “Alle gegevens wissen” te gebruiken of
+        de app te de-installeren.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">4. Bewaartermijn en uitzonderingen</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        We verwijderen je account en bijbehorende gegevens <strong>binnen 30
+        dagen</strong> na je verzoek. Een uitzondering geldt voor gegevens die we
+        <strong>wettelijk moeten bewaren</strong> — bijvoorbeeld transactie- of
+        factuurgegevens in verband met de fiscale bewaarplicht. Die bewaren we
+        uitsluitend zolang dat wettelijk verplicht is en daarna verwijderen we ze.
+        Diagnostische gegevens (zoals crashmeldingen) zijn niet aan je account
+        gekoppeld en bewaren we niet langer dan nodig.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold">5. Contact</h2>
+      <p class="mt-3 text-slate-700 leading-relaxed">
+        Vragen over het verwijderen van je account of gegevens?
+      </p>
+      <ul class="mt-3 list-none space-y-1 text-slate-700 leading-relaxed">
+        <li>{SITE.bedrijf}</li>
+        <li>{SITE.adres}, Nederland</li>
+        <li>
+          <a class="text-merk hover:underline" href={`mailto:${SITE.email}`}>
+            {SITE.email}
+          </a>
+        </li>
+      </ul>
+      <p class="mt-6 text-slate-700 leading-relaxed">
+        Zie ook ons
+        <a class="text-merk hover:underline" href="/privacy">privacybeleid</a>
+        voor meer informatie over hoe we met je gegevens omgaan.
+      </p>
+    </div>
+  </div>
+</Layout>
