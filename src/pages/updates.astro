@@ -1,29 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+// Changelog — eerlijk onderscheid tussen wat live is en wat in test/op de
+// planning staat. Items zijn genummerd.
 const updates = [
   {
-    versie: 'v1.0',
-    datum: 'Lancering',
-    nieuw: true,
+    versie: 'v1.0.1',
+    datum: 'Binnenkort — nu in test',
+    tag: { tekst: 'In test', kleur: 'oranje' },
     items: [
-      'Automatische rit-detectie (GPS + auto-Bluetooth op Android)',
-      'Belastingdienst-conforme administratie: sluitend, woon-werk, 500 km privé-grens',
-      'PDF- en Excel-export, per maand of jaar',
-      'Cloud-back-up & synchronisatie (EU/AVG)',
-      'Werktijden, slim classificeren en meerdere voertuigen',
+      'Veel betrouwbaardere automatische detectie op de achtergrond — óók als de app volledig gesloten is (iOS én Android).',
+      'iPhone: ritten starten nu vanzelf via een slimme zone rond je parkeerplek + bewegingsherkenning, zonder de app te openen.',
+      'Wandelen na het parkeren telt niet meer mee als autokilometers.',
+      'Geen dubbele ritten meer — dezelfde rit wordt nooit twee keer vastgelegd.',
+      'Duidelijke meldingen: "rit gestart" en "nieuwe rit herkend".',
+      'Vloeiende live-kaart tijdens de rit (soepel meebewegend i.p.v. schokkerig).',
+      'Ingebouwde zelftest die controleert of alle benodigde rechten goed staan.',
     ],
   },
   {
-    versie: 'Binnenkort',
-    datum: 'Op de planning',
+    versie: 'v1.0',
+    datum: 'Nu beschikbaar in Google Play',
+    tag: { tekst: 'Live', kleur: 'groen' },
     items: [
-      'iBeacon-ondersteuning voor maximale betrouwbaarheid (ook iPhone)',
-      'Koppeling met boekhoudpakketten (Moneybird, e-Boekhouden)',
-      'Push-herinneringen voor ritten die nog bevestigd moeten worden',
+      'Automatische rit-detectie (GPS + activiteitsherkenning + auto-Bluetooth).',
+      'Voldoet aan de eisen van de Belastingdienst: sluitend, woon-werk en de 500 km privé-grens.',
+      'PDF- en Excel-export, per maand of per jaar.',
+      'Cloud-back-up & synchronisatie — je gegevens in Nederland (EU), AVG-proof.',
+      'Werktijden, slim classificeren en meerdere voertuigen.',
+    ],
+  },
+  {
+    versie: 'Op de planning',
+    datum: 'Volgende stappen',
+    items: [
+      'Map-matching: routes op de weg vastzetten voor kilometers tot op de meter nauwkeurig.',
+      'Proactieve melding zodra je de 500 km privé-grens nadert.',
+      'Slimmer automatisch classificeren — leert je vaste adressen (thuis, werk, klanten).',
+      'Koppeling met boekhoudpakketten (Moneybird, e-Boekhouden, Exact).',
+      'iBeacon-ondersteuning voor maximale betrouwbaarheid.',
     ],
   },
 ];
+
+const tagKleur: Record<string, string> = {
+  groen: 'bg-groen/10 text-groen',
+  oranje: 'bg-oranje/10 text-oranje',
+};
 ---
 <Layout title="Updates" description="Wat is er nieuw in Rittenregistratie.app? Bekijk de laatste updates, verbeteringen en wat er op de planning staat.">
   <section class="relative overflow-hidden">
@@ -31,7 +54,7 @@ const updates = [
     <div class="container-x py-20 text-center lg:py-24">
       <h1 data-reveal class="text-4xl font-extrabold sm:text-5xl">Updates & <span class="gradient-text">verbeteringen</span></h1>
       <p data-reveal style="--reveal-delay:120ms" class="mx-auto mt-5 max-w-xl text-lg text-zacht">
-        We blijven de app doorontwikkelen. Hier zie je wat er nieuw is en wat eraan komt.
+        We blijven de app doorontwikkelen. Hier zie je per versie wat er nieuw is en wat eraan komt.
       </p>
     </div>
   </section>
@@ -43,13 +66,16 @@ const updates = [
           <div class="flex flex-wrap items-center gap-3">
             <span class="rounded-full bg-gradient-to-r from-merk to-violet px-3 py-1 text-sm font-extrabold text-white">{u.versie}</span>
             <span class="text-sm font-semibold text-zacht">{u.datum}</span>
-            {u.nieuw && <span class="rounded-full bg-groen/10 px-2.5 py-0.5 text-xs font-bold text-groen">Nieuw</span>}
+            {u.tag && <span class:list={['rounded-full px-2.5 py-0.5 text-xs font-bold', tagKleur[u.tag.kleur]]}>{u.tag.tekst}</span>}
           </div>
-          <ul class="mt-5 space-y-2.5">
-            {u.items.map((it) => (
-              <li class="flex items-start gap-3"><span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-merk/10 text-sm text-merk">✓</span><span class="text-[15px] text-slate-700">{it}</span></li>
+          <ol class="mt-5 space-y-2.5">
+            {u.items.map((it, n) => (
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-merk/10 text-[13px] font-bold text-merk">{n + 1}</span>
+                <span class="text-[15px] text-slate-700">{it}</span>
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
       ))}
     </div>

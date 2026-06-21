@@ -12,8 +12,8 @@ export const SITE = {
   kvk: '42063011',
   btw: 'NL005467477B07',
   adres: 'Sloestraat 15, 4456 AN Lewedorp',
-  // Vul deze in zodra de stores live zijn:
-  playUrl: '#',
+  // Google Play is live; App Store volgt zodra de EU-uitrol (DSA) rond is.
+  playUrl: 'https://play.google.com/store/apps/details?id=app.rittenregistratie',
   appStoreUrl: '#',
 };
 

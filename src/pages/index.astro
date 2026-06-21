@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Phone from '../components/Phone.astro';
 import CtaBand from '../components/CtaBand.astro';
+import StoreBadges from '../components/StoreBadges.astro';
 import { SITE, PRIJZEN, TOPICS } from '../consts';
 
 const features = [
@@ -26,6 +27,17 @@ const stappen = [
   { n: '1', t: 'Installeren & instellen', d: 'Voeg je auto toe en zet automatische detectie aan. Eénmalig, in een minuut.' },
   { n: '2', t: 'Gewoon rijden', d: 'De app herkent je ritten op de achtergrond — met route, adressen en kilometers.' },
   { n: '3', t: 'Bevestigen & exporteren', d: 'Eén tik om zakelijk/privé te bevestigen. Exporteer wanneer je wilt naar PDF of Excel.' },
+];
+
+// Eerlijke vergelijking met de (veelal buitenlandse) concurrentie.
+const vergelijk: [string, true | string, string][] = [
+  ['Gegevens opgeslagen in Nederland (EU)', true, 'Vaak buitenland'],
+  ['Gebouwd op de Nederlandse Belastingdienst-eisen', true, 'Niet altijd'],
+  ['500 km privé-grens (bijtelling) bewaakt', true, 'Zelden'],
+  ['Gratis starten — geen creditcard nodig', true, 'Beperkt'],
+  ['Je gegevens worden nooit verkocht', true, 'Onduidelijk'],
+  ['Nederlandse support', true, 'Vaak Engelstalig'],
+  ['Prijs per jaar', '€29,99', 'Vaak duurder'],
 ];
 
 const jsonld = [
@@ -85,9 +97,9 @@ const icon = (k: string) => icons[k] ?? '';
         en je gegevens blijven veilig in Nederland — niet bij een buitenlandse gigant.
       </p>
 
-      <div data-reveal style="--reveal-delay:240ms" class="mt-10 flex flex-wrap justify-center gap-3">
-        <a href="/download" class="btn-primary text-base">Gratis beginnen</a>
-        <a href="/hoe-het-werkt" class="btn border border-white/20 text-white hover:bg-white/10">Hoe het werkt →</a>
+      <div data-reveal style="--reveal-delay:240ms" class="mt-10 flex flex-col items-center gap-4">
+        <StoreBadges center dark />
+        <a href="/hoe-het-werkt" class="text-sm font-semibold text-slate-300 underline-offset-4 transition hover:text-white hover:underline">Of bekijk eerst hoe het werkt →</a>
       </div>
 
       <div data-reveal style="--reveal-delay:320ms" class="mx-auto mt-12 flex max-w-2xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold text-slate-300">
@@ -158,6 +170,36 @@ const icon = (k: string) => icons[k] ?? '';
         </div>
       ))}
     </div>
+  </section>
+
+  <!-- WAAROM WIJ — eerlijke vergelijking -->
+  <section class="container-x py-24">
+    <div class="mx-auto max-w-2xl text-center" data-reveal>
+      <span class="eyebrow">Waarom Rittenregistratie.app</span>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Nederlands, eerlijk en privacy-first</h2>
+      <p class="mt-4 text-zacht">De meeste rittenapps komen uit het buitenland. Wij zijn gemaakt voor de Nederlandse ondernemer — en je gegevens blijven hier.</p>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl overflow-hidden rounded-3xl border border-slate-100 shadow-soft" data-reveal>
+      <div class="grid grid-cols-[1.5fr_0.9fr_0.9fr] items-center border-b border-slate-100 bg-mist/70 text-[13px] font-extrabold sm:text-sm">
+        <div class="p-4"></div>
+        <div class="p-4 text-center text-merk">Rittenregistratie.app</div>
+        <div class="p-4 text-center text-zacht">Buitenlandse apps</div>
+      </div>
+      {vergelijk.map(([label, ons, hun], i) => (
+        <div class:list={['grid grid-cols-[1.5fr_0.9fr_0.9fr] items-center text-[14px]', i % 2 ? 'bg-white' : 'bg-slate-50/50']}>
+          <div class="p-4 font-semibold text-slate-700">{label}</div>
+          <div class="p-4 text-center">
+            {ons === true ? (
+              <span class="inline-grid h-6 w-6 place-items-center rounded-full bg-groen/10 text-sm font-bold text-groen">✓</span>
+            ) : (
+              <span class="font-extrabold text-merk">{ons}</span>
+            )}
+          </div>
+          <div class="p-4 text-center text-[13px] text-zacht">{hun}</div>
+        </div>
+      ))}
+    </div>
+    <p class="mx-auto mt-4 max-w-3xl text-center text-xs text-zacht">Vergelijking op hoofdlijnen; functies en prijzen van andere apps kunnen variëren.</p>
   </section>
 
   <!-- COMPLIANCE met echte screenshot -->
