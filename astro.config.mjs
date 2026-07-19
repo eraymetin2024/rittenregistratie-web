@@ -6,7 +6,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://rittenregistratie.app',
   trailingSlash: 'ignore',
-  integrations: [tailwind(), sitemap()],
+  integrations: [
+    tailwind(),
+    // /admin is het interne beheerpaneel: noindex én niet in de sitemap.
+    sitemap({ filter: (page) => !page.includes('/admin') }),
+  ],
   build: { inlineStylesheets: 'auto' },
   compressHTML: true,
 });

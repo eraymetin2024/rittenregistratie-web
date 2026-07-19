@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<!--
+  Adminpaneel voor supportberichten.
+
+  Draait volledig client-side tegen Supabase; de site blijft dus een statische
+  build. Dat kan veilig omdat de beveiliging niet in deze pagina zit maar in
+  Row-Level Security: alleen wie in de tabel `admins` staat, krijgt tickets
+  terug. Iemand die deze pagina opent zonder beheerdersaccount ziet een lege
+  lijst — de gegevens komen simpelweg niet mee.
+-->
+<Layout title="Beheer" noindex={true}>
+  <main class="mx-auto max-w-5xl px-4 py-10">
+    <h1 class="text-2xl font-bold">Supportberichten</h1>
+
+    <!-- Inloggen -->
+    <form id="login" class="mt-6 max-w-sm space-y-3">
+      <input
+        id="email"
+        type="email"
+        required
+        placeholder="E-mailadres"
+        autocomplete="username"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+      />
+      <input
+        id="wachtwoord"
+        type="password"
+        required
+        placeholder="Wachtwoord"
+        autocomplete="current-password"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+      />
+      <button
+        type="submit"
+        class="w-full rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white"
+      >
+        Inloggen
+      </button>
+      <p id="loginFout" class="hidden text-sm text-red-600"></p>
+    </form>
+
+    <!-- Paneel -->
+    <section id="paneel" class="hidden">
+      <div class="mt-4 flex flex-wrap items-center gap-2">
+        <select id="filter" class="rounded-lg border border-slate-300 px-3 py-2">
+          <option value="open">Openstaand</option>
+          <option value="nieuw">Nieuw</option>
+          <option value="in_behandeling">In behandeling</option>
+          <option value="beantwoord">Beantwoord</option>
+          <option value="gesloten">Afgerond</option>
+          <option value="alle">Alles</option>
+        </select>
+        <button
+          id="ververs"
+          class="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+        >Verversen</button>
+        <span id="telling" class="text-sm text-slate-500"></span>
+        <button id="uitloggen" class="ml-auto text-sm text-slate-500 underline"
+          >Uitloggen</button
+        >
+      </div>
+
+      <div id="lijst" class="mt-6 space-y-4"></div>
+      <p id="leeg" class="hidden py-10 text-center text-slate-500">
+        Geen berichten in deze weergave.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const login = $('login') as HTMLFormElement;
+  const paneel = $('paneel');
+  const lijst = $('lijst');
+
+  const CATEGORIE: Record<string, string> = {
+    hulp: 'Hulp nodig',
+    bug: 'Er gaat iets mis',
+    factuur: 'Facturen & abonnement',
+    idee: 'Idee of verzoek',
+    overig: 'Iets anders',
+  };
+  const STATUS: Record<string, string> = {
+    nieuw: 'Nieuw',
+    in_behandeling: 'In behandeling',
+    beantwoord: 'Beantwoord',
+    gesloten: 'Afgerond',
+  };
+
+  const esc = (s: unknown) =>
+    String(s ?? '').replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
+    );
+
+  function toonPaneel(actief: boolean) {
+    login.classList.toggle('hidden', actief);
+    paneel.classList.toggle('hidden', !actief);
+    if (actief) laad();
+  }
+
+  login.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fout = $('loginFout');
+    fout.classList.add('hidden');
+    const { error } = await supabase.auth.signInWithPassword({
+      email: (($('email') as HTMLInputElement).value || '').trim(),
+      password: ($('wachtwoord') as HTMLInputElement).value,
+    });
+    if (error) {
+      fout.textContent = 'Inloggen mislukt: ' + error.message;
+      fout.classList.remove('hidden');
+      return;
+    }
+    toonPaneel(true);
+  });
+
+  $('uitloggen').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    toonPaneel(false);
+  });
+
+  $('ververs').addEventListener('click', laad);
+  $('filter').addEventListener('change', laad);
+
+  async function laad() {
+    const filter = ($('filter') as HTMLSelectElement).value;
+    let q = supabase
+      .from('support_tickets')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(200);
+
+    if (filter === 'open') q = q.in('status', ['nieuw', 'in_behandeling']);
+    else if (filter !== 'alle') q = q.eq('status', filter);
+
+    const { data, error } = await q;
+    if (error) {
+      lijst.innerHTML =
+        '<p class="text-red-600">Laden mislukt: ' + esc(error.message) + '</p>';
+      return;
+    }
+    const rijen = data ?? [];
+    $('telling').textContent = rijen.length + ' bericht(en)';
+    $('leeg').classList.toggle('hidden', rijen.length > 0);
+    lijst.innerHTML = rijen.map(kaart).join('');
+    bindActies();
+  }
+
+  function kaart(t: any) {
+    const datum = new Date(t.created_at).toLocaleString('nl-NL');
+    const beantwoord = t.antwoord && String(t.antwoord).trim().length > 0;
+    return `
+      <article class="rounded-xl border border-slate-200 bg-white p-4" data-id="${esc(t.id)}">
+        <div class="flex flex-wrap items-center gap-2">
+          <strong class="text-lg">${esc(t.onderwerp)}</strong>
+          <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs">${esc(CATEGORIE[t.categorie] ?? t.categorie)}</span>
+          <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700">${esc(STATUS[t.status] ?? t.status)}</span>
+          <span class="ml-auto text-sm text-slate-500">${esc(datum)}</span>
+        </div>
+        <p class="mt-1 text-sm text-slate-500">
+          <a class="underline" href="mailto:${esc(t.email)}">${esc(t.email)}</a>
+          · v${esc(t.app_versie)} · ${esc(t.platform)} · ${esc(t.land)}/${esc(t.taal)}
+        </p>
+        <p class="mt-3 whitespace-pre-wrap">${esc(t.bericht)}</p>
+
+        <textarea
+          class="antwoord mt-4 w-full rounded-lg border border-slate-300 p-3"
+          rows="4"
+          placeholder="Je antwoord aan de gebruiker…"
+        >${esc(t.antwoord ?? '')}</textarea>
+        <div class="mt-2 flex flex-wrap items-center gap-2">
+          <button class="opslaan rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
+            ${beantwoord ? 'Antwoord bijwerken' : 'Antwoord versturen'}
+          </button>
+          <select class="status rounded-lg border border-slate-300 px-3 py-2 text-sm">
+            ${Object.entries(STATUS)
+              .map(
+                ([k, v]) =>
+                  `<option value="${k}"${k === t.status ? ' selected' : ''}>${v}</option>`
+              )
+              .join('')}
+          </select>
+          <span class="melding text-sm text-green-700"></span>
+        </div>
+      </article>`;
+  }
+
+  function bindActies() {
+    lijst.querySelectorAll('article').forEach((el) => {
+      const id = el.getAttribute('data-id')!;
+      const knop = el.querySelector('.opslaan') as HTMLButtonElement;
+      knop.addEventListener('click', async () => {
+        const antwoord = (el.querySelector('.antwoord') as HTMLTextAreaElement)
+          .value.trim();
+        const status = (el.querySelector('.status') as HTMLSelectElement).value;
+        const melding = el.querySelector('.melding')!;
+        knop.disabled = true;
+        const { error } = await supabase
+          .from('support_tickets')
+          .update({ antwoord: antwoord || null, status })
+          .eq('id', id);
+        knop.disabled = false;
+        if (error) {
+          melding.textContent = 'Mislukt: ' + error.message;
+          melding.className = 'melding text-sm text-red-600';
+          return;
+        }
+        // Zolang het ticket openstaat kan de gebruiker geen nieuw bericht
+        // sturen, dus het antwoord moet meteen zichtbaar zijn in de app.
+        melding.textContent = 'Opgeslagen — zichtbaar in de app';
+        melding.className = 'melding text-sm text-green-700';
+      });
+    });
+  }
+
+  // Sessie hervatten na een refresh.
+  supabase.auth.getSession().then(({ data }) => toonPaneel(!!data.session));
+</script>
